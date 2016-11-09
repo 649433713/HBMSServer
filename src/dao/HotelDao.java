@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Map;
 
-import po.HotelPO;
+import PO.HotelPO;
 
 public interface HotelDao extends Remote{
 	

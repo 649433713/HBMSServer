@@ -1,4 +1,4 @@
-package po;
+package PO;
 
 public class WebManagerPO {
 	String name;

@@ -4,9 +4,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Map;
 
+import PO.HotelPO;
 import dao.HotelDao;
 import daoImpl.HotelDaoImpl;
-import po.HotelPO;
 
 public class DataRemoteObject extends UnicastRemoteObject implements HotelDao{
 
