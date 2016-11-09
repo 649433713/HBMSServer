@@ -2,11 +2,10 @@ package rmi;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Map;
 
+import PO.HotelPO;
 import dao.HotelDao;
 import daoImpl.HotelDaoImpl;
-import po.HotelPO;
 
 public class DataRemoteObject extends UnicastRemoteObject implements HotelDao{
 
@@ -28,7 +27,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao{
 	}
 
 	@Override
-	public Map<String, HotelPO> getHotelList(String hotel_region) {
+	public HotelPO[] getHotelList(String hotel_region) {
 		
 		try {
 			return hotelDao.getHotelList(hotel_region);
@@ -52,7 +51,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao{
 	}
 
 	@Override
-	public Map<String, HotelPO> getHotelList() {
+	public HotelPO[] getHotelList() {
 		
 		try {
 			return hotelDao.getHotelList();
