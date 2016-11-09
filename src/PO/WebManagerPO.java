@@ -9,6 +9,9 @@ public class WebManagerPO {
 		id=i;
 		contactInfo=cI;
 	}
+	public WebManagerPO(){
+
+	}
 	public String getName() {
 		return name;
 	}
