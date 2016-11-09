@@ -11,8 +11,6 @@ import daoImpl.UserDaoImpl;
 import message.ResultMessage;
 
 public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao{
-
-
 	/**
 	 * 
 	 */
