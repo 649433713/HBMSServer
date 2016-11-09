@@ -5,6 +5,7 @@ import java.util.Map;
 
 import PO.HotelPO;
 import dao.HotelDao;
+import message.ResultMessage;
 
 public class HotelDaoImpl_stub implements HotelDao{
 	@Override
@@ -37,23 +38,23 @@ public class HotelDaoImpl_stub implements HotelDao{
 	}
 
 	@Override
-	public boolean addHotel(HotelPO po) {
+	public ResultMessage addHotel(HotelPO po) {
 		// TODO Auto-generated method stub
 		System.out.println("addHotel success!");
-		return true;
+		return ResultMessage.success;
 	}
 
 	@Override
-	public boolean modifyHotel(HotelPO po) {
+	public ResultMessage modifyHotel(HotelPO po) {
 		// TODO Auto-generated method stub
 		System.out.println("modifyHotel success!");
-		return true;
+		return ResultMessage.success;
 	}
 
 	@Override
-	public boolean deleteHotel(String hotel_ID) {
+	public ResultMessage deleteHotel(String hotel_ID) {
 		// TODO Auto-generated method stub
 		System.out.println("deleteHotel success!");
-		return true;
+		return ResultMessage.success;
 	}
 }

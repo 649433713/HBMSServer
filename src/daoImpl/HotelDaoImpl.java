@@ -7,6 +7,7 @@ import dao.HotelDao;
 import dataHelper.DataFactory;
 import dataHelper.HotelDataHelper;
 import dataHelperImpl.DataFactoryImpl;
+import message.ResultMessage;
 
 public class HotelDaoImpl implements HotelDao{
 	private Map<Integer, HotelPO> map;
@@ -50,21 +51,21 @@ public class HotelDaoImpl implements HotelDao{
 	}
 
 	@Override
-	public boolean addHotel(HotelPO po) {
+	public ResultMessage addHotel(HotelPO po) {
 		
-		return false;
+		return ResultMessage.failure;
 	}
 
 	@Override
-	public boolean modifyHotel(HotelPO po) {
+	public ResultMessage modifyHotel(HotelPO po) {
 		
-		return false;
+		return ResultMessage.failure;
 	}
 
 	@Override
-	public boolean deleteHotel(String hotel_ID) {
+	public ResultMessage deleteHotel(String hotel_ID) {
 		
-		return false;
+		return ResultMessage.failure;
 	}
 
 }

@@ -2,6 +2,7 @@ package rmi;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Map;
 
 import PO.HotelPO;
@@ -66,7 +67,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public boolean addHotel(HotelPO po) {
+	public ResultMessage addHotel(HotelPO po) {
 		
 		try {
 			return hotelDao.addHotel(po);
@@ -74,11 +75,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return ResultMessage.failure;
 	}
 
 	@Override
-	public boolean modifyHotel(HotelPO po) {
+	public ResultMessage modifyHotel(HotelPO po) {
 		
 		try {
 			return hotelDao.modifyHotel(po);
@@ -86,11 +87,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return ResultMessage.failure;
 	}
 
 	@Override
-	public boolean deleteHotel(String hotel_ID) {
+	public ResultMessage deleteHotel(String hotel_ID) {
 		
 		try {
 			return hotelDao.deleteHotel(hotel_ID);
@@ -98,7 +99,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return ResultMessage.failure;
 	}
 
 	@Override
@@ -165,5 +166,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 			e.printStackTrace();
 		}
 		return ResultMessage.failure;
+	}
+
+	@Override
+	public ArrayList<Object> getUserList() throws RemoteException {
+		
+		return null;
 	}
 }

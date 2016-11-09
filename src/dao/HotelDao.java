@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.util.Map;
 
 import PO.HotelPO;
+import message.ResultMessage;
 
 public interface HotelDao extends Remote{
 	
@@ -14,10 +15,10 @@ public interface HotelDao extends Remote{
 	
 	public Map<String, HotelPO> getHotelList()throws RemoteException;
 	
-	public boolean addHotel(HotelPO po)throws RemoteException;
+	public ResultMessage addHotel(HotelPO po)throws RemoteException;
 	
-	public boolean modifyHotel(HotelPO po)throws RemoteException;
+	public ResultMessage modifyHotel(HotelPO po)throws RemoteException;
 	
-	public boolean deleteHotel(String hotel_ID)throws RemoteException;
+	public ResultMessage deleteHotel(String hotel_ID)throws RemoteException;
 	
 }
