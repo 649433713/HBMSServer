@@ -8,11 +8,22 @@ import dao.UserDao;
 import message.ResultMessage;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * Created by alex on 16-11-9.
  */
 public class UserDaoImpl_stub implements UserDao{
+    @Override
+    public ArrayList<Object> getUserList() throws RemoteException {
+        ArrayList<Object> userlist=new ArrayList<>();
+        userlist.add(new CustomerPO());
+        userlist.add(new CustomerPO());
+        userlist.add(new CustomerPO());
+        userlist.add(new CustomerPO());
+        return userlist;
+    }
+
     @Override
     public ResultMessage add(Object po) throws RemoteException {
         //Conundrums here: how to identify a po as an object?

@@ -9,6 +9,7 @@ import PO.WebManagerPO;
 import dao.UserDao;
 import message.ResultMessage;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Map;
 /**
  * Created by alex on 16-11-9.
@@ -35,6 +36,16 @@ public class UserDaoImpl implements UserDao {
             userDaoImpl=new UserDaoImpl();
         }
         return userDaoImpl;
+    }
+
+    @Override
+    public ArrayList<Object> getUserList() throws RemoteException {
+        ArrayList<Object> userlist=new ArrayList<>();
+        userlist.add(new CustomerPO());
+        userlist.add(new CustomerPO());
+        userlist.add(new CustomerPO());
+        userlist.add(new CustomerPO());
+        return userlist;
     }
 
     @Override
