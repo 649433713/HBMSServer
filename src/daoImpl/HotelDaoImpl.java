@@ -2,11 +2,11 @@ package daoImpl;
 
 import java.util.Map;
 
-import PO.HotelPO;
 import dao.HotelDao;
 import dataHelper.DataFactory;
 import dataHelper.HotelDataHelper;
 import dataHelperImpl.DataFactoryImpl;
+import po.HotelPO;
 
 public class HotelDaoImpl implements HotelDao{
 	private Map<Integer, HotelPO> map;
@@ -32,7 +32,7 @@ public class HotelDaoImpl implements HotelDao{
 	}
 
 	@Override
-	public HotelPO[] getHotelList(String hotel_region) {
+	public Map<String, HotelPO> getHotelList(String hotel_region) {
 		
 		return null;
 	}
@@ -44,7 +44,7 @@ public class HotelDaoImpl implements HotelDao{
 	}
 
 	@Override
-	public HotelPO[] getHotelList() {
+	public Map<String, HotelPO> getHotelList() {
 		
 		return null;
 	}
