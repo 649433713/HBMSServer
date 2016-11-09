@@ -1,15 +1,16 @@
-package PO;
+package po;
 
+import java.awt.Image;
 import java.io.Serializable;
 
-public class WebMarketerPO implements Serializable{
+public class PersonalInfoPO implements Serializable{
 	String name;
-	String id;
 	String contactInfo;
-	public WebMarketerPO(String n,String i,String cI){
+	Image portrait;
+	public PersonalInfoPO(String n,String cI,Image p){
 		name=n;
-		id=i;
 		contactInfo=cI;
+		portrait=p;
 	}
 	public String getName() {
 		return name;
@@ -17,17 +18,17 @@ public class WebMarketerPO implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getContactInfo() {
 		return contactInfo;
 	}
 	public void setContactInfo(String contactInfo) {
 		this.contactInfo = contactInfo;
+	}
+	public Image getPortrait() {
+		return portrait;
+	}
+	public void setPortrait(Image portrait) {
+		this.portrait = portrait;
 	}
 	
 }

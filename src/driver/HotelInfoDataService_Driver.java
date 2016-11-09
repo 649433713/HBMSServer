@@ -2,8 +2,8 @@ package driver;
 
 import java.rmi.RemoteException;
 
-import PO.HotelPO;
 import dao.HotelDao;
+import po.HotelPO;
 
 public class HotelInfoDataService_Driver {
 	public void drive(HotelDao hotelInfoDataService) {

@@ -2,16 +2,17 @@ package dao;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Map;
 
-import PO.HotelPO;
+import po.HotelPO;
 
 public interface HotelDao extends Remote{
 	
-	public HotelPO[] getHotelList(String hotel_region)throws RemoteException;	
+	public Map<String, HotelPO> getHotelList(String hotel_region)throws RemoteException;	
 	
 	public HotelPO getHotelInfo(String hotel_ID)throws RemoteException;
 	
-	public HotelPO[] getHotelList()throws RemoteException;
+	public Map<String, HotelPO> getHotelList()throws RemoteException;
 	
 	public boolean addHotel(HotelPO po)throws RemoteException;
 	

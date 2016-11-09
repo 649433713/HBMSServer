@@ -1,16 +1,19 @@
 package daoImpl;
 
-import PO.HotelPO;
+import java.util.HashMap;
+import java.util.Map;
+
 import dao.HotelDao;
+import po.HotelPO;
 
 public class HotelDaoImpl_stub implements HotelDao{
 	@Override
-	public HotelPO[] getHotelList(String hotel_region) {
+	public Map<String, HotelPO> getHotelList(String hotel_region) {
 		// TODO Auto-generated method stub
 		if (hotel_region.equals("0001")) {
-			HotelPO hotelPO[] = new HotelPO[2];
+			Map<String, HotelPO> hotelPOs = new HashMap<String, HotelPO>();
 			System.out.println("getHotelList success!");
-			return hotelPO;
+			return hotelPOs;
 		}
 		return null;
 	}
@@ -27,7 +30,7 @@ public class HotelDaoImpl_stub implements HotelDao{
 	}
 
 	@Override
-	public HotelPO[] getHotelList() {
+	public Map<String, HotelPO> getHotelList() {
 		// TODO Auto-generated method stub
 		System.out.println("getHotelList success!");
 		return null;
