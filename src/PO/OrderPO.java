@@ -22,7 +22,10 @@ public class OrderPO implements Serializable{
 	Date executeDeadline;
 	int price;
 	
-	
+	public OrderPO(String id)
+	{
+		
+	}
 	public OrderPO(PersonalInfoPO pI,String i,Date cD,Date caD,HotelPO hI,
 			CreditRecordPO cR,String s,
 			Date chD,Date coD,int num,boolean hC,String cI,
