@@ -3,9 +3,9 @@ package daoImpl;
 import java.util.HashMap;
 import java.util.Map;
 
-import PO.OrderPO;
 import dao.OrderDao;
 import message.ResultMessage;
+import po.OrderPO;
 
 public class OrderDaoImpl implements OrderDao
 {

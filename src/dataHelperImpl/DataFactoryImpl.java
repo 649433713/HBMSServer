@@ -2,6 +2,7 @@ package dataHelperImpl;
 
 import dataHelper.DataFactory;
 import dataHelper.HotelDataHelper;
+import dataHelper.RoomDataHelper;
 import dataHelper.UserDataHelper;
 
 public class DataFactoryImpl implements DataFactory{
@@ -14,5 +15,11 @@ public class DataFactoryImpl implements DataFactory{
 	public UserDataHelper getUserDataHelper(){
 		UserDataHelper userDataHelper=new UserDataTxtHelper();
 		return userDataHelper;
+	}
+
+	@Override
+	public RoomDataHelper getRoomDataHelper() {
+		RoomDataHelper roomDataHelper = new RoomDataTxtHelper();
+		return roomDataHelper;
 	}
 }

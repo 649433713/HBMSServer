@@ -5,12 +5,12 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Map;
 
-import PO.HotelPO;
 import dao.HotelDao;
 import dao.UserDao;
 import daoImpl.HotelDaoImpl;
 import daoImpl.UserDaoImpl;
 import message.ResultMessage;
+import po.HotelPO;
 
 public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao{
 	/**

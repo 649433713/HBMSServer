@@ -2,8 +2,8 @@ package driver;
 
 import java.rmi.RemoteException;
 
-import PO.OrderPO;
 import dao.OrderDao;
+import po.OrderPO;
 
 public class OrderDataService_Driver {
 	public void drive(OrderDao orderserviceImpl) throws RemoteException

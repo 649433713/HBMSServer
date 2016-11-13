@@ -2,12 +2,12 @@ package daoImpl;
 
 import java.util.Map;
 
-import PO.HotelPO;
 import dao.HotelDao;
 import dataHelper.DataFactory;
 import dataHelper.HotelDataHelper;
 import dataHelperImpl.DataFactoryImpl;
 import message.ResultMessage;
+import po.HotelPO;
 
 public class HotelDaoImpl implements HotelDao{
 	private Map<Integer, HotelPO> map;

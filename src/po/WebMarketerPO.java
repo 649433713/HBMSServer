@@ -1,15 +1,17 @@
-package PO;
+package po;
 
-public class WebManagerPO {
+import java.io.Serializable;
+
+public class WebMarketerPO implements Serializable{
 	String name;
 	String id;
 	String contactInfo;
-	public WebManagerPO(String n,String i,String cI){
+	public WebMarketerPO(String n,String i,String cI){
 		name=n;
 		id=i;
 		contactInfo=cI;
 	}
-	public WebManagerPO(){
+	public WebMarketerPO(){
 
 	}
 	public String getName() {

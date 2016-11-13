@@ -3,7 +3,7 @@ package dao;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import PO.CreditPO;
+import po.CreditPO;
 
 public interface CreditDao extends Remote{
 	public void showCredit() throws RemoteException;

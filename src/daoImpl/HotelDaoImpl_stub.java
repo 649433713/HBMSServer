@@ -3,9 +3,9 @@ package daoImpl;
 import java.util.HashMap;
 import java.util.Map;
 
-import PO.HotelPO;
 import dao.HotelDao;
 import message.ResultMessage;
+import po.HotelPO;
 
 public class HotelDaoImpl_stub implements HotelDao{
 	@Override

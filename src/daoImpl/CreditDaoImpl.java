@@ -2,8 +2,8 @@ package daoImpl;
 
 import java.rmi.RemoteException;
 
-import PO.CreditPO;
 import dao.CreditDao;
+import po.CreditPO;
 
 public class CreditDaoImpl implements CreditDao{
 	

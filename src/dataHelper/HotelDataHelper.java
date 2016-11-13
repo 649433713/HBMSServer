@@ -2,7 +2,7 @@ package dataHelper;
 
 import java.util.Map;
 
-import PO.HotelPO;
+import po.HotelPO;
 
 public interface HotelDataHelper {
 	

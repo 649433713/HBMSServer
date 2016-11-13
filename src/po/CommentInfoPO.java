@@ -1,4 +1,4 @@
-package PO;
+package po;
 
 import java.awt.Image;
 import java.io.Serializable;
