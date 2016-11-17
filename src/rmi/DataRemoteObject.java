@@ -11,6 +11,7 @@ import daoImpl.HotelDaoImpl;
 import daoImpl.UserDaoImpl;
 import message.ResultMessage;
 import po.HotelPO;
+import po.UserPO;
 
 public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao{
 	/**
@@ -103,7 +104,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public ResultMessage add(Object po) throws RemoteException {
+	public ResultMessage add(UserPO po) throws RemoteException {
 		try {
 			return userDao.add(po);
 		} catch (RemoteException e) {
@@ -114,7 +115,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public Object find(String id) throws RemoteException {
+	public UserPO find(String id) throws RemoteException {
 		try {
 			return userDao.find(id);
 		} catch (RemoteException e) {
@@ -125,9 +126,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public ResultMessage delete(Object po) throws RemoteException {
+	public ResultMessage delete(String id) throws RemoteException {
 		try {
-			return userDao.delete(po);
+			return userDao.delete(id);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -136,7 +137,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public ResultMessage update(Object po) throws RemoteException {
+	public ResultMessage update(UserPO po) throws RemoteException {
 		try {
 			return userDao.update(po);
 		} catch (RemoteException e) {
@@ -158,7 +159,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public ResultMessage signup(Object po) throws RemoteException {
+	public ResultMessage signup(UserPO po) throws RemoteException {
 		try {
 			return userDao.signup(po);
 		} catch (RemoteException e) {
@@ -169,8 +170,13 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public ArrayList<Object> getUserList() throws RemoteException {
-		
+	public ArrayList<UserPO> getUserList() throws RemoteException {
+		try {
+			return userDao.getUserList();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 }

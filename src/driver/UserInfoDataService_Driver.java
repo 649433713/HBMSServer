@@ -1,10 +1,7 @@
 package driver;
 
 import dao.UserDao;
-import po.CustomerPO;
-import po.StaffPO;
-import po.WebManagerPO;
-import po.WebMarketerPO;
+import po.UserPO;
 
 import java.rmi.RemoteException;
 
@@ -14,23 +11,22 @@ import java.rmi.RemoteException;
 public class UserInfoDataService_Driver {
     public void drive(UserDao userInfoDataService){
         try{
-            userInfoDataService.signup(new CustomerPO());
-            userInfoDataService.login("0000","0000");
-            userInfoDataService.login("0001","0001");
-            userInfoDataService.login("0002","0002");
-            userInfoDataService.login("0003","0003");
-            userInfoDataService.login("0004","0004");
-            userInfoDataService.find("0000");
-            userInfoDataService.find("00001");
-            userInfoDataService.find("0001");
-            userInfoDataService.find("0002");
-            userInfoDataService.find("0003");
-            userInfoDataService.add(new CustomerPO());
-            userInfoDataService.add(new StaffPO());
-            userInfoDataService.delete(new CustomerPO());
-            userInfoDataService.delete(new WebManagerPO());
-            userInfoDataService.update(new WebMarketerPO());
-            userInfoDataService.update(new WebManagerPO());
+            userInfoDataService.signup(new UserPO("0000000000"));
+            userInfoDataService.login("0000000000","0000000000");
+            userInfoDataService.login("0100000000","0100000000");
+            userInfoDataService.login("0200000000","0200000000");
+            userInfoDataService.login("0300000000","0300000000");
+            userInfoDataService.login("0400000000","0400000000");
+            userInfoDataService.find("0000000000");
+            userInfoDataService.find("0100000000");
+            userInfoDataService.find("0200000000");
+            userInfoDataService.find("0200000001");
+            userInfoDataService.find("0300000000");
+            userInfoDataService.add(new UserPO("1110000000"));
+            userInfoDataService.add(new UserPO("0200000000"));
+            userInfoDataService.delete("1110000000");
+            userInfoDataService.update(new UserPO("1110000000"));
+            userInfoDataService.update(new UserPO("0200000000"));
         }catch(RemoteException e){
             e.printStackTrace();
         }

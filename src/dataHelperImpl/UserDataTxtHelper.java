@@ -1,10 +1,7 @@
 package dataHelperImpl;
 
 import dataHelper.UserDataHelper;
-import po.CustomerPO;
-import po.StaffPO;
-import po.WebManagerPO;
-import po.WebMarketerPO;
+import po.UserPO;
 
 import java.util.Map;
 
@@ -15,12 +12,12 @@ import java.util.Map;
 public class UserDataTxtHelper implements UserDataHelper{
 
     @Override
-    public Map<Integer, Object> getUserData() {
+    public Map<Integer, UserPO> getUserData() {
         return null;
     }
 
     @Override
-    public void updateUserData(Map<Integer, Object> map) {
+    public void updateUserData(Map<Integer, UserPO> map) {
 
     }
 }
