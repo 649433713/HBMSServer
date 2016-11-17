@@ -3,11 +3,11 @@ import dataHelper.DataFactory;
 import dataHelper.UserDataHelper;
 import dataHelperImpl.DataFactoryImpl;
 import dao.UserDao;
+import dataHelperImpl.UserDataTxtHelper;
 import message.ResultMessage;
-import po.CustomerPO;
-import po.StaffPO;
-import po.WebManagerPO;
-import po.WebMarketerPO;
+import model.UserType;
+import model.UserTypeHelper;
+import po.UserPO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by alex on 16-11-9.
  */
 public class UserDaoImpl implements UserDao {
-    private Map<Integer,Object> map;
+    private Map<Integer,UserPO> map;
 
     private static UserDaoImpl userDaoImpl;
 
@@ -40,42 +40,47 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ArrayList<Object> getUserList() throws RemoteException {
-        ArrayList<Object> userlist=new ArrayList<>();
-        userlist.add(new CustomerPO());
-        userlist.add(new CustomerPO());
-        userlist.add(new CustomerPO());
-        userlist.add(new CustomerPO());
+    public ArrayList<UserPO> getUserList() throws RemoteException {
+        ArrayList<UserPO> userlist=new ArrayList<UserPO>();
+        userlist.add(new UserPO("0000000000"));
+        userlist.add(new UserPO("0100000000"));
+        userlist.add(new UserPO("0200000000"));
+        userlist.add(new UserPO("0300000000"));
         return userlist;
     }
 
     @Override
-    public ResultMessage add(Object po) throws RemoteException {
+    public ResultMessage add(UserPO po) throws RemoteException {
         return null;
     }
 
     @Override
-    public Object find(String id) throws RemoteException {
-        return null;
+    public UserPO find(String id) throws RemoteException {
+        return new UserPO(id);
     }
 
     @Override
-    public ResultMessage delete(Object po) throws RemoteException {
-        return ResultMessage.failure;
+    public ResultMessage delete(String id) throws RemoteException {
+        UserTypeHelper userTypeHelper=new UserTypeHelper();
+        if(userTypeHelper.getUserType(id).equals(UserType.NoSuchUser)){
+            return ResultMessage.failure;
+        }else{
+            return ResultMessage.success;
+        }
     }
 
     @Override
-    public ResultMessage update(Object po) throws RemoteException {
-        return ResultMessage.failure;
+    public ResultMessage update(UserPO po) throws RemoteException {
+        return ResultMessage.success;
     }
 
     @Override
     public ResultMessage login(String id, String pwd) throws RemoteException {
-        return ResultMessage.failure;
+        return ResultMessage.success;
     }
 
     @Override
-    public ResultMessage signup(Object po) throws RemoteException {
-        return ResultMessage.failure;
+    public ResultMessage signup(UserPO po) throws RemoteException {
+        return ResultMessage.success;
     }
 }

@@ -6,9 +6,9 @@ import java.util.List;
 public class StaffAccountPO implements Serializable{
 	String name;
 	String password;
-	List<StaffPO> staffList;
+	List<UserPO> staffList;
 	
-	public StaffAccountPO(String n,String p,List<StaffPO> sL){
+	public StaffAccountPO(String n,String p,List<UserPO> sL){
 		name=n;
 		password=p;
 		staffList=sL;
@@ -30,11 +30,11 @@ public class StaffAccountPO implements Serializable{
 		this.password = password;
 	}
 
-	public List<StaffPO> getStaffList() {
+	public List<UserPO> getStaffList() {
 		return staffList;
 	}
 
-	public void setStaffList(List<StaffPO> staffList) {
+	public void setStaffList(List<UserPO> staffList) {
 		this.staffList = staffList;
 	}
 	
