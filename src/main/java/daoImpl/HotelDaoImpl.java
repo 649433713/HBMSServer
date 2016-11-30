@@ -7,6 +7,7 @@ import dataHelper.DataFactory;
 import dataHelper.HotelDataHelper;
 import dataHelperImpl.DataFactoryImpl;
 import message.ResultMessage;
+import model.HotelFilter;
 import po.HotelPO;
 
 public class HotelDaoImpl implements HotelDao{
@@ -28,44 +29,40 @@ public class HotelDaoImpl implements HotelDao{
 		if (map==null) {
 			dataFactory = new DataFactoryImpl();
 			hotelDataHelper = dataFactory.getHotelDataHelper();
-			map = hotelDataHelper.getHotelData();
+			map = null;
 		}
 	}
 
 	@Override
-	public Map<String, HotelPO> getHotelList(String hotel_region) {
-		
-		return null;
+	public Map<Integer, HotelPO> getHotelList(HotelFilter filter) {
+		map = hotelDataHelper.getHotelList(filter);
+		return map;
 	}
 
 	@Override
 	public HotelPO getHotelInfo(String hotel_ID) {
 		
-		return null;
+		return map.get(hotel_ID);
 	}
 
-	@Override
-	public Map<String, HotelPO> getHotelList() {
-		
-		return null;
-	}
+
 
 	@Override
 	public ResultMessage addHotel(HotelPO po) {
 		
-		return ResultMessage.failure;
+		return hotelDataHelper.addHotel(po);
 	}
 
 	@Override
 	public ResultMessage modifyHotel(HotelPO po) {
 		
-		return ResultMessage.failure;
+		return hotelDataHelper.updateHotel(po);
 	}
 
 	@Override
-	public ResultMessage deleteHotel(String hotel_ID) {
+	public ResultMessage deleteHotel(int hotel_ID) {
 		
-		return ResultMessage.failure;
+		return hotelDataHelper.delHotel(hotel_ID);
 	}
 
 }

@@ -17,6 +17,7 @@ import daoImpl.RoomDaoImpl;
 import daoImpl.UserDaoImpl;
 import message.ResultMessage;
 import message.RoomStateMessage;
+import model.HotelFilter;
 import po.CreditPO;
 import po.HotelPO;
 import po.OrderPO;
@@ -28,7 +29,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	 * 
 	 */
 	private static final long serialVersionUID = 4462344837104616646L;
-	//别的dao的接口都implements ,然后写在这，然后构造函数里初始化
+	//鍒殑dao鐨勬帴鍙ｉ兘implements ,鐒跺悗鍐欏湪杩欙紝鐒跺悗鏋勯�犲嚱鏁伴噷鍒濆鍖�
 	private HotelDao hotelDao;
 	private UserDao userDao;
 	private CreditDao creditDao;
@@ -47,9 +48,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public Map<String, HotelPO> getHotelList(String hotel_region) throws RemoteException{
+	public Map<Integer, HotelPO> getHotelList(HotelFilter filter) throws RemoteException{
 
-			return hotelDao.getHotelList(hotel_region);
+			return hotelDao.getHotelList(filter);
 	}
 
 	@Override
@@ -59,12 +60,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	
 	}
 
-	@Override
-	public Map<String, HotelPO> getHotelList() throws RemoteException{
-		
-			return hotelDao.getHotelList();
-	
-	}
+
 
 	@Override
 	public ResultMessage addHotel(HotelPO po) throws RemoteException{
@@ -81,7 +77,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public ResultMessage deleteHotel(String hotel_ID) throws RemoteException{
+	public ResultMessage deleteHotel(int hotel_ID) throws RemoteException{
 	
 			return hotelDao.deleteHotel(hotel_ID) ;
 	

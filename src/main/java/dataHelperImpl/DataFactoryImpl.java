@@ -8,7 +8,7 @@ import dataHelper.UserDataHelper;
 public class DataFactoryImpl implements DataFactory{
 
 	public HotelDataHelper getHotelDataHelper() {
-		HotelDataHelper hotelDataHelper = new HotelDataTxtHelper();
+		HotelDataHelper hotelDataHelper = new HotelDataMysqlHelper();
 		return hotelDataHelper;
 	}
 
