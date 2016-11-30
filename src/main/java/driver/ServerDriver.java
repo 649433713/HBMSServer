@@ -1,15 +1,15 @@
-package driver;
+/*package driver;
 
 import dao.HotelDao;
 import dao.UserDao;
 import daoImpl.HotelDaoImpl_stub;
 import daoImpl.UserDaoImpl_stub;
 
-/**
+*//**
  * 驱动的总测试入口
  * @author 王凡
  *
- */
+ *//*
 public class ServerDriver {
 	public static void main(String[] args) {
 		HotelDao hotelInfoDataService = new HotelDaoImpl_stub();
@@ -21,3 +21,4 @@ public class ServerDriver {
 		userInfoDataService_driver.drive(userInfoDataService);
 	}
 }
+*/

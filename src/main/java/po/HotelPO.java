@@ -6,32 +6,29 @@ import java.util.List;
 
 public class HotelPO implements Serializable{
 	String name;
-	String id;
+	int id;
 	int star;
 	String address;
-	String region;
+	int region;
 	String introduction;
 	String facility;
-	Image environment;
-	CommentInfoPO commentInfo;
-	RoomInfoPO roomInfo;
-	List<OrderPO> historyOrder;
-	StaffAccountPO staffAccount;
+	List<Image> environment;
+	int score;
 	
-	public HotelPO(String n,String i,int s,String a,
-			String r,String in,String f,Image e,
-			RoomInfoPO rI,List<OrderPO> hO,StaffAccountPO sA){
-		name=n;
-		id=i;
-		star=s;
-		address=a;
-		region=r;
-		introduction=in;
-		facility=f;
-		environment=e;
-		roomInfo=rI;
-		historyOrder=hO;
-		staffAccount=sA;
+	
+
+	public HotelPO(String name, int id, int star, String address, int region, String introduction, String facility,
+			List<Image> environment, int score) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.star = star;
+		this.address = address;
+		this.region = region;
+		this.introduction = introduction;
+		this.facility = facility;
+		this.environment = environment;
+		this.score = score;
 	}
 
 	public HotelPO() {
@@ -46,11 +43,11 @@ public class HotelPO implements Serializable{
 		this.name = name;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -70,11 +67,11 @@ public class HotelPO implements Serializable{
 		this.address = address;
 	}
 
-	public String getRegion() {
+	public int getRegion() {
 		return region;
 	}
 
-	public void setRegion(String region) {
+	public void setRegion(int region) {
 		this.region = region;
 	}
 
@@ -94,46 +91,30 @@ public class HotelPO implements Serializable{
 		this.facility = facility;
 	}
 
-	public Image getEnvironment() {
+	public List<Image> getEnvironment() {
 		return environment;
 	}
 
-	public void setEnvironment(Image environment) {
+	public void setEnvironment(List<Image> environment) {
 		this.environment = environment;
 	}
 
-	public CommentInfoPO getCommentInfo() {
-		return commentInfo;
+	public int getScore() {
+		return score;
 	}
 
-	public void setCommentInfo(CommentInfoPO commentInfo) {
-		this.commentInfo = commentInfo;
+	public void setScore(int score) {
+		this.score = score;
 	}
 
-	public RoomInfoPO getRoomInfo() {
-		return roomInfo;
+	@Override
+	public String toString() {
+		return "HotelPO [name=" + name + ", id=" + id + ", star=" + star + ", address=" + address + ", region=" + region
+				+ ", introduction=" + introduction + ", facility=" + facility + ", environment=" + environment
+				+ ", score=" + score + "]";
 	}
 
-	public void setRoomInfo(RoomInfoPO roomInfo) {
-		this.roomInfo = roomInfo;
-	}
-
-	public List<OrderPO> getHistoryOrder() {
-		return historyOrder;
-	}
-
-	public void setHistoryOrder(List<OrderPO> historyOrder) {
-		this.historyOrder = historyOrder;
-	}
-
-	public StaffAccountPO getStaffAccount() {
-		return staffAccount;
-	}
-
-	public void setStaffAccount(StaffAccountPO staffAccount) {
-		this.staffAccount = staffAccount;
-	}
-
+	
 	
 	
 }

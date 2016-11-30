@@ -5,5 +5,6 @@ package message;
  */
 public enum ResultMessage {
     failure,
-    success;
+    success,
+	notexist;
 }

@@ -7,11 +7,11 @@ import java.util.Map;
 
 public class HotelFilter {
 
-	List<Map<String, Object>> filter = new ArrayList<>();
+	public List<Map<String, Object>> filter = new ArrayList<>();
 	
 	/*
 	 * 
-	 * Filter ÖÐµÄ param µÄname key£¬´æ´¢É¸Ñ¡µÄ×Ö¶Î£¨name,address,region,star,score)
+	 * Filter ï¿½Ðµï¿½ param ï¿½ï¿½name keyï¿½ï¿½ï¿½æ´¢É¸Ñ¡ï¿½ï¿½ï¿½Ö¶Î£ï¿½name,address,region,star,score)
 	 */
 	public void add(String name ,String relation,String value) {
 		Map<String, Object> param = new HashMap<>();
