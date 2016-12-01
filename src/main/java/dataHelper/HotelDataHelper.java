@@ -1,10 +1,13 @@
 package dataHelper;
 
+import java.util.List;
 import java.util.Map;
 
 import message.ResultMessage;
 import model.HotelFilter;
+import po.CommentInfoPO;
 import po.HotelPO;
+import po.RegionPO;
 
 public interface HotelDataHelper {
 	
@@ -15,6 +18,12 @@ public interface HotelDataHelper {
 	public ResultMessage updateHotel(HotelPO hotelPO);
 	
 	public ResultMessage delHotel(int hotelID) ;
+
+	public List<CommentInfoPO> getComments(int hotelID);
+
+	public ResultMessage addComment(CommentInfoPO commentInfoPO);
+
+	public Map<Integer, RegionPO> getRegions();
 	
-	//ÒòÎª²éÑ¯¾ßÌå¾ÆµêÐÅÏ¢Ö®Ç°  ±ØÓÐ²éÑ¯¾ÆµêÁÐ±í¡£
+	//ï¿½ï¿½Îªï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½Ï¢Ö®Ç°  ï¿½ï¿½ï¿½Ð²ï¿½Ñ¯ï¿½Æµï¿½ï¿½Ð±ï¿½
 }

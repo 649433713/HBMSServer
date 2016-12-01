@@ -38,13 +38,13 @@ private Map<Integer, RoomInfoPO> map;
 	
 	
 	@Override
-	public ResultMessage deleteRoom(String room_ID) throws RemoteException {
+	public ResultMessage deleteRoom(int room_ID) throws RemoteException {
 
 		return null;
 	}
 
 	@Override
-	public Map<String, RoomInfoPO> getRoomList(String hotel_ID) throws RemoteException {
+	public Map<String, RoomInfoPO> getRoomList(int hotel_ID) throws RemoteException {
 		
 		return null;
 	}
@@ -68,7 +68,7 @@ private Map<Integer, RoomInfoPO> map;
 	}
 
 	@Override
-	public ResultMessage modifyRoomState(String room_ID, RoomStateMessage room_state) throws RemoteException {
+	public ResultMessage modifyRoomState(int room_ID, RoomStateMessage room_state) throws RemoteException {
 		
 		return null;
 	}

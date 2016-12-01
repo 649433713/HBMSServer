@@ -1,5 +1,7 @@
 package daoImpl;
 
+import java.rmi.RemoteException;
+import java.util.List;
 import java.util.Map;
 
 import dao.HotelDao;
@@ -8,7 +10,9 @@ import dataHelper.HotelDataHelper;
 import dataHelperImpl.DataFactoryImpl;
 import message.ResultMessage;
 import model.HotelFilter;
+import po.CommentInfoPO;
 import po.HotelPO;
+import po.RegionPO;
 
 public class HotelDaoImpl implements HotelDao{
 	private Map<Integer, HotelPO> map;
@@ -40,9 +44,9 @@ public class HotelDaoImpl implements HotelDao{
 	}
 
 	@Override
-	public HotelPO getHotelInfo(String hotel_ID) {
-		
-		return map.get(hotel_ID);
+	public HotelPO getHotelInfo(int hotelID) {
+		getHotelList(null);
+		return map.get(hotelID);
 	}
 
 
@@ -63,6 +67,21 @@ public class HotelDaoImpl implements HotelDao{
 	public ResultMessage deleteHotel(int hotel_ID) {
 		
 		return hotelDataHelper.delHotel(hotel_ID);
+	}
+	@Override
+	public List<CommentInfoPO> getComments(int hotelID) throws RemoteException {
+		
+		return hotelDataHelper.getComments(hotelID);
+	}
+	@Override
+	public ResultMessage addComment(CommentInfoPO commentInfoPO) throws RemoteException {
+		
+		return hotelDataHelper.addComment(commentInfoPO);
+	}
+	@Override
+	public Map<Integer, RegionPO> getRegions() throws RemoteException {
+		
+		return hotelDataHelper.getRegions();
 	}
 
 }

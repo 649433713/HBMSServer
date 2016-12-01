@@ -3,6 +3,7 @@ package rmi;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import dao.CreditDao;
@@ -18,9 +19,11 @@ import daoImpl.UserDaoImpl;
 import message.ResultMessage;
 import message.RoomStateMessage;
 import model.HotelFilter;
+import po.CommentInfoPO;
 import po.CreditPO;
 import po.HotelPO;
 import po.OrderPO;
+import po.RegionPO;
 import po.RoomInfoPO;
 import po.UserPO;
 
@@ -54,7 +57,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public HotelPO getHotelInfo(String hotel_ID) throws RemoteException{
+	public HotelPO getHotelInfo(int hotel_ID) throws RemoteException{
 		
 			return hotelDao.getHotelInfo(hotel_ID);
 	
@@ -133,7 +136,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public Map<String, RoomInfoPO> getRoomList(String hotel_ID) throws RemoteException {
+	public Map<String, RoomInfoPO> getRoomList(int hotel_ID) throws RemoteException {
 		return roomDao.getRoomList(hotel_ID);
 	}
 
@@ -155,13 +158,13 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public ResultMessage deleteRoom(String room_ID) throws RemoteException {
+	public ResultMessage deleteRoom(int room_ID) throws RemoteException {
 		
 		return roomDao.deleteRoom(room_ID);
 	}
 
 	@Override
-	public ResultMessage modifyRoomState(String room_ID, RoomStateMessage room_state) throws RemoteException {
+	public ResultMessage modifyRoomState(int room_ID, RoomStateMessage room_state) throws RemoteException {
 		
 		return roomDao.modifyRoomState(room_ID, room_state);
 	}
@@ -246,5 +249,23 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	public String getAccount(String id) throws RemoteException {
 		
 		return creditDao.getAccount(id);
+	}
+
+	@Override
+	public List<CommentInfoPO> getComments(int hotelID) throws RemoteException {
+		
+		return hotelDao.getComments(hotelID);
+	}
+
+	@Override
+	public ResultMessage addComment(CommentInfoPO commentInfoPO) throws RemoteException {
+		
+		return hotelDao.addComment(commentInfoPO);
+	}
+
+	@Override
+	public Map<Integer, RegionPO> getRegions() throws RemoteException {
+		
+		return hotelDao.getRegions();
 	}
 }

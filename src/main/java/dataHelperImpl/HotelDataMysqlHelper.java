@@ -2,6 +2,7 @@ package dataHelperImpl;
 
 import java.awt.Image;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +16,9 @@ import javax.swing.ImageIcon;
 import dataHelper.HotelDataHelper;
 import message.ResultMessage;
 import model.HotelFilter;
+import po.CommentInfoPO;
 import po.HotelPO;
+import po.RegionPO;
 
 public class HotelDataMysqlHelper implements HotelDataHelper {
 	Connection connection;
@@ -29,7 +32,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 
 		StringBuffer stringBuffer = new StringBuffer("select * from hotel where 1=1");
 
-		if (filter.filter != null && filter.filter.size() > 0) {
+		if (filter != null && filter.filter.size() > 0) {
 			for (int i = 0; i < filter.filter.size(); i++) {
 				Map<String, Object> map = filter.filter.get(i);
 				stringBuffer.append(" and " + map.get("name") + " " + map.get("rela") + " " + map.get("value"));
@@ -88,7 +91,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 		 */
 		String sql = ""+
 					" insert into hotel"+
-					" (name,address,region,introdution,"+
+					" (name,address,region,introduction,"+
 					" star,environment1,environment2,environment3,facility,score)"+
 					" values(?,?,?,?,?,?,?,?,?,?)";
 		try {
@@ -179,6 +182,117 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 		}
 
 		return ResultMessage.success;
+	}
+
+	@Override
+	public List<CommentInfoPO> getComments(int hotelID) {
+			
+		String sql = "select * from commentinfo where hotelID =? ";
+
+		List<CommentInfoPO> list = new ArrayList<>();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, hotelID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			CommentInfoPO commentInfoPO = null;
+			while (resultSet.next()) {
+	
+				Image image1 = null,image2 = null,image3 = null;
+				if (resultSet.getString("picture1") != null) {
+					image1 = new ImageIcon(resultSet.getString("picture1")).getImage();
+	
+				}
+				if (resultSet.getString("picture2") != null) {
+					image2 = new ImageIcon(resultSet.getString("picture2")).getImage();
+					
+				}
+				if (resultSet.getString("picture3") != null) {
+					image3 = new ImageIcon(resultSet.getString("picture3")).getImage();
+				}
+
+				commentInfoPO = new CommentInfoPO(resultSet.getInt("commentID"), 
+						resultSet.getDate("time"), resultSet.getInt("hotelID"), 
+						resultSet.getInt("score"), resultSet.getString("comment"),
+						image1,image2,image3);
+
+				list.add(commentInfoPO);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+		return list;
+		
+	
+	}
+
+	@Override
+	public ResultMessage addComment(CommentInfoPO commentInfoPO) {
+		
+		String imagePath1 = null;
+		String imagePath2 = null;
+		String imagePath3 = null;
+		/*
+		 * 这个path我是不会存
+		 * 
+		 */
+		String sql = ""+
+					" insert into commentinfo"+
+					" (time,hotelID,score,comment,picture1,picture2,picture3)"+
+					" values(?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+			preparedStatement.setDate(1,new Date(commentInfoPO.getTime().getTime()));
+			preparedStatement.setInt(2,commentInfoPO.getHotelID());
+			preparedStatement.setInt(3,commentInfoPO.getScore());
+			preparedStatement.setString(4,commentInfoPO.getComment());
+			preparedStatement.setString(5, imagePath1);
+			preparedStatement.setString(6, imagePath2);
+			preparedStatement.setString(7, imagePath3);
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return ResultMessage.failure;
+		}
+		return ResultMessage.success;
+	
+	}
+
+	@Override
+	public Map<Integer, RegionPO> getRegions() {
+		
+		String sql = "select * from region";
+
+		Map<Integer, RegionPO> map = new HashMap<>();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+	
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			RegionPO regionPO = null;
+			while (resultSet.next()) {
+
+				regionPO = new RegionPO(resultSet.getInt("regionID"),
+						resultSet.getString("province") , resultSet.getString("city"), 
+						resultSet.getString("regionName"));
+				
+				map.put(regionPO.getRegionID(), regionPO);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+		return map;
+		
 	}
 
 }
