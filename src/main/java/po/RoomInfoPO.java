@@ -4,6 +4,8 @@ package po;
 import java.io.Serializable;
 import java.util.Date;
 
+import message.RoomStateMessage;
+
 public class RoomInfoPO implements Serializable{
 	/**
 	 * 
@@ -14,10 +16,16 @@ public class RoomInfoPO implements Serializable{
 	String roomID;
 	String roomType;
 	int roomPrice;
-	int roomState;
+	RoomStateMessage roomState;
 	Date detailedInfo1;
 	Date detailedInfo2;
-	public RoomInfoPO(int roomInfoID, int hotelID, String roomID, String roomType, int roomPrice, int roomState,
+	
+	public RoomInfoPO(){
+		
+	}
+	
+	
+	public RoomInfoPO(int roomInfoID, int hotelID, String roomID, String roomType, int roomPrice, RoomStateMessage roomState,
 			Date detailedInfo1, Date detailedInfo2) {
 		super();
 		this.roomInfoID = roomInfoID;
@@ -69,10 +77,10 @@ public class RoomInfoPO implements Serializable{
 	public void setRoomPrice(int roomPrice) {
 		this.roomPrice = roomPrice;
 	}
-	public int getRoomState() {
+	public RoomStateMessage getRoomState() {
 		return roomState;
 	}
-	public void setRoomState(int roomState) {
+	public void setRoomState(RoomStateMessage roomState) {
 		this.roomState = roomState;
 	}
 	public Date getDetailedInfo1() {

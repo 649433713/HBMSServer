@@ -46,7 +46,8 @@ public class HotelDaoImpl implements HotelDao{
 	@Override
 	public HotelPO getHotelInfo(int hotelID) {
 		getHotelList(null);
-		return map.get(hotelID);
+		HotelPO copy = map.get(hotelID);
+		return copy;
 	}
 
 

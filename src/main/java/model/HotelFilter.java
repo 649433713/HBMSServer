@@ -13,7 +13,7 @@ public class HotelFilter {
 	 * 
 	 * Filter �е� param ��name key���洢ɸѡ���ֶΣ�name,address,region,star,score)
 	 */
-	public void add(String name ,String relation,String value) {
+	public void add(String name ,String relation,Object value) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("name", name);
 		param.put("relation", relation);

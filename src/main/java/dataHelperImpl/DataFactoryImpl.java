@@ -19,7 +19,7 @@ public class DataFactoryImpl implements DataFactory{
 
 	@Override
 	public RoomDataHelper getRoomDataHelper() {
-		RoomDataHelper roomDataHelper = new RoomDataTxtHelper();
+		RoomDataHelper roomDataHelper = new RoomDataMysqlHelper();
 		return roomDataHelper;
 	}
 }
