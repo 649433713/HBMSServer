@@ -148,8 +148,8 @@ DROP TABLE IF EXISTS `hotelpromotion`;
 CREATE TABLE `hotelpromotion` (
   `hotelPromotionID` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `hotelID` int(10) unsigned zerofill NOT NULL,
-  `name` varchar(30) DEFAULT NULL,
-  `content` varchar(30) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `content` varchar(200) DEFAULT NULL,
   `startDate` date DEFAULT '2000-01-01',
   `endDate` date DEFAULT '2030-01-01',
   `minRankAvailable` int(11) DEFAULT '1',
@@ -332,4 +332,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-01 19:05:20
+-- Dump completed on 2016-12-01 19:34:36

@@ -1,6 +1,7 @@
 package daoImpl;
 
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.Map;
 
 import dao.RoomDao;
@@ -13,7 +14,7 @@ import message.ResultMessage;
 
 public class RoomDaoImpl implements RoomDao {
 
-private Map<Integer, RoomInfoPO> map;
+private Map<String , RoomInfoPO> map;
 	
 	private static RoomDaoImpl roomDaoImpl;
 	
@@ -31,48 +32,52 @@ private Map<Integer, RoomInfoPO> map;
 		if (map==null) {
 			dataFactory = new DataFactoryImpl();
 			roomDataHelper = dataFactory.getRoomDataHelper();
-			map = roomDataHelper.getRoomInfoData();
+			map = null;
 		}
 	}
-	
-	
-	
-	@Override
-	public ResultMessage deleteRoom(int room_ID) throws RemoteException {
-
-		return null;
-	}
-
 	@Override
 	public Map<String, RoomInfoPO> getRoomList(int hotel_ID) throws RemoteException {
 		
 		return null;
 	}
-
 	@Override
 	public RoomInfoPO getRoomInfo(String roomType) throws RemoteException {
 		
 		return null;
 	}
-
+	@Override
+	public int getRoomNum(String roomType) throws RemoteException {
+		
+		return 0;
+	}
 	@Override
 	public ResultMessage addRoom(RoomInfoPO po) throws RemoteException {
 		
 		return null;
 	}
-
 	@Override
 	public ResultMessage modifyRoom(RoomInfoPO po) throws RemoteException {
 		
 		return null;
 	}
-
 	@Override
-	public ResultMessage modifyRoomState(int room_ID, RoomStateMessage room_state) throws RemoteException {
+	public ResultMessage deleteRoom(int roomInfoID) throws RemoteException {
 		
 		return null;
 	}
-
-
+	@Override
+	public ResultMessage deleteRoom(String roomID) throws RemoteException {
+		
+		return null;
+	}
+	@Override
+	public ResultMessage modifyRoomState(String roomID, RoomStateMessage room_state, Date date1, Date date2)
+			throws RemoteException {
+		
+		return null;
+	}
+	
+	
+	
 
 }
