@@ -52,9 +52,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public Map<Integer, HotelPO> getHotelList(HotelFilter filter) throws RemoteException{
+	public Map<Integer, HotelPO> getHotelList(HotelFilter filter,String order,java.util.Date date) throws RemoteException{
 
-			return hotelDao.getHotelList(filter);
+			return hotelDao.getHotelList(filter,order,date);
 	}
 
 	@Override

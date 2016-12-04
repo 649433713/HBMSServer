@@ -1,13 +1,11 @@
 package dataHelperImpl;
 
 import java.awt.Image;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +26,34 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 	}
 
 	@Override
-	public Map<Integer, HotelPO> getHotelList(HotelFilter filter) {
+	public Map<Integer, HotelPO> getHotelList(HotelFilter filter,String order,java.util.Date date) {
 
+		if (date!=null) {
+			Calendar c1 = Calendar.getInstance();
+	        Calendar c2 = Calendar.getInstance();
+	        
+	        c1.setTime(new java.util.Date());
+	        c2.setTime(date);
+
+	        int difference = c2.get(Calendar.DAY_OF_YEAR) - c1.get(Calendar.DAY_OF_YEAR);
+	        DecimalFormat decimalFormat = new DecimalFormat("00");
+	        String dayOff = "day"+decimalFormat.format(difference);
+			
+			String sql = "{call updateLowestPrice(?)}";
+			try {
+				CallableStatement callableStatement = connection.prepareCall(sql);
+				callableStatement.setString(1, dayOff);
+				callableStatement.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		
+		
 		StringBuffer stringBuffer = new StringBuffer("select * from hotel where 1=1");
 
 		if (filter != null && filter.filter.size() > 0) {
@@ -38,7 +62,16 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 				stringBuffer.append(" and " + map.get("name") + " " + map.get("relation") + " " + map.get("value"));
 			}
 		}
-		Map<Integer, HotelPO> map = new HashMap<>();
+		if (order!=null) {
+			if (order.equals("lowestPrice")) {
+				stringBuffer.append(" order by "+order);
+			}
+			else {
+				stringBuffer.append(" order by "+order+" desc");
+			}
+		
+		}
+		Map<Integer, HotelPO> map = new LinkedHashMap<>();
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(stringBuffer.toString());
@@ -64,8 +97,9 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 				hotelPO = new HotelPO(resultSet.getString("name"), resultSet.getInt("hotelID"),
 						resultSet.getInt("star"), resultSet.getString("address"), resultSet.getInt("region"),
 						resultSet.getString("introduction"), resultSet.getString("facility"), images,
-						resultSet.getInt("score"));
+						resultSet.getInt("score"),resultSet.getInt("lowestPrice"));
 
+	
 				map.put(hotelPO.getId(), hotelPO);
 
 			}
@@ -272,7 +306,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 		
 		String sql = "select * from region";
 
-		Map<Integer, RegionPO> map = new HashMap<>();
+		Map<Integer, RegionPO> map = new LinkedHashMap<>();
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(sql);

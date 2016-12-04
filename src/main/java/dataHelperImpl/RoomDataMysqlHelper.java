@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +30,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 
 		String sql = "select * from roominfo where hotelID =? ";
 
-		Map<String, RoomInfoPO> map = new HashMap<>();
+		Map<String, RoomInfoPO> map = new LinkedHashMap<>();
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(sql);
@@ -41,7 +41,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 			while (resultSet.next()) {
 
 				roomInfoPO = new RoomInfoPO(resultSet.getInt("roomInfoID"), resultSet.getInt("hotelID"),
-						resultSet.getString("roomID"), resultSet.getString("roomType"), resultSet.getInt("roomPrice"),
+						resultSet.getString("roomID"), resultSet.getString("roomType"), resultSet.getInt("dafaultPrice"),
 						RoomStateMessage.values()[resultSet.getInt("roomState")], resultSet.getDate("detailedInfo1"),
 						resultSet.getDate("detailedInfo2"));
 
@@ -61,7 +61,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 	public ResultMessage addRoom(RoomInfoPO po) {
 
 		String sql = "" + " insert into roominfo"
-				+ " (hotelID,roomID,roomType,roomPrice,roomState,detailedInfo1,detailedInfo2)"
+				+ " (hotelID,roomID,roomType,defaultPrice,roomState,detailedInfo1,detailedInfo2)"
 				+ " values(?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -69,7 +69,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 			preparedStatement.setInt(1, po.getHotelID());
 			preparedStatement.setString(2, po.getRoomID());
 			preparedStatement.setString(3, po.getRoomType());
-			preparedStatement.setInt(4, po.getRoomPrice());
+			preparedStatement.setInt(4, po.getDefaultPrice());
 			preparedStatement.setInt(5, po.getRoomState().ordinal());
 			preparedStatement.setDate(6, new Date(po.getDetailedInfo1().getTime()));
 			preparedStatement.setDate(7, new Date(po.getDetailedInfo2().getTime()));
@@ -87,7 +87,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 	public ResultMessage modifyRoom(RoomInfoPO po) {
 
 		String sql =" update roominfo"
-				+ " set hotelID=?,roomID=?,roomType=?,roomPrice=?,roomState=?,detailedInfo1=?,detailedInfo2=?"
+				+ " set hotelID=?,roomID=?,roomType=?,defaultPrice=?,roomState=?,detailedInfo1=?,detailedInfo2=?"
 				+ " where roomInfoID =?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -95,7 +95,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 			preparedStatement.setInt(1, po.getHotelID());
 			preparedStatement.setString(2, po.getRoomID());
 			preparedStatement.setString(3, po.getRoomType());
-			preparedStatement.setInt(4, po.getRoomPrice());
+			preparedStatement.setInt(4, po.getDefaultPrice());
 			preparedStatement.setInt(5, po.getRoomState().ordinal());
 			preparedStatement.setDate(6, new Date(po.getDetailedInfo1().getTime()));
 			preparedStatement.setDate(7, new Date(po.getDetailedInfo2().getTime()));

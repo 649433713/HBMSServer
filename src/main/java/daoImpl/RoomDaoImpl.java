@@ -2,7 +2,7 @@ package daoImpl;
 
 import java.rmi.RemoteException;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import dao.RoomDao;
@@ -81,7 +81,7 @@ public class RoomDaoImpl implements RoomDao {
 
 	@Override
 	public ResultMessage deleteRoom(int roomInfoID) throws RemoteException {
-		Map<String, Object> condition = new HashMap<>();
+		Map<String, Object> condition = new LinkedHashMap<>();
 
 		condition.put("name", "roomInfoID");
 		condition.put("relation", "=");
@@ -92,7 +92,7 @@ public class RoomDaoImpl implements RoomDao {
 
 	@Override
 	public ResultMessage deleteRoom(String roomID) throws RemoteException {
-		Map<String, Object> condition = new HashMap<>();
+		Map<String, Object> condition = new LinkedHashMap<>();
 
 		condition.put("name", "roomID");
 		condition.put("relation", "=");

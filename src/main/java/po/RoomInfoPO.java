@@ -15,7 +15,7 @@ public class RoomInfoPO implements Serializable{
 	int hotelID;
 	String roomID;
 	String roomType;
-	int roomPrice;
+	int defaultPrice;
 	RoomStateMessage roomState;
 	Date detailedInfo1;
 	Date detailedInfo2;
@@ -25,14 +25,14 @@ public class RoomInfoPO implements Serializable{
 	}
 	
 	
-	public RoomInfoPO(int roomInfoID, int hotelID, String roomID, String roomType, int roomPrice, RoomStateMessage roomState,
+	public RoomInfoPO(int roomInfoID, int hotelID, String roomID, String roomType, int defaultPrice, RoomStateMessage roomState,
 			Date detailedInfo1, Date detailedInfo2) {
 		super();
 		this.roomInfoID = roomInfoID;
 		this.hotelID = hotelID;
 		this.roomID = roomID;
 		this.roomType = roomType;
-		this.roomPrice = roomPrice;
+		this.defaultPrice = defaultPrice;
 		this.roomState = roomState;
 		this.detailedInfo1 = detailedInfo1;
 		this.detailedInfo2 = detailedInfo2;
@@ -42,7 +42,7 @@ public class RoomInfoPO implements Serializable{
 	@Override
 	public String toString() {
 		return "RoomInfoPO [roomInfoID=" + roomInfoID + ", hotelID=" + hotelID + ", roomID=" + roomID + ", roomType="
-				+ roomType + ", roomPrice=" + roomPrice + ", roomState=" + roomState + ", detailedInfo1="
+				+ roomType + ", defaultPrice=" + defaultPrice + ", roomState=" + roomState + ", detailedInfo1="
 				+ detailedInfo1 + ", detailedInfo2=" + detailedInfo2 + "]";
 	}
 
@@ -71,11 +71,11 @@ public class RoomInfoPO implements Serializable{
 	public void setRoomType(String roomType) {
 		this.roomType = roomType;
 	}
-	public int getRoomPrice() {
-		return roomPrice;
+	public int getDefaultPrice() {
+		return defaultPrice;
 	}
-	public void setRoomPrice(int roomPrice) {
-		this.roomPrice = roomPrice;
+	public void setDefaultPrice(int defaultPrice) {
+		this.defaultPrice = defaultPrice;
 	}
 	public RoomStateMessage getRoomState() {
 		return roomState;

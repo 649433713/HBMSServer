@@ -1,6 +1,7 @@
 package daoImpl;
 
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -38,14 +39,14 @@ public class HotelDaoImpl implements HotelDao{
 	}
 
 	@Override
-	public Map<Integer, HotelPO> getHotelList(HotelFilter filter) {
-		map = hotelDataHelper.getHotelList(filter);
+	public Map<Integer, HotelPO> getHotelList(HotelFilter filter,String order,Date date) {
+		map = hotelDataHelper.getHotelList(filter,order,date);
 		return map;
 	}
 
 	@Override
 	public HotelPO getHotelInfo(int hotelID) {
-		getHotelList(null);
+		getHotelList(null,null,null);
 		HotelPO copy = map.get(hotelID);
 		return copy;
 	}

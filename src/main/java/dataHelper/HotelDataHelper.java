@@ -1,5 +1,6 @@
 package dataHelper;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import po.RegionPO;
 
 public interface HotelDataHelper {
 	
-	public Map<Integer,HotelPO> getHotelList(HotelFilter filter);
+	public Map<Integer,HotelPO> getHotelList(HotelFilter filter, String order, Date date);
 
 	public ResultMessage addHotel(HotelPO hotelPO) ;
 	

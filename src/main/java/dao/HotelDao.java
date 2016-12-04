@@ -2,6 +2,7 @@ package dao;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,8 +13,11 @@ import po.HotelPO;
 import po.RegionPO;
 
 public interface HotelDao extends Remote{
-	
-	public Map<Integer, HotelPO> getHotelList(HotelFilter filter)throws RemoteException;	
+	/*
+	 * filter规则查看model里该类规则
+	 * order为（lowestPrice,star,score）
+	 */
+	public Map<Integer, HotelPO> getHotelList(HotelFilter filter,String order,Date date)throws RemoteException;	
 	
 	public HotelPO getHotelInfo(int hotelID)throws RemoteException;
 	
