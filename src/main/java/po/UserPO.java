@@ -1,80 +1,127 @@
 package po;
+import model.MemberType;
+
+import java.awt.*;
 import java.io.Serializable;
 /**
  * Created by alex on 16-11-17.
  */
 public class UserPO implements Serializable{
-    //shared
-    String id;
+    String userID;
+    String accountName;
     String password;
-    PersonalInfoPO personalInfo;
-    //for customers
-    CreditPO creditInfo;
-    MemberInfoPO memberInfo;
-    //for staffs
+    String name;
+    String contact;
+    Image portrait;
+    long creditValue;
+    MemberType memberType;
+    String memberInfo;
+    int rank;
     String workid;
-    String hotelid;
-    //for web marketers and web managers: shared ones are enough
+    int hotelid;
     //constructors for allPO
     public UserPO(String id){
-        this.id=id;
+        this.userID=id;
+    }
+
+    public UserPO(String userID, String accountName, String password, String name
+            , String contact, Image portrait, long creditValue
+            , MemberType memberType, String memberInfo, int rank
+            , String workid, int hotelid) {
+        this.userID = userID;
+        this.accountName = accountName;
+        this.password = password;
+        this.name = name;
+        this.contact = contact;
+        this.portrait = portrait;
+        this.creditValue = creditValue;
+        this.memberType = memberType;
+        this.memberInfo = memberInfo;
+        this.rank = rank;
+        this.workid = workid;
+        this.hotelid = hotelid;
     }
 
     //constructors for customerPO
-    public UserPO(String id,String pwd,PersonalInfoPO personalInfo,CreditPO creditInfo
-            ,MemberInfoPO memberInfo){
-        this.id=id;
+    public UserPO(String id,String pwd,String name,String contact,
+                  Image image,long creditValue,MemberType memberType,String memberInfo,int rank){
+        this.userID=id;
         this.password=pwd;
-        this.personalInfo=personalInfo;
-        this.creditInfo=creditInfo;
+        this.accountName=name;
+        this.contact=contact;
+        this.portrait=image;
+        this.creditValue=creditValue;
         this.memberInfo=memberInfo;
+        this.memberType=memberType;
+        this.rank=rank;
     }
 
     //constructors for StaffPO
-    public UserPO(String id,String pwd,PersonalInfoPO personalInfo,CreditPO creditInfo
-            ,MemberInfoPO memberInfo,String workid,String hotelid){
-        this.id=id;
+    public UserPO(String id,String pwd,String name,String contact,Image image,String workid,int hotelid){
+        this.userID=id;
         this.password=pwd;
-        this.personalInfo=personalInfo;
-        this.creditInfo=creditInfo;
-        this.memberInfo=memberInfo;
+        this.accountName=name;
+        this.contact=contact;
+        this.portrait=image;
         this.workid=workid;
         this.hotelid=hotelid;
     }
 
     //constructors for WebMarketerPO and WebManagerPO
-    public UserPO(String id,String pwd,PersonalInfoPO personalInfo){
-        this.id=id;
+    public UserPO(String id,String pwd,String name,String contact,Image image){
+        this.userID=id;
         this.password=pwd;
-        this.personalInfo=personalInfo;
+        this.accountName=name;
+        this.contact=contact;
+        this.portrait=image;
     }
 
     //getters
-    public String getId() {
-        return id;
+    public String getUserID() {
+        return userID;
+    }
+
+    public String getAccountName() {
+        return accountName;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public PersonalInfoPO getPersonalInfo() {
-        return personalInfo;
+    public String getName() {
+        return name;
     }
 
-    public CreditPO getCreditInfo() {
-        return creditInfo;
+    public String getContact() {
+        return contact;
     }
 
-    public MemberInfoPO getMemberInfo(){
+    public Image getPortrait() {
+        return portrait;
+    }
+
+    public long getCreditValue() {
+        return creditValue;
+    }
+
+    public MemberType getMemberType() {
+        return memberType;
+    }
+
+    public String getMemberInfo() {
         return memberInfo;
+    }
+
+    public int getRank() {
+        return rank;
     }
 
     public String getWorkid() {
         return workid;
     }
 
-    public String getHotelid() {
+    public int getHotelid() {
         return hotelid;
     }
 }
