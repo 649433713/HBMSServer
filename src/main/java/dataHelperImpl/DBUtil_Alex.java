@@ -17,7 +17,6 @@ public class DBUtil_Alex {
 
     private static Connection connection = null;
     static{
-        //1.加载驱动程序
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection= DriverManager.getConnection(URL,NAME, PASSWORD);
@@ -25,8 +24,6 @@ public class DBUtil_Alex {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        //2.获得数据库连接
-
     }
     public static Connection getConnection() {
         return connection;

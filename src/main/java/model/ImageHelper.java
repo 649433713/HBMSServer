@@ -36,7 +36,7 @@ public class ImageHelper {
         if(file.isFile()&&file.exists()){
             file.delete();
             return true;
-        }
-        return false;
+        }else return false;
+
     }
 }
