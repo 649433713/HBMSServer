@@ -19,5 +19,4 @@ public interface UserDao extends Remote{
     public ResultMessage modifyUser(UserPO po) throws RemoteException,Exception;
     public ResultMessage login(String id, String pwd) throws RemoteException;
     public ResultMessage signup(UserPO po) throws RemoteException,Exception;
-
 }
