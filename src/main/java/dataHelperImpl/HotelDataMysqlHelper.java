@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 
 import dataHelper.HotelDataHelper;
 import message.ResultMessage;
+import model.DateToDayOff;
 import model.HotelFilter;
 import po.CommentInfoPO;
 import po.HotelPO;
@@ -29,15 +30,8 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 	public Map<Integer, HotelPO> getHotelList(HotelFilter filter,String order,java.util.Date date) {
 
 		if (date!=null) {
-			Calendar c1 = Calendar.getInstance();
-	        Calendar c2 = Calendar.getInstance();
-	        
-	        c1.setTime(new java.util.Date());
-	        c2.setTime(date);
-
-	        int difference = c2.get(Calendar.DAY_OF_YEAR) - c1.get(Calendar.DAY_OF_YEAR);
-	        DecimalFormat decimalFormat = new DecimalFormat("00");
-	        String dayOff = "day"+decimalFormat.format(difference);
+			
+	        String dayOff = DateToDayOff.dateToDatOff(date);
 			
 			String sql = "{call updateLowestPrice(?)}";
 			try {

@@ -19,6 +19,8 @@ public class RoomInfoPO implements Serializable{
 	RoomStateMessage roomState;
 	Date detailedInfo1;
 	Date detailedInfo2;
+	int tempPrice;
+	int tempNum;
 	
 	public RoomInfoPO(){
 		
@@ -36,14 +38,36 @@ public class RoomInfoPO implements Serializable{
 		this.roomState = roomState;
 		this.detailedInfo1 = detailedInfo1;
 		this.detailedInfo2 = detailedInfo2;
-	}
+		}
 	
 	
+
 	@Override
 	public String toString() {
 		return "RoomInfoPO [roomInfoID=" + roomInfoID + ", hotelID=" + hotelID + ", roomID=" + roomID + ", roomType="
 				+ roomType + ", defaultPrice=" + defaultPrice + ", roomState=" + roomState + ", detailedInfo1="
-				+ detailedInfo1 + ", detailedInfo2=" + detailedInfo2 + "]";
+				+ detailedInfo1 + ", detailedInfo2=" + detailedInfo2 + ", tempPrice=" + tempPrice + ", tempNum="
+				+ tempNum + "]";
+	}
+
+
+	public int getTempNum() {
+		return tempNum;
+	}
+
+
+	public void setTempNum(int tempNum) {
+		this.tempNum = tempNum;
+	}
+
+
+	public int getTempPrice() {
+		return tempPrice;
+	}
+
+
+	public void setTempPrice(int tempPrice) {
+		this.tempPrice = tempPrice;
 	}
 
 

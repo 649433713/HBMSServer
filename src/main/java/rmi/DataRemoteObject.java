@@ -137,8 +137,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public Map<String, RoomInfoPO> getRoomList(int hotel_ID) throws RemoteException {
-		return roomDao.getRoomList(hotel_ID);
+	public Map<String, RoomInfoPO> getRoomList(int hotel_ID,Date date) throws RemoteException {
+		return roomDao.getRoomList(hotel_ID,date);
 	}
 
 	@Override
@@ -265,22 +265,32 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 		return hotelDao.getRegions();
 	}
 
-	@Override
-	public int getRoomNum(String roomType) throws RemoteException {
-		
-		return roomDao.getRoomNum(roomType);
-	}
 
 	@Override
-	public ResultMessage deleteRoom(String roomID) throws RemoteException {
-		
-		return roomDao.deleteRoom(roomID);
-	}
-
-	@Override
-	public ResultMessage modifyRoomState(String roomID, RoomStateMessage room_state, Date date1, Date date2)
+	public ResultMessage modifyRoomState(int roomInfoID, RoomStateMessage room_state, Date date1, Date date2)
 			throws RemoteException {
 		
-		return roomDao.modifyRoomState(roomID, room_state, date1, date2);
+		return roomDao.modifyRoomState(roomInfoID, room_state, date1, date2);
+	}
+
+	@Override
+	public ResultMessage deleteRoom(int hotelID, String roomID) throws RemoteException {
+		
+		return roomDao.deleteRoom(hotelID, roomID);
+	}
+
+
+	@Override
+	public ResultMessage modifyRoomStateByDay(int roomInfoID, RoomStateMessage roomState, Date date)
+			throws RemoteException {
+		
+		return roomDao.modifyRoomStateByDay(roomInfoID, roomState, date);
+	}
+
+
+	@Override
+	public ResultMessage setPrice(int roomInfoID, Date date, int price) throws RemoteException {
+		
+		return roomDao.setPrice(roomInfoID, date, price);
 	}
 }

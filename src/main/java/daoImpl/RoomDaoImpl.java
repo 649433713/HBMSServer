@@ -11,6 +11,7 @@ import dataHelper.RoomDataHelper;
 import dataHelperImpl.DataFactoryImpl;
 import po.RoomInfoPO;
 import message.RoomStateMessage;
+import model.UserType;
 import message.ResultMessage;
 
 public class RoomDaoImpl implements RoomDao {
@@ -37,10 +38,12 @@ public class RoomDaoImpl implements RoomDao {
 			map = null;
 		}
 	}
+	
+	
 
 	@Override
-	public Map<String, RoomInfoPO> getRoomList(int hotel_ID) throws RemoteException {
-		map = roomDataHelper.getRoomList(hotel_ID);
+	public Map<String, RoomInfoPO> getRoomList(int hotel_ID,Date date) throws RemoteException {
+		map = roomDataHelper.getRoomList(hotel_ID,date);
 		return map;
 	}
 
@@ -56,16 +59,6 @@ public class RoomDaoImpl implements RoomDao {
 		return copy;
 	}
 
-	@Override
-	public int getRoomNum(String roomType) throws RemoteException {
-		int count = 0;
-		for (RoomInfoPO roomInfoPO : map.values()) {
-			if (roomType.equals(roomInfoPO.getRoomType())) {
-				++count;
-			}
-		}
-		return count;
-	}
 
 	@Override
 	public ResultMessage addRoom(RoomInfoPO po) throws RemoteException {
@@ -81,42 +74,79 @@ public class RoomDaoImpl implements RoomDao {
 
 	@Override
 	public ResultMessage deleteRoom(int roomInfoID) throws RemoteException {
-		Map<String, Object> condition = new LinkedHashMap<>();
 
-		condition.put("name", "roomInfoID");
-		condition.put("relation", "=");
-		condition.put("value", roomInfoID);
-
-		return roomDataHelper.deleteRoom(condition);
+		return roomDataHelper.deleteRoom(roomInfoID);
 	}
 
 	@Override
-	public ResultMessage deleteRoom(String roomID) throws RemoteException {
-		Map<String, Object> condition = new LinkedHashMap<>();
+	public ResultMessage deleteRoom(int hotelID,String roomID) throws RemoteException {
+		int roomInfoID = 0;
+		for (RoomInfoPO roomInfoPO : map.values()) {
+			if (roomInfoPO.getHotelID()==hotelID&&roomInfoPO.getRoomID().equals(roomID)) {
+				roomInfoID = roomInfoPO.getRoomInfoID();
+			}
+		}
 
-		condition.put("name", "roomID");
-		condition.put("relation", "=");
-		condition.put("value", roomID);
-
-		return roomDataHelper.deleteRoom(condition);
+		return roomDataHelper.deleteRoom(roomInfoID);
 	}
 
 	@Override
-	public ResultMessage modifyRoomState(String roomID, RoomStateMessage room_state, Date date1, Date date2)
+	public ResultMessage modifyRoomState(int roomInfoID, RoomStateMessage room_state, Date date1, Date date2)
 			throws RemoteException {
-
+		
 		RoomInfoPO copy = null;
 		for (RoomInfoPO roomInfoPO : map.values()) {
-			if (roomID.equals(roomInfoPO.getRoomID())) {
+			if (roomInfoID==roomInfoPO.getRoomInfoID()) {
 				copy = roomInfoPO;
 				break;
 			}
 		}
+		
+		
 		copy.setRoomState(room_state);
 		copy.setDetailedInfo1(date1);
 		copy.setDetailedInfo2(date2);
 		
+	
 		return roomDataHelper.modifyRoom(copy);
+	}
+
+	/*
+	* Title: setPrice
+	*Description: 
+	* @param roomInfoID
+	* @param date
+	* @param price
+	* @return 
+	* @see dao.RoomDao#setPrice(int, java.util.Date, int) 
+	*/
+	@Override
+	public ResultMessage setPrice(int roomInfoID, Date date, int price)throws RemoteException  {
+		if (date!=null) {
+			return roomDataHelper.modifyPriceByDay(roomInfoID,price,date);
+		}
+		else {
+			RoomInfoPO roomInfoPO = map.get(roomInfoID);
+			roomInfoPO.setDefaultPrice(price);
+			return modifyRoom(roomInfoPO);
+		}
+	}
+
+	/*
+	* Title: modifyRoomStateByDay
+	*Description: 
+	* @param roomInfoID
+	* @param roomState
+	* @param date
+	* @return
+	* @throws RemoteException 
+	* @see dao.RoomDao#modifyRoomStateByDay(int, message.RoomStateMessage, java.util.Date) 
+	*/
+	@Override
+	public ResultMessage modifyRoomStateByDay(int roomInfoID, RoomStateMessage roomState, Date date)
+			throws RemoteException {
+		
+		return  roomDataHelper.modifyStateByDay(roomInfoID,roomState,date);
 	}
 
 }

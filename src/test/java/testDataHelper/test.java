@@ -9,7 +9,9 @@ import dao.RoomDao;
 import daoImpl.HotelDaoImpl;
 import daoImpl.RoomDaoImpl;
 import dataHelperImpl.HotelDataMysqlHelper;
+import message.RoomStateMessage;
 import po.HotelPO;
+import po.RoomInfoPO;
 
 public class test {
 
@@ -18,16 +20,18 @@ public class test {
 		HotelDao hotelDao = new HotelDaoImpl();
 		RoomDao roomDao = new RoomDaoImpl();
 		
-		Map<Integer, HotelPO> hotelList = null;
-		
+	
+		Map<String, RoomInfoPO> roomList = null;
 		try {
-			hotelList = hotelDao.getHotelList(null, "score", new Date());
+			roomList = roomDao.getRoomList(119,null);
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for (HotelPO hotelPO : hotelList.values()) {
-		System.out.println(hotelPO);
+
+		for (RoomInfoPO roomInfoPO : roomList.values()) {
+			System.out.println(roomInfoPO);
 		}
 		
 	}
