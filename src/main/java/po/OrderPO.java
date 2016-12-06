@@ -6,8 +6,9 @@ import java.util.Date;
 
 
 public class OrderPO implements Serializable{
+	
 	PersonalInfoPO personalInfo;
-	String id;
+	
 	Date createDate;
 	Date cancelDate;
 	HotelPO hotelInfo;

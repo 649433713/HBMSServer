@@ -1,64 +1,88 @@
 package daoImpl;
 
-import java.util.HashMap;
+import java.rmi.RemoteException;
 import java.util.Map;
 
 import dao.OrderDao;
+import dataHelper.DataFactory;
+import dataHelper.OrderDataHelper;
+import dataHelperImpl.DataFactoryImpl;
+import message.OrderStateMessage;
 import message.ResultMessage;
+import model.UserType;
 import po.OrderPO;
 
 public class OrderDaoImpl implements OrderDao
 {
-
-	@Override
-	public Map<String, OrderPO> getOrderList(String userID)
-	{
-		// TODO Auto-generated method stub
-		if(userID.equals("0001"))
-		{
-			Map<String, OrderPO> orderList = new HashMap<String, OrderPO>();
-			for(int i = 0; i < orderList.size();i++)
-			{
-				OrderPO orderPO = new OrderPO("0001");//从文件中或者数据库中读出来的orderpo
-				orderList.put("0001", orderPO);
-			}
-			return orderList;
+	
+	private Map<Integer, OrderPO> map;
+	
+	private static OrderDaoImpl orderDaoImpl;
+	
+	private DataFactory dataFactory;
+	
+	private OrderDataHelper orderDataHelper;
+	
+	public static OrderDaoImpl getInstance(){
+		if(orderDaoImpl == null){
+			orderDaoImpl = new OrderDaoImpl();
 		}
-		return null;
+		return orderDaoImpl;
+	}
+	public OrderDaoImpl() {
+		if (map==null) {
+			dataFactory = new DataFactoryImpl();
+			orderDataHelper = dataFactory.getOrderDataHelper();
+			
+		}
 	}
 	
-	@Override
-	public ResultMessage addOrder(OrderPO orderpo) {
-		// TODO Auto-generated method stub
-		System.out.println("addOrder successfully!");
-		return ResultMessage.success;
-	}
+	
 
 	@Override
-	public ResultMessage deleteOrder(OrderPO orderpo) {
+	public Map<Integer, OrderPO> getOrderList(int ID, UserType userType) throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println("deleteOrder successfully!");
-		return ResultMessage.success;
+		return orderDataHelper.getOrderList(ID, userType, null);
+	}
+	
+	
+	@Override
+	public Map<Integer, OrderPO> getUnexecutedOrderList(int ID, UserType userType) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Unexecuted);
+	}
+	@Override
+	public Map<Integer, OrderPO> getExecutedOrderList(int ID, UserType userType) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Executed);
+	}
+	@Override
+	public Map<Integer, OrderPO> getCancelledOrderList(int ID, UserType userType) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Cancelled);
+	}
+	@Override
+	public Map<Integer, OrderPO> getAbnormalOrderList(int ID, UserType userType) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Abnormal);
+	}
+	@Override
+	public OrderPO getOrderInfo(int orderID) throws RemoteException {
+		// TODO Auto-generated method stub
+		OrderPO copy = map.get(orderID);
+		
+		return copy;
+	}
+	@Override
+	public ResultMessage changeOrderState(int orderID, OrderStateMessage orderState) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderDataHelper.modifyOrderState(orderID, orderState);
+	}
+	@Override
+	public ResultMessage addOrder(OrderPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderDataHelper.addOrder(po);
 	}
 
-	@Override
-	public ResultMessage modifyOrder(OrderPO orderpo) {
-		// TODO Auto-generated method stub
-		System.out.println("modifyOrder successfully!");
-		return ResultMessage.success;
-	}
-
-	@Override
-	public OrderPO findOrder(String orderID) {
-		// TODO Auto-generated method stub
-		Map<String, OrderPO> orderList = new HashMap<String, OrderPO>();
-		for(int i = 0; i < orderList.size();i++)
-		{
-			OrderPO orderPO = new OrderPO("0001");//从文件中或者数据库中读出来的orderpo
-			orderList.put("0001", orderPO);
-		}
-		OrderPO returnOrderPO = orderList.get(orderID);
-		return returnOrderPO;
-	}
 
 }
