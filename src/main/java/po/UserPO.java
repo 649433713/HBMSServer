@@ -1,13 +1,14 @@
 package po;
 import model.MemberType;
-
+import model.UserType;
 import java.awt.*;
 import java.io.Serializable;
 /**
  * Created by alex on 16-11-17.
  */
 public class UserPO implements Serializable{
-    String userID;
+    int userID;
+    UserType userType;
     String accountName;
     String password;
     String name;
@@ -20,15 +21,16 @@ public class UserPO implements Serializable{
     String workid;
     int hotelid;
     //constructors for allPO
-    public UserPO(String id){
-        this.userID=id;
+    public UserPO(int userID){
+        this.userID=userID;
     }
 
-    public UserPO(String userID, String accountName, String password, String name
+    public UserPO(int userID,UserType userType, String accountName, String password, String name
             , String contact, Image portrait, long creditValue
             , MemberType memberType, String memberInfo, int rank
             , String workid, int hotelid) {
         this.userID = userID;
+        this.userType=userType;
         this.accountName = accountName;
         this.password = password;
         this.name = name;
@@ -43,9 +45,10 @@ public class UserPO implements Serializable{
     }
 
     //constructors for customerPO
-    public UserPO(String id,String pwd,String name,String contact,
+    public UserPO(int id,String pwd,String name,String contact,
                   Image image,long creditValue,MemberType memberType,String memberInfo,int rank){
         this.userID=id;
+        this.userType=UserType.Customer;
         this.password=pwd;
         this.accountName=name;
         this.contact=contact;
@@ -57,8 +60,9 @@ public class UserPO implements Serializable{
     }
 
     //constructors for StaffPO
-    public UserPO(String id,String pwd,String name,String contact,Image image,String workid,int hotelid){
+    public UserPO(int id,String pwd,String name,String contact,Image image,String workid,int hotelid){
         this.userID=id;
+        this.userType=UserType.Staff;
         this.password=pwd;
         this.accountName=name;
         this.contact=contact;
@@ -68,8 +72,9 @@ public class UserPO implements Serializable{
     }
 
     //constructors for WebMarketerPO and WebManagerPO
-    public UserPO(String id,String pwd,String name,String contact,Image image){
+    public UserPO(int id,UserType userType,String pwd,String name,String contact,Image image){
         this.userID=id;
+        this.userType=userType;
         this.password=pwd;
         this.accountName=name;
         this.contact=contact;
@@ -77,8 +82,12 @@ public class UserPO implements Serializable{
     }
 
     //getters
-    public String getUserID() {
+    public int getUserID() {
         return userID;
+    }
+
+    public UserType getUserType(){
+        return userType;
     }
 
     public String getAccountName() {
