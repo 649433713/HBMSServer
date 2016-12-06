@@ -25,12 +25,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
     }
 
     @Override
-    public UserPO getUserData(String id) {
+    public UserPO getUserData(int id) {
         UserTypeHelper userTypeHelper=new UserTypeHelper();
         MemberTypeHelper memberTypeHelper=new MemberTypeHelper();
-        if(userTypeHelper.getUserType(id).equals(UserType.NoSuchUser)){
-            return null;
-        }
+
         String sentence="select * from user where userID='"+id+"'";
         PreparedStatement preparedStatement;
         Image image=null;
@@ -43,7 +41,8 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 icon = new ImageIcon(resultSet.getString("portrait"));
                 image=icon.getImage();
             }
-            userPO=new UserPO(resultSet.getString("userID")
+            userPO=new UserPO(resultSet.getInt("userID")
+                    ,userTypeHelper.getUserType(resultSet.getInt("userType"))
                     ,resultSet.getString("accountName")
                     ,resultSet.getString("password")
                     ,resultSet.getString("name")
@@ -69,25 +68,26 @@ public class UserDataMysqlHelper implements UserDataHelper {
         String portraitPath=imageHelper.getProjectPath()+"/res/"+portraitName;
         //maybe in windows it should be: String portraitPath=projectPathHelper.getProjectPath()+"\\res\\"+portraitName;
         //try to put string to
-        String sql="INSERT into user(userID,accountName,password,name,contact,portrait,creditValue,memberType,memberInfo,rank,hotelID,workID)" +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql="INSERT into user(userID,userType,accountName,password,name,contact,portrait,creditValue,memberType,memberInfo,rank,hotelID,workID)" +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1,userPO.getUserID());
-            preparedStatement.setString(2,userPO.getAccountName());
-            preparedStatement.setString(3,userPO.getPassword());
-            preparedStatement.setString(4,userPO.getName());
-            preparedStatement.setString(5,userPO.getContact());
-            preparedStatement.setString(6,portraitPath);//to put the image path to the database
+            preparedStatement.setInt(1,userPO.getUserID());
+            preparedStatement.setInt(2,userPO.getUserType().ordinal());
+            preparedStatement.setString(3,userPO.getAccountName());
+            preparedStatement.setString(4,userPO.getPassword());
+            preparedStatement.setString(5,userPO.getName());
+            preparedStatement.setString(6,userPO.getContact());
+            preparedStatement.setString(7,portraitPath);//to put the image path to the database
             Image image=userPO.getPortrait();
             imageHelper.saveImage(image,portraitPath);
-            preparedStatement.setLong(7,userPO.getCreditValue());
-            preparedStatement.setInt(8,userPO.getMemberType().ordinal());
-            preparedStatement.setString(9,userPO.getMemberInfo());
-            preparedStatement.setInt(10,userPO.getRank());
-            preparedStatement.setInt(11,userPO.getHotelid());
-            preparedStatement.setString(12,userPO.getWorkid());
+            preparedStatement.setLong(8,userPO.getCreditValue());
+            preparedStatement.setInt(9,userPO.getMemberType().ordinal());
+            preparedStatement.setString(10,userPO.getMemberInfo());
+            preparedStatement.setInt(11,userPO.getRank());
+            preparedStatement.setInt(12,userPO.getHotelid());
+            preparedStatement.setString(13,userPO.getWorkid());
             preparedStatement.execute();
         }catch(SQLException e){
             e.printStackTrace();
@@ -97,20 +97,20 @@ public class UserDataMysqlHelper implements UserDataHelper {
     }
 
     @Override
-    public ResultMessage deleteUser(String id) throws Exception{
+    public ResultMessage deleteUser(int id) throws Exception{
         ImageHelper imageHelper=new ImageHelper();
         //remind that when deleting a user, the portrait info(both image and its path) should be deleted
         String sql="" + " Select * from user" + " where userID =? ";
         String sql2 = "" + "delete from user where userID = ?";
         try{
             PreparedStatement preparedStatement=connection.prepareStatement(sql);
-            preparedStatement.setString(1,id);
+            preparedStatement.setInt(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {
                 return ResultMessage.notexist;
             }
             preparedStatement = connection.prepareStatement(sql2);
-            preparedStatement.setString(1, id);
+            preparedStatement.setInt(1, id);
             preparedStatement.execute();
             //delete the image
             String portraitName="portrait"+id;
@@ -131,27 +131,28 @@ public class UserDataMysqlHelper implements UserDataHelper {
         String portraitPath=imageHelper.getProjectPath()+"/res/"+portraitName;
         String sql = ""+
                 " update user"+
-                " set userid=?,accountName=?,password=?,name=?,"+
+                " set userid=?,userType=?,accountName=?,password=?,name=?,"+
                 " contact=?,portrait=?,creditValue=?,memberType=?," +
                 "memberInfo=?,rank=?,hotelID=?,workID=?"+
                 " where userID=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,userPO.getUserID());
-            preparedStatement.setString(2,userPO.getAccountName());
-            preparedStatement.setString(3,userPO.getPassword());
-            preparedStatement.setString(4,userPO.getName());
-            preparedStatement.setString(5,userPO.getContact());
+            preparedStatement.setInt(1,userPO.getUserID());
+            preparedStatement.setInt(2,userPO.getUserType().ordinal());
+            preparedStatement.setString(3,userPO.getAccountName());
+            preparedStatement.setString(4,userPO.getPassword());
+            preparedStatement.setString(5,userPO.getName());
+            preparedStatement.setString(6,userPO.getContact());
             imageHelper.deleteImage(portraitPath);
             Image image=userPO.getPortrait();
             imageHelper.saveImage(image,portraitPath);
-            preparedStatement.setString(6,portraitPath);
-            preparedStatement.setLong(7,userPO.getCreditValue());
-            preparedStatement.setInt(8,userPO.getMemberType().ordinal());
-            preparedStatement.setString(9,userPO.getMemberInfo());
-            preparedStatement.setInt(10,userPO.getRank());
-            preparedStatement.setInt(11,userPO.getHotelid());
-            preparedStatement.setString(12,userPO.getWorkid());
+            preparedStatement.setString(7,portraitPath);
+            preparedStatement.setLong(8,userPO.getCreditValue());
+            preparedStatement.setInt(9,userPO.getMemberType().ordinal());
+            preparedStatement.setString(10,userPO.getMemberInfo());
+            preparedStatement.setInt(11,userPO.getRank());
+            preparedStatement.setInt(12,userPO.getHotelid());
+            preparedStatement.setString(13,userPO.getWorkid());
             preparedStatement.execute();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
