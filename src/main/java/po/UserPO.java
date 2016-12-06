@@ -22,8 +22,8 @@ public class UserPO implements Serializable{
     String workid;
     int hotelid;
     //constructors for allPO
-    public UserPO(int id){
-        this.userID=id;
+    public UserPO(int userID){
+        this.userID=userID;
     }
 
     public UserPO(int userID,UserType userType, String accountName, String password, String name

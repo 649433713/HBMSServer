@@ -3,7 +3,6 @@ package daoImpl;
 import java.rmi.RemoteException;
 
 import dao.CreditDao;
-import po.CreditPO;
 
 public class CreditDaoImpl_Stub implements CreditDao{
 	private int creditValue;

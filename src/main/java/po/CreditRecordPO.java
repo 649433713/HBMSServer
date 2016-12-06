@@ -1,33 +1,55 @@
 package po;
 
+import model.CreditRecordChangeType;
+import model.CreditRecordReasonType;
+
 import java.io.Serializable;
+import java.util.Date;
 
 public class CreditRecordPO implements Serializable{
-	String changeType;
-	String reasonType;
+	int creditRecordID;
+	Date time;
+	int userID;
+	CreditRecordChangeType changeType;
+	CreditRecordReasonType reasonType;
 	Long amount;
-	public CreditRecordPO(String cT,String rT,Long a){
-		changeType=cT;
-		reasonType=rT;
-		amount=a;
+	int orderID;
+
+	public CreditRecordPO(int creditRecordID, Date time, int userID, CreditRecordChangeType changeType, CreditRecordReasonType reasonType, Long amount, int orderID) {
+		this.creditRecordID = creditRecordID;
+		this.time = time;
+		this.userID = userID;
+		this.changeType = changeType;
+		this.reasonType = reasonType;
+		this.amount = amount;
+		this.orderID = orderID;
 	}
-	public String getChangeType() {
+
+	public int getCreditRecordID() {
+		return creditRecordID;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public CreditRecordChangeType getChangeType() {
 		return changeType;
 	}
-	public void setChangeType(String changeType) {
-		this.changeType = changeType;
-	}
-	public String getReasonType() {
+
+	public CreditRecordReasonType getReasonType() {
 		return reasonType;
 	}
-	public void setReasonType(String reasonType) {
-		this.reasonType = reasonType;
-	}
+
 	public Long getAmount() {
 		return amount;
 	}
-	public void setAmount(Long amount) {
-		this.amount = amount;
+
+	public int getOrderID() {
+		return orderID;
 	}
-	
 }

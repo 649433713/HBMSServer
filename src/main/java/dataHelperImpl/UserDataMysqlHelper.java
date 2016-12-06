@@ -68,26 +68,24 @@ public class UserDataMysqlHelper implements UserDataHelper {
         String portraitPath=imageHelper.getProjectPath()+"/res/"+portraitName;
         //maybe in windows it should be: String portraitPath=projectPathHelper.getProjectPath()+"\\res\\"+portraitName;
         //try to put string to
-        String sql="INSERT into user(userID,userType,accountName,password,name,contact,portrait,creditValue,memberType,memberInfo,rank,hotelID,workID)" +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql="INSERT into user(userType,accountName,password,name,contact,portrait,creditValue,memberType,memberInfo,rank,hotelID,workID)" +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setInt(1,userPO.getUserID());
-            preparedStatement.setInt(2,userPO.getUserType().ordinal());
-            preparedStatement.setString(3,userPO.getAccountName());
-            preparedStatement.setString(4,userPO.getPassword());
-            preparedStatement.setString(5,userPO.getName());
-            preparedStatement.setString(6,userPO.getContact());
-            preparedStatement.setString(7,portraitPath);//to put the image path to the database
+            preparedStatement.setInt(1,userPO.getUserType().ordinal());
+            preparedStatement.setString(2,userPO.getAccountName());
+            preparedStatement.setString(3,userPO.getPassword());
+            preparedStatement.setString(4,userPO.getName());
+            preparedStatement.setString(5,userPO.getContact());
+            preparedStatement.setString(6,portraitPath);//to put the image path to the database
             Image image=userPO.getPortrait();
             imageHelper.saveImage(image,portraitPath);
-            preparedStatement.setLong(8,userPO.getCreditValue());
-            preparedStatement.setInt(9,userPO.getMemberType().ordinal());
-            preparedStatement.setString(10,userPO.getMemberInfo());
-            preparedStatement.setInt(11,userPO.getRank());
-            preparedStatement.setInt(12,userPO.getHotelid());
-            preparedStatement.setString(13,userPO.getWorkid());
+            preparedStatement.setLong(7,userPO.getCreditValue());
+            preparedStatement.setInt(8,userPO.getMemberType().ordinal());
+            preparedStatement.setString(9,userPO.getMemberInfo());
+            preparedStatement.setInt(10,userPO.getRank());
+            preparedStatement.setInt(11,userPO.getHotelid());
+            preparedStatement.setString(12,userPO.getWorkid());
             preparedStatement.execute();
         }catch(SQLException e){
             e.printStackTrace();

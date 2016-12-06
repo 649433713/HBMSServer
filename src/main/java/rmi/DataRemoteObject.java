@@ -21,7 +21,6 @@ import message.ResultMessage;
 import message.RoomStateMessage;
 import model.HotelFilter;
 import po.CommentInfoPO;
-import po.CreditPO;
 import po.HotelPO;
 import po.OrderPO;
 import po.RegionPO;
