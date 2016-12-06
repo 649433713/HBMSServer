@@ -4,11 +4,13 @@ import java.rmi.RemoteException;
 import java.util.Map;
 
 import dao.OrderDao;
+import dao.RoomDao;
 import dataHelper.DataFactory;
 import dataHelper.OrderDataHelper;
 import dataHelperImpl.DataFactoryImpl;
 import message.OrderStateMessage;
 import message.ResultMessage;
+import message.RoomStateMessage;
 import model.UserType;
 import po.OrderPO;
 
@@ -42,33 +44,38 @@ public class OrderDaoImpl implements OrderDao
 	@Override
 	public Map<Integer, OrderPO> getOrderList(int ID, UserType userType) throws RemoteException {
 		// TODO Auto-generated method stub
-		return orderDataHelper.getOrderList(ID, userType, null);
+		map = orderDataHelper.getOrderList(ID, userType, null);
+		return map;
 	}
 	
 	
 	@Override
 	public Map<Integer, OrderPO> getUnexecutedOrderList(int ID, UserType userType) throws RemoteException {
 		// TODO Auto-generated method stub
-		return orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Unexecuted);
+		map = orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Unexecuted);
+		return map;
 	}
 	@Override
 	public Map<Integer, OrderPO> getExecutedOrderList(int ID, UserType userType) throws RemoteException {
 		// TODO Auto-generated method stub
-		return orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Executed);
+		map = orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Executed);
+		return map;
 	}
 	@Override
 	public Map<Integer, OrderPO> getCancelledOrderList(int ID, UserType userType) throws RemoteException {
 		// TODO Auto-generated method stub
-		return orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Cancelled);
+		map =orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Cancelled);
+		return map;
 	}
 	@Override
 	public Map<Integer, OrderPO> getAbnormalOrderList(int ID, UserType userType) throws RemoteException {
 		// TODO Auto-generated method stub
-		return orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Abnormal);
+		map = orderDataHelper.getOrderList(ID, userType, OrderStateMessage.Abnormal);
+		return map;
 	}
 	@Override
 	public OrderPO getOrderInfo(int orderID) throws RemoteException {
-		// TODO Auto-generated method stub
+		map = getOrderList(0, null);
 		OrderPO copy = map.get(orderID);
 		
 		return copy;
@@ -76,12 +83,21 @@ public class OrderDaoImpl implements OrderDao
 	@Override
 	public ResultMessage changeOrderState(int orderID, OrderStateMessage orderState) throws RemoteException {
 		// TODO Auto-generated method stub
+		if (orderState==OrderStateMessage.Cancelled) {
+			OrderPO orderPO = getOrderInfo(orderID);
+			RoomDao roomDao = new RoomDaoImpl();
+			roomDao.modifyRoomStateByDay(orderPO.getRoomInfoID(), RoomStateMessage.Blank, orderPO.getExecuteDDl());
+		}
+		
 		return orderDataHelper.modifyOrderState(orderID, orderState);
 	}
 	@Override
-	public ResultMessage addOrder(OrderPO po) throws RemoteException {
+	public ResultMessage addOrder(OrderPO orderPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		return orderDataHelper.addOrder(po);
+		RoomDao roomDao = new RoomDaoImpl();
+		roomDao.modifyRoomStateByDay(orderPO.getRoomInfoID(), RoomStateMessage.Unavailable, orderPO.getExecuteDDl());
+
+		return orderDataHelper.addOrder(orderPO);
 	}
 
 

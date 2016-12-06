@@ -143,17 +143,15 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 			preparedStatement.setDate(6, new Date(po.getDetailedInfo1().getTime()));
 			preparedStatement.setDate(7, new Date(po.getDetailedInfo2().getTime()));
 			preparedStatement.setInt(8, po.getRoomInfoID());
-			if (preparedStatement.execute()) {
-				return ResultMessage.success;
-			}else {
-				return ResultMessage.notexist;
-			}
+			preparedStatement.execute();
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return ResultMessage.failure;
 		}
-		
+		return ResultMessage.success;
 	}
 
 	@Override
@@ -165,15 +163,16 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 		String sql = "delete from roominfo where  roomInfoID ="+roomInfoID;
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			if(preparedStatement.execute())
-				return ResultMessage.success;
-			return ResultMessage.notexist;
+			preparedStatement.execute();
+			
+			
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return ResultMessage.failure;
-		}
+		}	
+		return ResultMessage.success;
 	}
 
 	/*
@@ -190,6 +189,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 		String dayOff = null;
 		if (date!=null) {
 			dayOff = DateToDayOff.dateToDatOff(date);
+	
 		}
 
 		String sql =" update roomdate set "+dayOff+"=? where roomInfoID =?";
@@ -200,17 +200,15 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 			preparedStatement.setInt(1, roomState.ordinal());
 			preparedStatement.setInt(2, roomInfoID);
 		
-			if (preparedStatement.execute()) {
-				return ResultMessage.success;
-			}else {
-				return ResultMessage.notexist;
-			}
+			preparedStatement.execute();
+				
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return ResultMessage.failure;
 		}
-		
+		return ResultMessage.success;
 	}
 		
 	/*
@@ -234,17 +232,15 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 			preparedStatement.setInt(1, price);
 			preparedStatement.setInt(2, roomInfoID);
 			
-			if (preparedStatement.execute()) {
-				return ResultMessage.success;
-			}else {
-				return ResultMessage.notexist;
-			}
+			preparedStatement.execute();
+				
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return ResultMessage.failure;
 		}
-		
+		return ResultMessage.success;
 	}
 
 	

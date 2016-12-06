@@ -91,7 +91,7 @@ public class RoomDaoImpl implements RoomDao {
 	}
 
 	@Override
-	public ResultMessage modifyRoomState(int roomInfoID, RoomStateMessage room_state, Date date1, Date date2)
+	public ResultMessage modifyRoomState(int roomInfoID, RoomStateMessage room_state)
 			throws RemoteException {
 		
 		RoomInfoPO copy = null;
@@ -104,8 +104,6 @@ public class RoomDaoImpl implements RoomDao {
 		
 		
 		copy.setRoomState(room_state);
-		copy.setDetailedInfo1(date1);
-		copy.setDetailedInfo2(date2);
 		
 	
 		return roomDataHelper.modifyRoom(copy);

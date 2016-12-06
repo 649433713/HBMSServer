@@ -37,6 +37,7 @@ public interface OrderDao extends Remote{
 		//获得具体订单信息
 		public OrderPO getOrderInfo(int orderID) throws RemoteException;
 		//用户点击“撤销订单”，订单状态  “未执行”---->"已撤销"
+		//执行订单 “未执行、异常”---->"已执行"
 		public ResultMessage changeOrderState(int orderID,OrderStateMessage orderState) throws RemoteException;
 
 		//用户点击“生成订单”，添加订单

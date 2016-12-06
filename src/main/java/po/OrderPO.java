@@ -4,202 +4,165 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import message.OrderStateMessage;
+/**
+ * 
+ * @author 凡
+ *	生成po时，除executeDDL外都为null，executeDDL的值为预定房间日期的当天18:00
+ */
+
 
 public class OrderPO implements Serializable{
+	int orderID;
+	int userID;
+	int hotelID;
+	int roomInfoID;
+	OrderStateMessage orderState;
 	
-	PersonalInfoPO personalInfo;
-	
-	Date createDate;
-	Date cancelDate;
-	HotelPO hotelInfo;
-	CreditRecordPO creditRecord;
-	String state;
-	Date checkDate;
-	Date checkoutDate;
+	//最近一次操作事件，生成po时该项为null
+	Date generateTime;
+	Date cancelTime;
+	Date executeDDl;
+	Date checkinTime;
+	Date checkoutTime;
 	int number;
-	boolean hasChild;
-	String contactInfo;
-	String creditExplanation;
-	Date executeDeadline;
+	int hasChild;
 	int price;
 	
-	public OrderPO(String id)
-	{
-		
-	}
-	public OrderPO(PersonalInfoPO pI,String i,Date cD,Date caD,HotelPO hI,
-			CreditRecordPO cR,String s,
-			Date chD,Date coD,int num,boolean hC,String cI,
-			String cE,Date eD,int p){
-		personalInfo=pI;
-		id=i;
-		createDate=cD;
-		cancelDate=caD;
-		hotelInfo=hI;
-		creditRecord=cR;
-		state=s;
-		checkDate=cD;
-		checkoutDate=coD;
-		number=num;
-		hasChild=hC;
-		contactInfo=cI;
-		creditExplanation=cE;
-		executeDeadline=eD;
-		price=p;
+	public OrderPO(){
 		
 	}
 
-
-	public PersonalInfoPO getPersonalInfo() {
-		return personalInfo;
+	public OrderPO(int orderID, int userID, int hotelID, int roomInfoID, OrderStateMessage orderState,
+			Date generateTime, Date cancelTime, Date executeDDl, Date checkinTime, Date checkoutTime, int number,
+			int hasChild, int price) {
+		super();
+		this.orderID = orderID;
+		this.userID = userID;
+		this.hotelID = hotelID;
+		this.roomInfoID = roomInfoID;
+		this.orderState = orderState;
+		this.generateTime = generateTime;
+		this.cancelTime = cancelTime;
+		this.executeDDl = executeDDl;
+		this.checkinTime = checkinTime;
+		this.checkoutTime = checkoutTime;
+		this.number = number;
+		this.hasChild = hasChild;
+		this.price = price;
 	}
 
-
-	public void setPersonalInfo(PersonalInfoPO personalInfo) {
-		this.personalInfo = personalInfo;
+	public int getOrderID() {
+		return orderID;
 	}
 
-
-	public String getId() {
-		return id;
+	public void setOrderID(int orderID) {
+		this.orderID = orderID;
 	}
 
-
-	public void setId(String id) {
-		this.id = id;
+	public int getUserID() {
+		return userID;
 	}
 
-
-	public Date getCreateDate() {
-		return createDate;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public int getHotelID() {
+		return hotelID;
 	}
 
-
-	public Date getCancelDate() {
-		return cancelDate;
+	public void setHotelID(int hotelID) {
+		this.hotelID = hotelID;
 	}
 
-
-	public void setCancelDate(Date cancelDate) {
-		this.cancelDate = cancelDate;
+	public int getRoomInfoID() {
+		return roomInfoID;
 	}
 
-
-	public HotelPO getHotelInfo() {
-		return hotelInfo;
+	public void setRoomInfoID(int roomInfoID) {
+		this.roomInfoID = roomInfoID;
 	}
 
-
-	public void setHotelInfo(HotelPO hotelInfo) {
-		this.hotelInfo = hotelInfo;
+	public OrderStateMessage getOrderState() {
+		return orderState;
 	}
 
-
-	public CreditRecordPO getCreditRecord() {
-		return creditRecord;
+	public void setOrderState(OrderStateMessage orderState) {
+		this.orderState = orderState;
 	}
 
-
-	public void setCreditRecord(CreditRecordPO creditRecord) {
-		this.creditRecord = creditRecord;
+	public Date getGenerateTime() {
+		return generateTime;
 	}
 
-
-	public String getState() {
-		return state;
+	public void setGenerateTime(Date generateTime) {
+		this.generateTime = generateTime;
 	}
 
-
-	public void setState(String state) {
-		this.state = state;
+	public Date getCancelTime() {
+		return cancelTime;
 	}
 
-
-	public Date getCheckDate() {
-		return checkDate;
+	public void setCancelTime(Date cancelTime) {
+		this.cancelTime = cancelTime;
 	}
 
-
-	public void setCheckDate(Date checkDate) {
-		this.checkDate = checkDate;
+	public Date getExecuteDDl() {
+		return executeDDl;
 	}
 
-
-	public Date getCheckoutDate() {
-		return checkoutDate;
+	public void setExecuteDDl(Date executeDDl) {
+		this.executeDDl = executeDDl;
 	}
 
-
-	public void setCheckoutDate(Date checkoutDate) {
-		this.checkoutDate = checkoutDate;
+	public Date getChechinTime() {
+		return checkinTime;
 	}
 
+	public void setChechinTime(Date checkinTime) {
+		this.checkinTime = checkinTime;
+	}
+
+	public Date getChechoutTime() {
+		return checkoutTime;
+	}
+
+	public void setChechoutTime(Date checkoutTime) {
+		this.checkoutTime = checkoutTime;
+	}
 
 	public int getNumber() {
 		return number;
 	}
 
-
 	public void setNumber(int number) {
 		this.number = number;
 	}
 
-
-	public boolean isHasChild() {
+	public int getHasChild() {
 		return hasChild;
 	}
 
-
-	public void setHasChild(boolean hasChild) {
+	public void setHasChild(int hasChild) {
 		this.hasChild = hasChild;
 	}
-
-
-	public String getContactInfo() {
-		return contactInfo;
-	}
-
-
-	public void setContactInfo(String contactInfo) {
-		this.contactInfo = contactInfo;
-	}
-
-
-	public String getCreditExplanation() {
-		return creditExplanation;
-	}
-
-
-	public void setCreditExplanation(String creditExplanation) {
-		this.creditExplanation = creditExplanation;
-	}
-
-
-	public Date getExecuteDeadline() {
-		return executeDeadline;
-	}
-
-
-	public void setExecuteDeadline(Date executeDeadline) {
-		this.executeDeadline = executeDeadline;
-	}
-
 
 	public int getPrice() {
 		return price;
 	}
 
-
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "OrderPO [orderID=" + orderID + ", userID=" + userID + ", hotelID=" + hotelID + ", roomInfoID="
+				+ roomInfoID + ", orderState=" + orderState + ", generateTime=" + generateTime + ", cancelTime="
+				+ cancelTime + ", executeDDl=" + executeDDl + ", checkinTime=" + checkinTime + ", checkoutTime="
+				+ checkoutTime + ", number=" + number + ", hasChild=" + hasChild + ", price=" + price + "]";
+	}
 	
 	
 	

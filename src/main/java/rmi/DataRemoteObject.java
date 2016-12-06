@@ -17,18 +17,19 @@ import daoImpl.HotelDaoImpl;
 import daoImpl.OrderDaoImpl;
 import daoImpl.RoomDaoImpl;
 import daoImpl.UserDaoImpl;
+import message.OrderStateMessage;
 import message.ResultMessage;
 import message.RoomStateMessage;
 import model.HotelFilter;
+import model.UserType;
 import po.CommentInfoPO;
-import po.CreditPO;
 import po.HotelPO;
 import po.OrderPO;
 import po.RegionPO;
 import po.RoomInfoPO;
 import po.UserPO;
 
-public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao, CreditDao, OrderDao, RoomDao {
+public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao {
 	/**
 	 * 
 	 */
@@ -87,55 +88,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	
 	}
 
-	@Override
-	public ResultMessage add(UserPO po) throws RemoteException {
 	
-			return userDao.add(po);
-
-	}
-
-	@Override
-	public UserPO find(String id) throws RemoteException {
-	
-			return userDao.find(id);
-	
-	}
-
-	@Override
-	public ResultMessage delete(String id) throws RemoteException {
-	
-			return userDao.delete(id);
-	
-	}
-
-	@Override
-	public ResultMessage update(UserPO po) throws RemoteException {
-	
-			return userDao.update(po);
-
-	}
-
-	@Override
-	public ResultMessage login(String id, String pwd) throws RemoteException {
-		
-			return userDao.login(id,pwd);
-
-	}
-
-	@Override
-	public ResultMessage signup(UserPO po) throws RemoteException {
-		
-			return userDao.signup(po);
-	
-	}
-
-	@Override
-	public ArrayList<UserPO> getUserList() throws RemoteException {
-	
-			return userDao.getUserList();
-	
-	}
-
 	@Override
 	public Map<String, RoomInfoPO> getRoomList(int hotel_ID,Date date) throws RemoteException {
 		return roomDao.getRoomList(hotel_ID,date);
@@ -165,87 +118,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 
-	@Override
-	public Map<String, OrderPO> getOrderList(String id) throws RemoteException {
-		
-		return orderDao.getOrderList(id);
-	}
-
-	@Override
-	public ResultMessage addOrder(OrderPO orderpo) throws RemoteException {
-		
-		return  orderDao.addOrder(orderpo);
-	}
-
-	@Override
-	public ResultMessage deleteOrder(OrderPO orderpo) throws RemoteException {
-		
-		return  orderDao.deleteOrder(orderpo);
-	}
-
-	@Override
-	public ResultMessage modifyOrder(OrderPO orderpo) throws RemoteException {
-		
-		return  orderDao.modifyOrder(orderpo);
-	}
-
-	@Override
-	public OrderPO findOrder(String orderID) throws RemoteException {
-		
-		return  orderDao.findOrder(orderID);
-	}
-
-	@Override
-	public void showCredit() throws RemoteException {
-		creditDao.showCredit();
-	}
-
-	@Override
-	public void showCreditRecord() throws RemoteException {
-		creditDao.showCreditRecord();
-	}
-
-	@Override
-	public boolean addCredit(int creditValue) throws RemoteException {
-		
-		return creditDao.addCredit(creditValue);
-	}
-
-	@Override
-	public boolean resumeCredit(CreditPO credit) throws RemoteException {
-		
-		return creditDao.resumeCredit(credit);
-	}
-
-	@Override
-	public int getCreditValue(String id) throws RemoteException {
-		
-		return creditDao.getCreditValue(id);
-	}
-
-	@Override
-	public int setCreditValue(String id, int value) throws RemoteException {
-		
-		return creditDao.setCreditValue(id, value);
-	}
-
-	@Override
-	public String getChangeType(String id) throws RemoteException {
-		
-		return creditDao.getChangeType(	id);
-	}
-
-	@Override
-	public String getReasonType(String id) throws RemoteException {
-		
-		return creditDao.getReasonType(id);
-	}
-
-	@Override
-	public String getAccount(String id) throws RemoteException {
-		
-		return creditDao.getAccount(id);
-	}
 
 	@Override
 	public List<CommentInfoPO> getComments(int hotelID) throws RemoteException {
@@ -267,11 +139,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 
 
 	@Override
-	public ResultMessage modifyRoomState(int roomInfoID, RoomStateMessage room_state, Date date1, Date date2)
+	public ResultMessage modifyRoomState(int roomInfoID, RoomStateMessage room_state)
 			throws RemoteException {
 		
-		return roomDao.modifyRoomState(roomInfoID, room_state, date1, date2);
+		return roomDao.modifyRoomState(roomInfoID, room_state);
 	}
+
 
 	@Override
 	public ResultMessage deleteRoom(int hotelID, String roomID) throws RemoteException {
@@ -293,4 +166,103 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 		
 		return roomDao.setPrice(roomInfoID, date, price);
 	}
+
+	@Override
+	public Map<Integer, OrderPO> getOrderList(int ID, UserType userType) throws RemoteException {
+		
+		
+		return orderDao.getOrderList(ID, userType);
+	}
+
+	@Override
+	public Map<Integer, OrderPO> getUnexecutedOrderList(int ID, UserType userType) throws RemoteException {
+		
+		
+		return orderDao.getUnexecutedOrderList(ID, userType);
+	}
+
+	@Override
+	public Map<Integer, OrderPO> getExecutedOrderList(int ID, UserType userType) throws RemoteException {
+		
+		
+		return orderDao.getExecutedOrderList(ID, userType);
+	}
+
+	@Override
+	public Map<Integer, OrderPO> getCancelledOrderList(int ID, UserType userType) throws RemoteException {
+		
+		
+		return orderDao.getCancelledOrderList(ID, userType);
+	}
+
+	@Override
+	public Map<Integer, OrderPO> getAbnormalOrderList(int ID, UserType userType) throws RemoteException {
+		
+		
+		return orderDao.getAbnormalOrderList(ID, userType);
+	}
+
+	@Override
+	public OrderPO getOrderInfo(int orderID) throws RemoteException {
+		
+		
+		return orderDao.getOrderInfo(orderID);
+	}
+
+	@Override
+	public ResultMessage changeOrderState(int orderID, OrderStateMessage orderState) throws RemoteException {
+		
+		
+		return orderDao.changeOrderState(orderID, orderState);
+	}
+
+	@Override
+	public ResultMessage addOrder(OrderPO po) throws RemoteException {
+		
+		
+		return orderDao.addOrder(po);
+	}
+
+	@Override
+	public UserPO getUserData(String id) throws RemoteException {
+		
+		
+		return null;
+	}
+
+	@Override
+	public ResultMessage addUser(UserPO po) throws RemoteException, Exception {
+		
+		
+		return null;
+	}
+
+	@Override
+	public ResultMessage deleteUser(String id) throws RemoteException, Exception {
+		
+		
+		return null;
+	}
+
+	@Override
+	public ResultMessage modifyUser(UserPO po) throws RemoteException, Exception {
+		
+		
+		return null;
+	}
+
+	@Override
+	public ResultMessage login(String id, String pwd) throws RemoteException {
+		
+		
+		return null;
+	}
+
+	@Override
+	public ResultMessage signup(UserPO po) throws RemoteException, Exception {
+		
+		
+		return null;
+	}
+
 }

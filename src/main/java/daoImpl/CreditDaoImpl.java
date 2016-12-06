@@ -3,7 +3,6 @@ package daoImpl;
 import java.rmi.RemoteException;
 
 import dao.CreditDao;
-import po.CreditPO;
 
 public class CreditDaoImpl implements CreditDao{
 	
@@ -36,7 +35,7 @@ public class CreditDaoImpl implements CreditDao{
 	}
 
 	@Override
-	public boolean resumeCredit(CreditPO credit) throws RemoteException {
+	public boolean resumeCredit(int credit) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return false;
 	}

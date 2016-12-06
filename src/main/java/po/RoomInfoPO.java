@@ -8,6 +8,16 @@ import message.RoomStateMessage;
 
 public class RoomInfoPO implements Serializable{
 	/**
+	 * @param detailedInfo1
+	 * 		  		对于Checkined状态，包含入住时间.
+			 		对于Blank状态，null。
+			 		对于Booked，包含预计入住时间（当天12点）
+	 * @param detailedInfo2
+	 * 			 	对于Checkined状态，包含预计离开时间（第二天12点）.
+				 	对于Blank状态，包含实际离开时间。
+				 	对于Booked，null
+	 * 
+	 * 
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;

@@ -191,28 +191,28 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 		String sql2 = "" + "delete from hotel where hotelID = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		/*	preparedStatement.setInt(1, hotelID);
+			preparedStatement.setInt(1, hotelID);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			if (!resultSet.next()) {
 				System.out.println("不存在此id");
 				return ResultMessage.notexist;
 			}
-*/
+
 			preparedStatement = connection.prepareStatement(sql2);
 			preparedStatement.setInt(1, hotelID);
-			if (preparedStatement.execute()) {
-				return ResultMessage.success;
-			}
-			System.out.println("还是不存在");
-			return ResultMessage.notexist;
+			preparedStatement.execute();
+				
+			
+			
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return ResultMessage.failure;
 		}
 
-		
+		return ResultMessage.success;
 	}
 
 	@Override

@@ -7,7 +7,6 @@ import java.util.Map;
 
 import message.ResultMessage;
 import message.RoomStateMessage;
-import model.UserType;
 import po.RoomInfoPO;
 
 public interface RoomDao extends Remote {
@@ -30,17 +29,11 @@ public interface RoomDao extends Remote {
 	
 	/**
 	 * @Description: TODO 更改房间状态（针对房间，不针对具体某天）只针对房间当天属性
-	 * @param date1
-	 *        对于Checkined状态，包含入住时间.
-	 * 		  对于Blank状态，null。
-	 *        对于Booked，包含预计入住时间（当天12点）
-	 * @param date2 
-	 * 		  对于Checkined状态，包含预计离开时间（第二天12点）.
-	 *        对于Blank状态，包含实际离开时间。
-	 *        对于Booked，null
 	 * 
+	 * 若RoomState改为unavailable 表示房间不可预订，date1与date2为null
+	 
 	 */
-	public ResultMessage modifyRoomState(int roomInfoID,RoomStateMessage room_state,Date date1,Date date2)throws RemoteException;
+	public ResultMessage modifyRoomState(int roomInfoID,RoomStateMessage room_state)throws RemoteException;
 	
 	/** 
 	* @Title: modifyRoomStateByDay 
