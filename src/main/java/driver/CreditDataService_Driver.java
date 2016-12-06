@@ -1,7 +1,6 @@
 package driver;
 
 import dao.CreditDao;
-import po.CreditPO;
 
 public class CreditDataService_Driver {
 	public void driver(CreditDao creditDataService){

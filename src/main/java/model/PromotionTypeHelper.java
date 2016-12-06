@@ -11,4 +11,8 @@ public class PromotionTypeHelper {
             return PromotionType.WebPromotion;
         }else return PromotionType.NoSuchPromotion;
     }
+
+    public PromotionType getPromotionType(int number){
+        return PromotionType.values()[number];
+    }
 }
