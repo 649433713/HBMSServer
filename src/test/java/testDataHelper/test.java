@@ -35,11 +35,11 @@ public class test {
 			OrderPO orderPO;
 			orderDao.getOrderList(0, null);
 			orderPO = orderDao.getOrderInfo(10);
-			orderPO.setRoomInfoID(18);
+			orderPO.setRoomInfoID(20);
 			orderDao.addOrder(orderPO);
 			
 			Thread.sleep(10000);
-			orderDao.changeOrderState(16, OrderStateMessage.Cancelled);
+			orderDao.changeOrderState(18, OrderStateMessage.Cancelled);
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

@@ -224,45 +224,47 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public UserPO getUserData(String id) throws RemoteException {
+	public UserPO getUserData(int id) throws RemoteException {
 		
 		
-		return null;
+		return userDao.getUserData(id);
 	}
 
 	@Override
 	public ResultMessage addUser(UserPO po) throws RemoteException, Exception {
 		
 		
-		return null;
+		return userDao.addUser(po);
 	}
 
 	@Override
-	public ResultMessage deleteUser(String id) throws RemoteException, Exception {
+	public ResultMessage deleteUser(int id) throws RemoteException, Exception {
 		
 		
-		return null;
+		return userDao.deleteUser(id);
 	}
 
 	@Override
 	public ResultMessage modifyUser(UserPO po) throws RemoteException, Exception {
 		
 		
-		return null;
+		return userDao.modifyUser(po);
 	}
 
 	@Override
-	public ResultMessage login(String id, String pwd) throws RemoteException {
+	public ResultMessage login(int id, String pwd) throws RemoteException {
 		
 		
-		return null;
+		return userDao.login(id, pwd);
 	}
 
 	@Override
 	public ResultMessage signup(UserPO po) throws RemoteException, Exception {
 		
 		
-		return null;
+		return userDao.signup(po);
 	}
+
+	
 
 }
