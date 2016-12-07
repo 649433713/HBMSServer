@@ -15,6 +15,8 @@ public class DBUtil {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection= DriverManager.getConnection(URL,USER, PASSWORD);
+			PreparedStatement preparedStatement= connection.prepareStatement("SET GLOBAL event_scheduler = 1");
+			preparedStatement.execute();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
