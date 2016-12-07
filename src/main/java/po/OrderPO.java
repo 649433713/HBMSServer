@@ -13,6 +13,10 @@ import message.OrderStateMessage;
 
 
 public class OrderPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5375281150006214703L;
 	int orderID;
 	int userID;
 	int hotelID;

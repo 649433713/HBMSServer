@@ -12,6 +12,7 @@ import message.OrderStateMessage;
 import message.ResultMessage;
 import message.RoomStateMessage;
 import model.UserType;
+import po.AppealPO;
 import po.OrderPO;
 
 public class OrderDaoImpl implements OrderDao
@@ -77,7 +78,6 @@ public class OrderDaoImpl implements OrderDao
 	public OrderPO getOrderInfo(int orderID) throws RemoteException {
 		map = getOrderList(0, null);
 		OrderPO copy = map.get(orderID);
-		
 		return copy;
 	}
 	@Override
@@ -98,6 +98,24 @@ public class OrderDaoImpl implements OrderDao
 		roomDao.modifyRoomStateByDay(orderPO.getRoomInfoID(), RoomStateMessage.Unavailable, orderPO.getExecuteDDl());
 
 		return orderDataHelper.addOrder(orderPO);
+	}
+	@Override
+	public ResultMessage addAppealOrder(AppealPO appealPO) throws RemoteException {
+		
+		
+		return orderDataHelper.addAppealOrder(appealPO);
+	}
+	@Override
+	public AppealPO getAppealOrder(int orderID) throws RemoteException {
+		
+		
+		return orderDataHelper.getAppealOrder(orderID);
+	}
+	@Override
+	public ResultMessage modifyAppealOrder(AppealPO appealPO) throws RemoteException {
+		
+		
+		return orderDataHelper.modifyAppealOrder(appealPO);
 	}
 
 

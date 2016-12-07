@@ -22,6 +22,7 @@ import message.ResultMessage;
 import message.RoomStateMessage;
 import model.HotelFilter;
 import model.UserType;
+import po.AppealPO;
 import po.CommentInfoPO;
 import po.HotelPO;
 import po.OrderPO;
@@ -263,6 +264,27 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 		
 		
 		return userDao.signup(po);
+	}
+
+	@Override
+	public ResultMessage addAppealOrder(AppealPO appealPO) throws RemoteException {
+		
+		
+		return orderDao.addAppealOrder(appealPO);
+	}
+
+	@Override
+	public AppealPO getAppealOrder(int orderID) throws RemoteException {
+		
+		
+		return orderDao.getAppealOrder(orderID);
+	}
+
+	@Override
+	public ResultMessage modifyAppealOrder(AppealPO appealPO) throws RemoteException {
+		
+		
+		return orderDao.modifyAppealOrder(appealPO);
 	}
 
 	

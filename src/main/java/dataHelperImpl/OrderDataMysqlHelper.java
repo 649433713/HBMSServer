@@ -3,7 +3,6 @@
  */
 package dataHelperImpl;
 
-import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -12,13 +11,12 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import dao.RoomDao;
-import daoImpl.RoomDaoImpl;
 import dataHelper.OrderDataHelper;
+import message.AppealStateMessage;
 import message.OrderStateMessage;
 import message.ResultMessage;
-import message.RoomStateMessage;
 import model.UserType;
+import po.AppealPO;
 import po.OrderPO;
 
 /**  
@@ -130,6 +128,70 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 			preparedStatement.execute();
 			
 			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return ResultMessage.failure;
+		}
+		return ResultMessage.success;
+	}
+	@Override
+	public ResultMessage addAppealOrder(AppealPO appealPO) {
+		
+		String sql = "insert into appeal(orderID,userID,content)"
+				+ "values(?,?,?)";
+		
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, appealPO.getOrderID());
+			preparedStatement.setInt(2, appealPO.getUserID());
+			preparedStatement.setString(3, appealPO.getContent());
+		
+			preparedStatement.execute();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return ResultMessage.failure;
+		}
+		return ResultMessage.success;
+	}
+	@Override
+	public AppealPO getAppealOrder(int orderID) {
+		
+		AppealPO appealPO = null;
+		String sql = "select * from appeal where orderID = ?";
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, orderID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				appealPO = new AppealPO(resultSet.getInt("appealID"), resultSet.getInt("orderID"), 
+						resultSet.getInt("userID"), resultSet.getInt("webMarketerID"),resultSet.getDate("appealTime"), 
+						resultSet.getString("content"), AppealStateMessage.values()[resultSet.getInt("appealState")]);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return appealPO;
+	}
+	@Override
+	public ResultMessage modifyAppealOrder(AppealPO appealPO) {
+	
+		String sql = "update appeal set webMarketerID=?,appealState=? where appealID =?";
+		PreparedStatement preparedStatement ;
+		
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, appealPO.getWebMarketerID());
+			preparedStatement.setInt(2, appealPO.getAppealState().ordinal());
+			preparedStatement.setInt(3, appealPO.getAppealID());
+			
+			preparedStatement.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

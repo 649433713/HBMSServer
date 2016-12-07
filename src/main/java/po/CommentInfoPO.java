@@ -5,6 +5,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class CommentInfoPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1340405623531713283L;
 	int commentID;
 	Date time;
 	int hotelID;

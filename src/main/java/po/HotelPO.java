@@ -5,6 +5,11 @@ import java.io.Serializable;
 import java.util.List;
 
 public class HotelPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1854219570798741040L;
+
 	String name;
 	int id;
 	int star;

@@ -1,7 +1,13 @@
 package po;
 
-public class RegionPO {
+import java.io.Serializable;
 
+public class RegionPO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7967208747639332844L;
 	int regionID;
 	String province;
 	String city;

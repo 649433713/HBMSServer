@@ -7,6 +7,7 @@ import java.util.Map;
 import message.OrderStateMessage;
 import message.ResultMessage;
 import model.UserType;
+import po.AppealPO;
 import po.OrderPO;
 
 public interface OrderDao extends Remote{
@@ -34,7 +35,7 @@ public interface OrderDao extends Remote{
 		//获取异常订单（即用户未按照规定时间入住，订单处于的状态）
 		public Map<Integer, OrderPO> getAbnormalOrderList(int ID,UserType userType) throws RemoteException;
 		
-		//获得具体订单信息
+		//获得具体订单信息(非申诉订单)
 		public OrderPO getOrderInfo(int orderID) throws RemoteException;
 		//用户点击“撤销订单”，订单状态  “未执行”---->"已撤销"
 		//执行订单 “未执行、异常”---->"已执行"
@@ -43,5 +44,11 @@ public interface OrderDao extends Remote{
 		//用户点击“生成订单”，添加订单
 		public ResultMessage addOrder(OrderPO po) throws RemoteException;
 		
+		//用户在异常订单界面可发起申诉
+		public ResultMessage addAppealOrder(AppealPO appealPO)throws RemoteException;
 		
+		//网站营销人员处理异常订单
+		public AppealPO getAppealOrder(int orderID)throws RemoteException;
+		
+		public ResultMessage modifyAppealOrder(AppealPO appealPO)throws RemoteException;
 }
