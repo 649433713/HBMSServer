@@ -91,7 +91,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 				hotelPO = new HotelPO(resultSet.getString("name"), resultSet.getInt("hotelID"),
 						resultSet.getInt("star"), resultSet.getString("address"), resultSet.getInt("region"),
 						resultSet.getString("introduction"), resultSet.getString("facility"), images,
-						resultSet.getInt("score"),resultSet.getInt("lowestPrice"));
+						resultSet.getDouble("score"),resultSet.getInt("lowestPrice"));
 
 	
 				map.put(hotelPO.getId(), hotelPO);
@@ -134,7 +134,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 			preparedStatement.setString(7, imagePath2);
 			preparedStatement.setString(8, imagePath3);
 			preparedStatement.setString(9, hotelPO.getFacility());
-			preparedStatement.setInt(10, hotelPO.getScore());
+			preparedStatement.setDouble(10, hotelPO.getScore());
 			
 			preparedStatement.execute();
 		} catch (SQLException e) {
@@ -171,7 +171,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 			preparedStatement.setString(7, imagePath2);
 			preparedStatement.setString(8, imagePath3);
 			preparedStatement.setString(9, hotelPO.getFacility());
-			preparedStatement.setInt(10, hotelPO.getScore());
+			preparedStatement.setDouble(10, hotelPO.getScore());
 			preparedStatement.setInt(11, hotelPO.getId());
 			
 			preparedStatement.execute();

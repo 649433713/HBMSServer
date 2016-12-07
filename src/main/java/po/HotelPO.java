@@ -13,13 +13,13 @@ public class HotelPO implements Serializable{
 	String introduction;
 	String facility;
 	List<Image> environment;
-	int score;
+	double score;
 	int lowestPrice;
 	
 	
 
 	public HotelPO(String name, int id, int star, String address, int region, String introduction, String facility,
-			List<Image> environment, int score,int lowestPrice) {
+			List<Image> environment, double score,int lowestPrice) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -101,11 +101,11 @@ public class HotelPO implements Serializable{
 		this.environment = environment;
 	}
 
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 
