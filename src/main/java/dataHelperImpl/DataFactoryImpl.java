@@ -1,10 +1,6 @@
 package dataHelperImpl;
 
-import dataHelper.DataFactory;
-import dataHelper.HotelDataHelper;
-import dataHelper.OrderDataHelper;
-import dataHelper.RoomDataHelper;
-import dataHelper.UserDataHelper;
+import dataHelper.*;
 
 public class DataFactoryImpl implements DataFactory{
 
@@ -30,4 +26,12 @@ public class DataFactoryImpl implements DataFactory{
 		OrderDataHelper orderDataHelper = new OrderDataMysqlHelper();
 		return orderDataHelper;
 	}
+
+	@Override
+	public CreditDataHelper getCreditDataHelper() {
+		CreditDataHelper creditDataHelper=new CreditDataMysqlHelper();
+		return creditDataHelper;
+	}
+
+
 }

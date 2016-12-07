@@ -9,6 +9,8 @@ import java.util.Map;
  */
 public interface UserDataHelper {
     public UserPO getUserData(int id);
+
+    public UserPO getUserData(String accountName);
    
     public ResultMessage addUser(UserPO userPO) throws Exception;
    

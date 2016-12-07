@@ -10,6 +10,8 @@ import java.io.IOException;
  * Created by alex on 12/5/16.
  */
 public class ImageHelper {
+
+
     public String getProjectPath() throws Exception{
         File directory = new File("");
         String path = directory.getCanonicalPath() ;
