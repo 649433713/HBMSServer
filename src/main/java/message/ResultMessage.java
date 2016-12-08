@@ -6,5 +6,6 @@ package message;
 public enum ResultMessage {
     failure,
     success,
-	notexist;
+	notexist,
+	disconnection;
 }
