@@ -1,6 +1,6 @@
 package po;
 
-import java.awt.Image;
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,14 +17,14 @@ public class HotelPO implements Serializable{
 	int region;
 	String introduction;
 	String facility;
-	List<Image> environment;
+	List<File> environment;
 	double score;
 	int lowestPrice;
 	
 	
 
 	public HotelPO(String name, int id, int star, String address, int region, String introduction, String facility,
-			List<Image> environment, double score,int lowestPrice) {
+			List<File> environment, double score,int lowestPrice) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -98,11 +98,11 @@ public class HotelPO implements Serializable{
 		this.facility = facility;
 	}
 
-	public List<Image> getEnvironment() {
+	public List<File> getEnvironment() {
 		return environment;
 	}
 
-	public void setEnvironment(List<Image> environment) {
+	public void setEnvironment(List<File> environment) {
 		this.environment = environment;
 	}
 

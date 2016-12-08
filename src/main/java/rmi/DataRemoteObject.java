@@ -34,7 +34,10 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4462344837104616646L;
+	private static final long serialVersionUID = -8161659370903805031L;
+	/**
+	 * 
+	 */
 	//鍒殑dao鐨勬帴鍙ｉ兘implements ,鐒跺悗鍐欏湪杩欙紝鐒跺悗鏋勯�犲嚱鏁伴噷鍒濆鍖�
 	private HotelDao hotelDao;
 	private UserDao userDao;
@@ -45,8 +48,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	protected DataRemoteObject() throws RemoteException {
 		super();
 		hotelDao = new HotelDaoImpl();
-		userDao=new UserDaoImpl();
-		creditDao = new CreditDaoImpl();
+//		userDao=new UserDaoImpl();
+//		creditDao = new CreditDaoImpl();
 		orderDao = new OrderDaoImpl();
 		roomDao = new RoomDaoImpl();
 		 

@@ -10,6 +10,7 @@ import po.UserPO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,16 +32,23 @@ public class UserDataMysqlHelper implements UserDataHelper {
 
         String sentence="select * from user where userID='"+id+"'";
         PreparedStatement preparedStatement;
-        Image image=null;
+  //      Image image=null;
+        File image = null;
         UserPO userPO=null;
         try{
             preparedStatement = connection.prepareStatement(sentence);
             ResultSet resultSet = preparedStatement.executeQuery();
-            ImageIcon icon;
+  /*          ImageIcon icon;
             if (resultSet.getString("portrait") != null) {
                 icon = new ImageIcon(resultSet.getString("portrait"));
                 image=icon.getImage();
-            }
+            }*/
+            if (resultSet.next()) {
+            	 if (resultSet.getString("portrait") != null) {
+            		 image= new File(resultSet.getString("portrait"));
+            	 }
+                                  
+			}
             userPO=new UserPO(resultSet.getInt("userID")
                     ,userTypeHelper.getUserType(resultSet.getInt("userType"))
                     ,resultSet.getString("accountName")
@@ -78,8 +86,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
             preparedStatement.setString(4,userPO.getName());
             preparedStatement.setString(5,userPO.getContact());
             preparedStatement.setString(6,portraitPath);//to put the image path to the database
-            Image image=userPO.getPortrait();
-            imageHelper.saveImage(image,portraitPath);
+//            Image image=userPO.getPortrait();
+            File image = userPO.getPortrait();
+//       	 没有存File 
+ //           imageHelper.saveImage(image,portraitPath);
             preparedStatement.setLong(7,userPO.getCreditValue());
             preparedStatement.setInt(8,userPO.getMemberType().ordinal());
             preparedStatement.setString(9,userPO.getMemberInfo());
@@ -142,8 +152,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
             preparedStatement.setString(5,userPO.getName());
             preparedStatement.setString(6,userPO.getContact());
             imageHelper.deleteImage(portraitPath);
-            Image image=userPO.getPortrait();
-            imageHelper.saveImage(image,portraitPath);
+ //     Image image=userPO.getPortrait();
+            File image=userPO.getPortrait();
+//	 没有存File            
+  //          imageHelper.saveImage(image,portraitPath);
             preparedStatement.setString(7,portraitPath);
             preparedStatement.setLong(8,userPO.getCreditValue());
             preparedStatement.setInt(9,userPO.getMemberType().ordinal());
