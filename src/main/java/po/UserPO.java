@@ -133,4 +133,8 @@ public class UserPO implements Serializable{
     public int getHotelid() {
         return hotelid;
     }
+
+    public void setCreditValue(long creditValue) {
+        this.creditValue = creditValue;
+    }
 }
