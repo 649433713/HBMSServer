@@ -7,6 +7,9 @@ import java.util.Date;
 import message.RoomStateMessage;
 
 public class RoomInfoPO implements Serializable{
+	
+	
+	private static final long serialVersionUID = -4623214578961472411L;
 	/**
 	 * @param detailedInfo1
 	 * 		  		对于Checkined状态，包含入住时间.
@@ -20,7 +23,7 @@ public class RoomInfoPO implements Serializable{
 	 * 
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+
 	int roomInfoID;
 	int hotelID;
 	String roomID;

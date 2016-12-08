@@ -15,6 +15,7 @@ import daoImpl.RoomDaoImpl;
 import dataHelperImpl.HotelDataMysqlHelper;
 import message.OrderStateMessage;
 import message.RoomStateMessage;
+import po.AppealPO;
 import po.HotelPO;
 import po.OrderPO;
 import po.RoomInfoPO;
@@ -35,11 +36,10 @@ public class test {
 			OrderPO orderPO;
 			orderDao.getOrderList(0, null);
 			orderPO = orderDao.getOrderInfo(10);
-			orderPO.setRoomInfoID(20);
-			orderDao.addOrder(orderPO);
-			
-			Thread.sleep(10000);
-			orderDao.changeOrderState(18, OrderStateMessage.Cancelled);
+		
+			AppealPO appealPO = new AppealPO(0, orderPO.getOrderID(), orderPO.getUserID(), 0, null, "不服", null);
+			orderDao.addAppealOrder(appealPO);
+			System.out.println(orderDao.getAppealOrder(orderPO.getOrderID()));
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
