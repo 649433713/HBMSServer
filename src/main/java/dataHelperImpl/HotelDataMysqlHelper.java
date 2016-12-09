@@ -1,6 +1,7 @@
 package dataHelperImpl;
 
 import java.awt.Image;
+import java.io.File;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 
 			HotelPO hotelPO = null;
 			while (resultSet.next()) {
-				List<Image> images = new ArrayList<>();
+				/*List<Image> images = new ArrayList<>();
 				ImageIcon icon;
 				if (resultSet.getString("environment1") != null) {
 					icon = new ImageIcon(resultSet.getString("environment1"));
@@ -87,7 +88,21 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 					icon = new ImageIcon(resultSet.getString("environment3"));
 					images.add(icon.getImage());
 				}
-
+*/
+				List<File>images = new ArrayList<>();
+				File file;
+				if (resultSet.getString("environment1") != null) {
+					file = new File(resultSet.getString("environment1"));
+					images.add(file);
+				}
+				if (resultSet.getString("environment2") != null) {
+					file = new File(resultSet.getString("environment2"));
+					images.add(file);
+				}
+				if (resultSet.getString("environment3") != null) {
+					file = new File(resultSet.getString("environment3"));
+					images.add(file);
+				}
 				hotelPO = new HotelPO(resultSet.getString("name"), resultSet.getInt("hotelID"),
 						resultSet.getInt("star"), resultSet.getString("address"), resultSet.getInt("region"),
 						resultSet.getString("introduction"), resultSet.getString("facility"), images,
@@ -109,7 +124,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 	@Override
 	public ResultMessage addHotel(HotelPO hotelPO) {
 		
-		List<Image> images = hotelPO.getEnvironment();
+		List<File> images = hotelPO.getEnvironment();
 		String imagePath1 = null;
 		String imagePath2 = null;
 		String imagePath3 = null;
@@ -147,7 +162,7 @@ public class HotelDataMysqlHelper implements HotelDataHelper {
 
 	@Override
 	public ResultMessage updateHotel(HotelPO hotelPO) {
-		List<Image> images = hotelPO.getEnvironment();
+		List<File> images = hotelPO.getEnvironment();
 		String imagePath1 = null;
 		String imagePath2 = null;
 		String imagePath3 = null;

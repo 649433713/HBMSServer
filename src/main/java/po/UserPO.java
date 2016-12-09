@@ -1,19 +1,23 @@
 package po;
 import model.MemberType;
 import model.UserType;
-import java.awt.*;
+import java.io.File;
 import java.io.Serializable;
 /**
  * Created by alex on 16-11-17.
  */
 public class UserPO implements Serializable{
-    int userID;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8843459876398714280L;
+	int userID;
     UserType userType;
     String accountName;
     String password;
     String name;
     String contact;
-    Image portrait;
+    File portrait;
     long creditValue;
     MemberType memberType;
     String memberInfo;
@@ -26,7 +30,7 @@ public class UserPO implements Serializable{
     }
 
     public UserPO(int userID,UserType userType, String accountName, String password, String name
-            , String contact, Image portrait, long creditValue
+            , String contact, File portrait, long creditValue
             , MemberType memberType, String memberInfo, int rank
             , String workid, int hotelid) {
         this.userID = userID;
@@ -46,7 +50,7 @@ public class UserPO implements Serializable{
 
     //constructors for customerPO
     public UserPO(int id,String pwd,String name,String contact,
-                  Image image,long creditValue,MemberType memberType,String memberInfo,int rank){
+                  File image,long creditValue,MemberType memberType,String memberInfo,int rank){
         this.userID=id;
         this.userType=UserType.Customer;
         this.password=pwd;
@@ -60,7 +64,7 @@ public class UserPO implements Serializable{
     }
 
     //constructors for StaffPO
-    public UserPO(int id,String pwd,String name,String contact,Image image,String workid,int hotelid){
+    public UserPO(int id,String pwd,String name,String contact,File image,String workid,int hotelid){
         this.userID=id;
         this.userType=UserType.Staff;
         this.password=pwd;
@@ -72,7 +76,7 @@ public class UserPO implements Serializable{
     }
 
     //constructors for WebMarketerPO and WebManagerPO
-    public UserPO(int id,UserType userType,String pwd,String name,String contact,Image image){
+    public UserPO(int id,UserType userType,String pwd,String name,String contact,File image){
         this.userID=id;
         this.userType=userType;
         this.password=pwd;
@@ -106,7 +110,7 @@ public class UserPO implements Serializable{
         return contact;
     }
 
-    public Image getPortrait() {
+    public File getPortrait() {
         return portrait;
     }
 

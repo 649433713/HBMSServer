@@ -37,7 +37,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
             preparedStatement = connection.prepareStatement(sentence);
             ResultSet resultSet = preparedStatement.executeQuery();
             ImageIcon icon;
-            if (resultSet.getString("portrait").equals("")) {
+            if (resultSet.getString("portrait") != null) {
                 icon = new ImageIcon(resultSet.getString("portrait"));
                 image=icon.getImage();
             }
@@ -56,44 +56,6 @@ public class UserDataMysqlHelper implements UserDataHelper {
                     ,resultSet.getInt("hotelID")
             );
         }catch(SQLException e){
-            e.printStackTrace();
-        }
-        return userPO;
-    }
-
-    public UserPO getUserData(String accountName){
-        UserTypeHelper userTypeHelper=new UserTypeHelper();
-        MemberTypeHelper memberTypeHelper=new MemberTypeHelper();
-
-        String sentence="select * from user where accountName='"+accountName+"'";
-        PreparedStatement preparedStatement;
-        Image image=null;
-        UserPO userPO=null;
-        String nullString="";
-        try{
-            preparedStatement = connection.prepareStatement(sentence);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ImageIcon icon;
-            if (resultSet.getString("portrait").equals(nullString)) {
-                icon = new ImageIcon(resultSet.getString("portrait"));
-                image=icon.getImage();
-            }
-            userPO=new UserPO(resultSet.getInt("userID")
-                    ,userTypeHelper.getUserType(resultSet.getInt("userType"))
-                    ,resultSet.getString("accountName")
-                    ,resultSet.getString("password")
-                    ,resultSet.getString("name")
-                    ,resultSet.getString("contact")
-                    ,image
-                    ,resultSet.getLong("creditValue")
-                    ,memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
-                    ,resultSet.getString("memberInfo")
-                    ,resultSet.getInt("rank")
-                    ,resultSet.getString("workID")
-                    ,resultSet.getInt("hotelID")
-            );
-        }catch(SQLException e){
-
             e.printStackTrace();
         }
         return userPO;
@@ -102,21 +64,6 @@ public class UserDataMysqlHelper implements UserDataHelper {
     @Override
     public ResultMessage addUser(UserPO userPO) throws Exception{
         ImageHelper imageHelper=new ImageHelper();
-        String accountName=userPO.getAccountName();
-        String sentence="select * from user where accountName='"+accountName+"'";
-        PreparedStatement preparedStatement;
-        try{
-            preparedStatement = connection.prepareStatement(sentence);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
-                //a user with a same accountName already exists
-                return ResultMessage.failure;
-            }
-        }catch(SQLException e){
-            e.printStackTrace();
-            return ResultMessage.failure;
-        }
-
         String portraitName="portrait"+userPO.getUserID();
         String portraitPath=imageHelper.getProjectPath()+"/res/"+portraitName;
         //maybe in windows it should be: String portraitPath=projectPathHelper.getProjectPath()+"\\res\\"+portraitName;
@@ -124,7 +71,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
         String sql="INSERT into user(userType,accountName,password,name,contact,portrait,creditValue,memberType,memberInfo,rank,hotelID,workID)" +
                 "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         try{
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1,userPO.getUserType().ordinal());
             preparedStatement.setString(2,userPO.getAccountName());
             preparedStatement.setString(3,userPO.getPassword());
@@ -166,7 +113,6 @@ public class UserDataMysqlHelper implements UserDataHelper {
             //delete the image
             String portraitName="portrait"+id;
             String portraitPath=imageHelper.getProjectPath()+"/res/"+portraitName;
-            imageHelper.deleteImage(portraitPath);
             //maybe in windows it should be: String portraitPath=projectPathHelper.getProjectPath()+"\\res\\"+portraitName;
 
         }catch(SQLException e){
