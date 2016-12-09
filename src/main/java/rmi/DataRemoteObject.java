@@ -172,10 +172,10 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public Map<Integer, OrderPO> getOrderList(int ID, UserType userType) throws RemoteException {
+	public Map<Integer, OrderPO> getOrderList(int ID, UserType userType,OrderStateMessage orderState) throws RemoteException {
 		
 		
-		return orderDao.getOrderList(ID, userType);
+		return orderDao.getOrderList(ID, userType,orderState);
 	}
 
 	@Override

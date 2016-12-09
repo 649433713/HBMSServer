@@ -1,17 +1,24 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HotelFilter {
+public class HotelFilter implements Serializable{
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4258843928411453500L;
 	public List<Map<String, Object>> filter = new ArrayList<>();
 	
-	/*
-	 * 
-	 * Filter �е� param ��name key���洢ɸѡ���ֶΣ�name,address,region,star,score)
+	/**
+	 * @param name （hotelID,name,address,region,star,facility,score，price)
+	 * @param relation (=,>,<,like)
+	 * @param value (like 需 value为 %+String+%
 	 */
 	public void add(String name ,String relation,Object value) {
 		Map<String, Object> param = new HashMap<>();

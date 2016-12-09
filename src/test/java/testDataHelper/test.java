@@ -34,7 +34,7 @@ public class test {
 		Map<String, RoomInfoPO> roomList = null;
 		try {
 			OrderPO orderPO;
-			orderDao.getOrderList(0, null);
+			orderDao.getOrderList(0, null,null);
 			orderPO = orderDao.getOrderInfo(10);
 		
 			AppealPO appealPO = new AppealPO(0, orderPO.getOrderID(), orderPO.getUserID(), 0, null, "不服", null);
