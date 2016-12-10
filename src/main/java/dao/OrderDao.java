@@ -21,7 +21,7 @@ public interface OrderDao extends Remote{
 		 * @return
 		 * @throws RemoteException
 		 */
-		public Map<Integer, OrderPO> getOrderList(int ID,UserType userType) throws RemoteException;
+		public Map<Integer, OrderPO> getOrderList(int ID,UserType userType,OrderStateMessage orderState) throws RemoteException;
 	
 		//获取未执行订单（即订单已生成，但是订单的用户还未入住，订单未执行状态）
 		public Map<Integer, OrderPO> getUnexecutedOrderList(int ID,UserType userType) throws RemoteException;

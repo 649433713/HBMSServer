@@ -43,9 +43,9 @@ public class OrderDaoImpl implements OrderDao
 	
 
 	@Override
-	public Map<Integer, OrderPO> getOrderList(int ID, UserType userType) throws RemoteException {
+	public Map<Integer, OrderPO> getOrderList(int ID, UserType userType,OrderStateMessage orderState) throws RemoteException {
 		// TODO Auto-generated method stub
-		map = orderDataHelper.getOrderList(ID, userType, null);
+		map = orderDataHelper.getOrderList(ID, userType,orderState);
 		return map;
 	}
 	
@@ -76,7 +76,7 @@ public class OrderDaoImpl implements OrderDao
 	}
 	@Override
 	public OrderPO getOrderInfo(int orderID) throws RemoteException {
-		map = getOrderList(0, null);
+		map = getOrderList(0, null,null);
 		OrderPO copy = map.get(orderID);
 		return copy;
 	}

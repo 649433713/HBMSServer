@@ -88,7 +88,7 @@ public class OrderDataMysqlHelper implements OrderDataHelper {
 			 sql = "update orderlist set orderState = 2 where orderID = "+orderID;
 			break;
 		case Cancelled:
-			 sql = "update orderlist set cancelTime = now(),executeDDL=default,orderState = 3 where orderID = "+orderID;
+			 sql = "update orderlist set cancelTime = now(),orderState = 3 where orderID = "+orderID;
 			break;
 		default:
 			break;
