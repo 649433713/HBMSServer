@@ -8,12 +8,7 @@ import java.sql.SQLException;
  * Created by alex on 12/4/16.
  */
 public class DBUtil_Alex {
-    //just for test
-    //just for test
-    private static final String HOST_IP="127.0.0.1";
-    private static final String DB_PORT="3306";
-    private static final String DB_NAME="hbmsdatabase";
-    private static final String URL="jdbc:mysql://"+HOST_IP+":"+DB_PORT+"/"+DB_NAME+"?characterEncoding=utf8&useSSL=true";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/hbmsdatabase?useUnicode=true&characterEncoding=utf-8&useSSL=true";
     private static final String NAME="root";
     private static final String PASSWORD="818818";
     private static Connection connection = null;
