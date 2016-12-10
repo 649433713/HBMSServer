@@ -8,8 +8,6 @@ import model.UserType;
 import model.UserTypeHelper;
 import po.UserPO;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.sql.*;
 
@@ -23,38 +21,65 @@ public class UserDataMysqlHelper implements UserDataHelper {
     }
 
     @Override
-    public UserPO getUserData(int id) {
+    public UserPO getUserData(int id)throws Exception {
+        ResultSet resultSet;
         UserTypeHelper userTypeHelper=new UserTypeHelper();
         MemberTypeHelper memberTypeHelper=new MemberTypeHelper();
+        ImageHelper imageHelper=new ImageHelper();
 
-        String sentence="select * from user where userID='"+id+"'";
+        String sentence="select userID,userType," +
+                "AES_DECRYPT(accountName,'innovator')," +
+                "AES_DECRYPT(password,'innovator')," +
+                "AES_DECRYPT(name,'innovator')," +
+                "AES_DECRYPT(contact,'innovator')," +
+                "portrait,creditValue,memberType,memberInfo," +
+                "rank,workID,hotelID from user where userID='"+id+"'";
         PreparedStatement preparedStatement;
         UserPO userPO=null;
         try{
             preparedStatement = connection.prepareStatement(sentence);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            userPO=new UserPO(resultSet.getInt("userID")
-                    ,userTypeHelper.getUserType(resultSet.getInt("userType"))
-                    ,resultSet.getString("AES_DECRYPT(accountName,'innovator')")
-                    ,resultSet.getString("AES_DECRYPT(password,'innovator')")
-                    ,resultSet.getString("AES_DECRYPT(name,'innovator')")
-                    ,resultSet.getString("AES_DECRYPT(contact,'innovator')")
-                    ,new File(resultSet.getString("portrait"))
-                    ,resultSet.getLong("creditValue")
-                    ,memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
-                    ,resultSet.getString("memberInfo")
-                    ,resultSet.getInt("rank")
-                    ,resultSet.getString("workID")
-                    ,resultSet.getInt("hotelID")
-            );
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            try {
+                userPO = new UserPO(resultSet.getInt("userID")
+                        , userTypeHelper.getUserType(resultSet.getInt("userType"))
+                        , resultSet.getString("AES_DECRYPT(accountName,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(password,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(name,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(contact,'innovator')")
+                        , new File(resultSet.getString("portrait"))
+                        , resultSet.getLong("creditValue")
+                        , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
+                        , resultSet.getString("memberInfo")
+                        , (resultSet.getInt("rank"))
+                        , resultSet.getString("workID")
+                        , resultSet.getInt("hotelID")
+                );
+            }catch(NullPointerException ne){
+                userPO = new UserPO(resultSet.getInt("userID")
+                        , userTypeHelper.getUserType(resultSet.getInt("userType"))
+                        , resultSet.getString("AES_DECRYPT(accountName,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(password,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(name,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(contact,'innovator')")
+                        , new File(imageHelper.getProjectPath()+"/res/0/admin.jpg")
+                        , resultSet.getLong("creditValue")
+                        , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
+                        , resultSet.getString("memberInfo")
+                        , 0
+                        , resultSet.getString("workID")
+                        , resultSet.getInt("hotelID")
+                );
+            }
         }catch(SQLException e){
             e.printStackTrace();
         }
+
         return userPO;
     }
 
     @Override
-    public UserPO getUserData(String accountName) {
+    public UserPO getUserData(String accountName) throws Exception{
         UserTypeHelper userTypeHelper=new UserTypeHelper();
         MemberTypeHelper memberTypeHelper=new MemberTypeHelper();
         String sentence="select * from user where accountName='"+accountName+"'";
@@ -63,6 +88,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
         try{
             preparedStatement = connection.prepareStatement(sentence);
             ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
             userPO=new UserPO(resultSet.getInt("userID")
                     ,userTypeHelper.getUserType(resultSet.getInt("userType"))
                     ,resultSet.getString("AES_DECRYPT(accountName,'innovator')")
@@ -91,7 +117,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
         Statement statement=connection.createStatement();
         PreparedStatement preparedStatement;
         String key="innovator";
-        String sql0="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID)" +
+        String sql0="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID,hotelID)" +
                 "VALUES ("  +userPO.getUserType().ordinal()+
                 ","         +"AES_ENCRYPT('"+userPO.getAccountName()+"','"+key+"')"+
                 ","         +"AES_ENCRYPT('"+userPO.getPassword()+"','"+key+"')"+
@@ -101,6 +127,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 ","          +userPO.getMemberType().ordinal()+
                 ","          +userPO.getMemberInfo()+
                 ","          +userPO.getWorkid()+
+                ","          +userPO.getHotelid()+
                 ")";
         try{
             statement.execute(sql0);
@@ -165,13 +192,11 @@ public class UserDataMysqlHelper implements UserDataHelper {
     public ResultMessage modifyUser(UserPO userPO) throws Exception{
         ImageHelper imageHelper=new ImageHelper();
         int userID=userPO.getUserID();
-        String portraitName="portrait"+userID;
-        String portraitPath=imageHelper.getProjectPath()+"/res/"+portraitName;
         String sql = ""+
                 " update user"+
                 " set userID=?,userType=?,accountName=AES_ENCRYPT(?,'innovator'),password=AES_ENCRYPT(?,'innovator'),name=AES_ENCRYPT(?,'innovator'),"+
                 " contact=AES_ENCRYPT(?,'innovator'),portrait=?,creditValue=?,memberType=?," +
-                "memberInfo=?,rank=?,hotelID=?,workID=?"+
+                "memberInfo=?,hotelID=?,workID=?"+
                 " where userID=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -181,21 +206,17 @@ public class UserDataMysqlHelper implements UserDataHelper {
             preparedStatement.setString(4,userPO.getPassword());
             preparedStatement.setString(5,userPO.getName());
             preparedStatement.setString(6,userPO.getContact());
-            //first we have to delete the old portrait
-            File userFolderDir=imageHelper.getdir(userID);
-            imageHelper.deldir(userFolderDir);
-            //then the new image have to put into a new directory
-            imageHelper.makedir(userID);
-            File image=userPO.getPortrait();
-            imageHelper.saveImage(image,portraitPath);
+            String portraitPath=imageHelper.makedir(userID)+"/portrait"+userID+".jpg";
             preparedStatement.setString(7,portraitPath);
             preparedStatement.setLong(8,userPO.getCreditValue());
             preparedStatement.setInt(9,userPO.getMemberType().ordinal());
             preparedStatement.setString(10,userPO.getMemberInfo());
-            preparedStatement.setInt(11,userPO.getRank());
-            preparedStatement.setInt(12,userPO.getHotelid());
-            preparedStatement.setString(13,userPO.getWorkid());
+            preparedStatement.setInt(11,userPO.getHotelid());
+            preparedStatement.setString(12,userPO.getWorkid());
+            preparedStatement.setInt(13,userID);
             preparedStatement.execute();
+            File image=userPO.getPortrait();
+            imageHelper.saveImage(image,portraitPath);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

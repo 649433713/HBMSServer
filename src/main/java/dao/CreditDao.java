@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 public interface CreditDao extends Remote{
-	public long getCreditValue(int userID) throws RemoteException;
+	public long getCreditValue(int userID) throws RemoteException,Exception;
 
 	public ResultMessage setCreditValue(int userID,long value) throws RemoteException,Exception;
 

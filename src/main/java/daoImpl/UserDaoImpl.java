@@ -42,11 +42,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public UserPO getUserData(int id) throws RemoteException {
+    public UserPO getUserData(int id) throws RemoteException,Exception {
         return userDataHelper.getUserData(id);
     }
 
-    public UserPO getUserData(String accountName) throws RemoteException{
+    public UserPO getUserData(String accountName) throws RemoteException,Exception{
         return userDataHelper.getUserData(accountName);
     }
 
@@ -66,7 +66,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ResultMessage login(String accountName, String pwd) throws RemoteException {
+    public ResultMessage login(String accountName, String pwd) throws RemoteException,Exception {
         userPO=userDataHelper.getUserData(accountName);
         if(userPO!=null&&pwd.equals(userPO.getPassword())){
             return ResultMessage.success;

@@ -237,14 +237,14 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public UserPO getUserData(int id) throws RemoteException {
+	public UserPO getUserData(int id) throws RemoteException,Exception {
 		
 		
 		return userDao.getUserData(id);
 	}
 
 	@Override
-	public UserPO getUserData(String accountName) throws RemoteException {
+	public UserPO getUserData(String accountName) throws RemoteException ,Exception{
 
 
 		return userDao.getUserData(accountName);
@@ -272,7 +272,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public ResultMessage login(String accountName, String pwd) throws RemoteException {
+	public ResultMessage login(String accountName, String pwd) throws RemoteException,Exception {
 		
 		
 		return userDao.login(accountName,pwd);
