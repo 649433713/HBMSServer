@@ -28,10 +28,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
         ImageHelper imageHelper=new ImageHelper();
 
         String sentence="select userID,userType," +
-                "AES_DECRYPT(accountName,'innovator')," +
-                "AES_DECRYPT(password,'innovator')," +
-                "AES_DECRYPT(name,'innovator')," +
-                "AES_DECRYPT(contact,'innovator')," +
+                "AES_DECRYPT(unhex(accountName),'innovator')," +
+                "AES_DECRYPT(unhex(password),'innovator')," +
+                "AES_DECRYPT(unhex(name),'innovator')," +
+                "AES_DECRYPT(unhex(contact),'innovator')," +
                 "portrait,creditValue,memberType,memberInfo," +
                 "rank,workID,hotelID from user where userID='"+id+"'";
         PreparedStatement preparedStatement;
@@ -39,14 +39,18 @@ public class UserDataMysqlHelper implements UserDataHelper {
         try{
             preparedStatement = connection.prepareStatement(sentence);
             resultSet = preparedStatement.executeQuery();
-            resultSet.next();
+            if(resultSet.next()){
+
+            }else{
+                return null;
+            }
             try {
                 userPO = new UserPO(resultSet.getInt("userID")
                         , userTypeHelper.getUserType(resultSet.getInt("userType"))
-                        , resultSet.getString("AES_DECRYPT(accountName,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(password,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(name,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(contact,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(accountName),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(password),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(name),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(contact),'innovator')")
                         , new File(resultSet.getString("portrait"))
                         , resultSet.getLong("creditValue")
                         , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
@@ -59,10 +63,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 //resultSet.next();
                 userPO = new UserPO(resultSet.getInt("userID")
                         , userTypeHelper.getUserType(resultSet.getInt("userType"))
-                        , resultSet.getString("AES_DECRYPT(accountName,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(password,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(name,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(contact,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(accountName),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(password),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(name),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(contact),'innovator')")
                         , new File(imageHelper.getProjectPath()+"/res/0/admin.jpg")
                         , resultSet.getLong("creditValue")
                         , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
@@ -87,12 +91,12 @@ public class UserDataMysqlHelper implements UserDataHelper {
         ImageHelper imageHelper=new ImageHelper();
 
         String sentence="select userID,userType," +
-                "AES_DECRYPT(accountName,'innovator')," +
-                "AES_DECRYPT(password,'innovator')," +
-                "AES_DECRYPT(name,'innovator')," +
-                "AES_DECRYPT(contact,'innovator')," +
+                "AES_DECRYPT(unhex(accountName),'innovator')," +
+                "AES_DECRYPT(unhex(password),'innovator')," +
+                "AES_DECRYPT(unhex(name),'innovator')," +
+                "AES_DECRYPT(unhex(contact),'innovator')," +
                 "portrait,creditValue,memberType,memberInfo," +
-                "rank,workID,hotelID from user where AES_DECRYPT(accountName,'innovator')='"+accountName+"'";
+                "rank,workID,hotelID from user where AES_DECRYPT(unhex(accountName),'innovator')='"+accountName+"'";
         PreparedStatement preparedStatement;
         UserPO userPO=null;
         try{
@@ -101,16 +105,15 @@ public class UserDataMysqlHelper implements UserDataHelper {
             if(resultSet.next()){
 
             }else{
-                System.out.println("no such user found");
                 return null;
             }
             try {
                 userPO = new UserPO(resultSet.getInt("userID")
                         , userTypeHelper.getUserType(resultSet.getInt("userType"))
-                        , resultSet.getString("AES_DECRYPT(accountName,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(password,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(name,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(contact,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(accountName),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(password),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(name),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(contact),'innovator')")
                         , new File(resultSet.getString("portrait"))
                         , resultSet.getLong("creditValue")
                         , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
@@ -123,10 +126,10 @@ public class UserDataMysqlHelper implements UserDataHelper {
                 System.out.println("calling null pointer exception handler");
                 userPO = new UserPO(resultSet.getInt("userID")
                         , userTypeHelper.getUserType(resultSet.getInt("userType"))
-                        , resultSet.getString("AES_DECRYPT(accountName,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(password,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(name,'innovator')")
-                        , resultSet.getString("AES_DECRYPT(contact,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(accountName),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(password),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(name),'innovator')")
+                        , resultSet.getString("AES_DECRYPT(unhex(contact),'innovator')")
                         , new File(imageHelper.getProjectPath()+"/res/0/admin.jpg")
                         , resultSet.getLong("creditValue")
                         , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
@@ -153,14 +156,14 @@ public class UserDataMysqlHelper implements UserDataHelper {
         String key="innovator";
         String sql0="INSERT into user(userType,accountName,password,name,contact,creditValue,memberType,memberInfo,workID,hotelID)" +
                 "VALUES ("  +userPO.getUserType().ordinal()+
-                ","         +"AES_ENCRYPT('"+userPO.getAccountName()+"','"+key+"')"+
-                ","         +"AES_ENCRYPT('"+userPO.getPassword()+"','"+key+"')"+
-                ","         +"AES_ENCRYPT('"+userPO.getName()+"','"+key+"')"+
-                ","         +"AES_ENCRYPT('"+userPO.getContact()+"','"+key+"')"+
+                ","         +"hex(AES_ENCRYPT('"+userPO.getAccountName()+"','"+key+"'))"+
+                ","         +"hex(AES_ENCRYPT('"+userPO.getPassword()+"','"+key+"'))"+
+                ","         +"hex(AES_ENCRYPT('"+userPO.getName()+"','"+key+"'))"+
+                ","         +"hex(AES_ENCRYPT('"+userPO.getContact()+"','"+key+"'))"+
                 ","          +userPO.getCreditValue()+
                 ","          +userPO.getMemberType().ordinal()+
-                ","          +userPO.getMemberInfo()+
-                ","          +userPO.getWorkid()+
+                ",'"          +userPO.getMemberInfo()+
+                "',"          +userPO.getWorkid()+
                 ","          +userPO.getHotelid()+
                 ")";
         try{
@@ -168,7 +171,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
         }catch(SQLException e){
             return ResultMessage.failure;
         }
-        String sql2="select * from user where AES_DECRYPT(accountName,'"+key+"')='"+userPO.getAccountName()+"'";
+        String sql2="select * from user where AES_DECRYPT(unhex(accountName),'"+key+"')='"+userPO.getAccountName()+"'";
         String sql3=""+
                 " update user"+
                 " set portrait=?"+
@@ -228,8 +231,8 @@ public class UserDataMysqlHelper implements UserDataHelper {
 
         String sql = ""+
                 " update user"+
-                " set userID=?,userType=?,accountName=AES_ENCRYPT(?,'innovator'),password=AES_ENCRYPT(?,'innovator'),name=AES_ENCRYPT(?,'innovator'),"+
-                " contact=AES_ENCRYPT(?,'innovator'),portrait=?,creditValue=?,memberType=?," +
+                " set userID=?,userType=?,accountName=hex(AES_ENCRYPT(?,'innovator')),password=hex(AES_ENCRYPT(?,'innovator')),name=hex(AES_ENCRYPT(?,'innovator')),"+
+                " contact=hex(AES_ENCRYPT(?,'innovator')),portrait=?,creditValue=?,memberType=?," +
                 "memberInfo=?,hotelID=?,workID=?"+
                 " where userID=?";
         try {

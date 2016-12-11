@@ -69,6 +69,6 @@ public class test_Alex_Credit {
         //getCreditRecordList(2);
         //addCreditRecord();
         //getCreditValue();
-        setCreditValue();
+        //setCreditValue();
     }
 }

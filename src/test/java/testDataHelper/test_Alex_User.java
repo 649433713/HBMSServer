@@ -20,12 +20,11 @@ import java.util.Date;
  */
 public class test_Alex_User {
     static void addUser()throws Exception{
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         String time;
         Date date=simpleDateFormat.parse("1996-9-30");
         time=simpleDateFormat.format(date);
         File image=new File("/home/alex/Pictures/admin.png");
-        System.out.println(time);
         UserPO userPOTest=new UserPO(0, UserType.Customer,"alex2097","123","Alex Yu","13818052097",image,100, MemberType.Person,time,0,null,1);
         UserDao userDao=new UserDaoImpl();
         ResultMessage message;
@@ -40,7 +39,7 @@ public class test_Alex_User {
     }
 
     static void modifyUser() throws Exception{
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         String time;
         Date date=simpleDateFormat.parse("1996-9-30");
         time=simpleDateFormat.format(date);
@@ -54,17 +53,22 @@ public class test_Alex_User {
     static void getUser(int id)throws Exception{
         UserDao userDao=new UserDaoImpl();
         UserPO userPO=userDao.getUserData(id);
-        System.out.println(userPO.getAccountName());
-        System.out.println(userPO.getUserType());
-        System.out.println(userPO.getRank());
+        if(userPO!=null){
+            System.out.println(userPO.getAccountName());
+            System.out.println(userPO.getUserType());
+            System.out.println(userPO.getRank());
+        }else System.out.println("no such user found!");
+
     }
 
     static void getUser(String accountName)throws Exception{
         UserDao userDao=new UserDaoImpl();
         UserPO userPO=userDao.getUserData(accountName);
-        System.out.println("the user id is :"+userPO.getUserID());
-        //System.out.println(userPO.getRank());
-        System.out.println(userPO.getMemberInfo());
+        if(userPO!=null){
+            System.out.println("the user id is :"+userPO.getUserID());
+            System.out.println(userPO.getRank());
+            System.out.println(userPO.getMemberInfo());
+        }else System.out.println("no such user found!");
     }
 
     static void signup()throws Exception{
@@ -86,7 +90,7 @@ public class test_Alex_User {
     static void login() throws Exception{
         UserDao userDao=new UserDaoImpl();
         System.out.println("testing login successfully");
-        System.out.println(userDao.login("alex2097","123"));
+        System.out.println(userDao.login("alex2097","151250187"));
         System.out.println("testing login failed case");
         System.out.println(userDao.login("alex2097","asdf"));
         System.out.println(userDao.login("alex2098","asdf"));
@@ -99,10 +103,12 @@ public class test_Alex_User {
         //deleteUser(2);
         //addUser();
         //getUser(1);
+        //getUser(3);
         //getUser("alex2097");
+        //getUser("alex2098");
         //modifyUser();
         //signup();
         //deleteUser(3);
-        login();
+        //login();
     }
 }

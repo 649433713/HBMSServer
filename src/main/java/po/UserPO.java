@@ -8,6 +8,7 @@ import java.io.Serializable;
  */
 public class UserPO implements Serializable{
 
+
     private static final long serialVersionUID = 2358054794207235733L;
     /**
 	 * 
