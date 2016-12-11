@@ -44,7 +44,21 @@ public class test_Alex_Credit {
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         format.format(date);
         CreditRecordPO creditRecordPOTest=new CreditRecordPO(0,date,1,reasonTypeHelper.getCreditRecordReasonType(0),number,10);
-        creditDao.addCreditValue(creditRecordPOTest);
+        creditDao.addCreditRecord(creditRecordPOTest);
+    }
+
+    static long getCreditValue()throws Exception{
+        CreditDao creditDao=new CreditDaoImpl();
+        long number=creditDao.getCreditValue(2);
+        System.out.println("the credit value is: "+number);
+        return number;
+    }
+
+    static void setCreditValue()throws Exception{
+        CreditDao creditDao=new CreditDaoImpl();
+        long number2=300;
+        long number1=getCreditValue();
+        System.out.println(creditDao.setCreditValue(2,number2));
     }
 
     public static void main(String args[])throws Exception{
@@ -53,6 +67,8 @@ public class test_Alex_Credit {
         statement.execute("ALTER TABLE hbmsdatabase.creditrecord AUTO_INCREMENT = 8");
         //getCreditRecordList(1);
         //getCreditRecordList(2);
-        addCreditRecord();
+        //addCreditRecord();
+        //getCreditValue();
+        setCreditValue();
     }
 }

@@ -15,6 +15,6 @@ public interface CreditDao extends Remote{
 
 	public Map<Integer, CreditRecordPO> getCreditRecordList(int userID) throws  RemoteException;
 
-	public ResultMessage addCreditValue(CreditRecordPO po) throws RemoteException;
+	public ResultMessage addCreditRecord(CreditRecordPO po) throws RemoteException;
 
 }	

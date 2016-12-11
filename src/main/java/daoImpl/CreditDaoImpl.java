@@ -63,7 +63,7 @@ public class CreditDaoImpl implements CreditDao{
 	}
 
 	@Override
-	public ResultMessage addCreditValue(CreditRecordPO po) throws RemoteException {
+	public ResultMessage addCreditRecord(CreditRecordPO po) throws RemoteException {
 		return creditDataHelper.addCreditRecord(po);
 	}
 }
