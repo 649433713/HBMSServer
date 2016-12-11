@@ -18,7 +18,7 @@ import java.util.Date;
 /**
  * Created by alex on 12/10/16.
  */
-public class test_Alex {
+public class test_Alex_User {
     static void addUser()throws Exception{
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-mm-dd");
         String time;

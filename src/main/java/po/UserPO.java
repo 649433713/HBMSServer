@@ -7,6 +7,7 @@ import java.io.Serializable;
  * Created by alex on 16-11-17.
  */
 public class UserPO implements Serializable{
+
     private static final long serialVersionUID = 2358054794207235733L;
     /**
 	 * 
