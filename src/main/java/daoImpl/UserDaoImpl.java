@@ -71,8 +71,11 @@ public class UserDaoImpl implements UserDao {
         if(userPO!=null&&pwd.equals(userPO.getPassword())){
             return ResultMessage.success;
         }else{
-            userPO=null;
-            return ResultMessage.failure;
+            if(userPO!=null){
+                return ResultMessage.wrongPassword;
+            }else{
+                return ResultMessage.notexist;
+            }
         }
     }
 

@@ -56,6 +56,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
                         , resultSet.getInt("hotelID")
                 );
             }catch(NullPointerException ne){
+                //resultSet.next();
                 userPO = new UserPO(resultSet.getInt("userID")
                         , userTypeHelper.getUserType(resultSet.getInt("userType"))
                         , resultSet.getString("AES_DECRYPT(accountName,'innovator')")
@@ -80,32 +81,65 @@ public class UserDataMysqlHelper implements UserDataHelper {
 
     @Override
     public UserPO getUserData(String accountName) throws Exception{
+        ResultSet resultSet;
         UserTypeHelper userTypeHelper=new UserTypeHelper();
         MemberTypeHelper memberTypeHelper=new MemberTypeHelper();
-        String sentence="select * from user where accountName='"+accountName+"'";
+        ImageHelper imageHelper=new ImageHelper();
+
+        String sentence="select userID,userType," +
+                "AES_DECRYPT(accountName,'innovator')," +
+                "AES_DECRYPT(password,'innovator')," +
+                "AES_DECRYPT(name,'innovator')," +
+                "AES_DECRYPT(contact,'innovator')," +
+                "portrait,creditValue,memberType,memberInfo," +
+                "rank,workID,hotelID from user where AES_DECRYPT(accountName,'innovator')='"+accountName+"'";
         PreparedStatement preparedStatement;
         UserPO userPO=null;
         try{
             preparedStatement = connection.prepareStatement(sentence);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            userPO=new UserPO(resultSet.getInt("userID")
-                    ,userTypeHelper.getUserType(resultSet.getInt("userType"))
-                    ,resultSet.getString("AES_DECRYPT(accountName,'innovator')")
-                    ,resultSet.getString("AES_DECRYPT(password,'innovator')")
-                    ,resultSet.getString("AES_DECRYPT(name,'innovator')")
-                    ,resultSet.getString("AES_DECRYPT(contact,'innovator')")
-                    ,new File(resultSet.getString("portrait"))
-                    ,resultSet.getLong("creditValue")
-                    ,memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
-                    ,resultSet.getString("memberInfo")
-                    ,resultSet.getInt("rank")
-                    ,resultSet.getString("workID")
-                    ,resultSet.getInt("hotelID")
-            );
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+
+            }else{
+                System.out.println("no such user found");
+                return null;
+            }
+            try {
+                userPO = new UserPO(resultSet.getInt("userID")
+                        , userTypeHelper.getUserType(resultSet.getInt("userType"))
+                        , resultSet.getString("AES_DECRYPT(accountName,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(password,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(name,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(contact,'innovator')")
+                        , new File(resultSet.getString("portrait"))
+                        , resultSet.getLong("creditValue")
+                        , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
+                        , resultSet.getString("memberInfo")
+                        , (resultSet.getInt("rank"))
+                        , resultSet.getString("workID")
+                        , resultSet.getInt("hotelID")
+                );
+            }catch(NullPointerException ne){
+                System.out.println("calling null pointer exception handler");
+                userPO = new UserPO(resultSet.getInt("userID")
+                        , userTypeHelper.getUserType(resultSet.getInt("userType"))
+                        , resultSet.getString("AES_DECRYPT(accountName,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(password,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(name,'innovator')")
+                        , resultSet.getString("AES_DECRYPT(contact,'innovator')")
+                        , new File(imageHelper.getProjectPath()+"/res/0/admin.jpg")
+                        , resultSet.getLong("creditValue")
+                        , memberTypeHelper.getMemberType(resultSet.getInt("memberType"))
+                        , resultSet.getString("memberInfo")
+                        , 0
+                        , resultSet.getString("workID")
+                        , resultSet.getInt("hotelID")
+                );
+            }
         }catch(SQLException e){
             e.printStackTrace();
         }
+
         return userPO;
 
 
@@ -132,7 +166,6 @@ public class UserDataMysqlHelper implements UserDataHelper {
         try{
             statement.execute(sql0);
         }catch(SQLException e){
-            e.printStackTrace();
             return ResultMessage.failure;
         }
         String sql2="select * from user where AES_DECRYPT(accountName,'"+key+"')='"+userPO.getAccountName()+"'";
@@ -192,6 +225,7 @@ public class UserDataMysqlHelper implements UserDataHelper {
     public ResultMessage modifyUser(UserPO userPO) throws Exception{
         ImageHelper imageHelper=new ImageHelper();
         int userID=userPO.getUserID();
+
         String sql = ""+
                 " update user"+
                 " set userID=?,userType=?,accountName=AES_ENCRYPT(?,'innovator'),password=AES_ENCRYPT(?,'innovator'),name=AES_ENCRYPT(?,'innovator'),"+

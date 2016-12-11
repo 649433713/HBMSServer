@@ -46,7 +46,7 @@ public class test_Alex {
         time=simpleDateFormat.format(date);
         File image=new File("/home/alex/Pictures/test.jpg");
 
-        UserPO userPOTest=new UserPO(2, UserType.Customer,"alex2097","151250187","Alex Yu","15951923079",image,800, MemberType.Person,time,0,null,3);
+        UserPO userPOTest=new UserPO(2, UserType.Customer,"alex2097","151250187","Alex Yu","15951923079",image,800, MemberType.Person,time,1,null,3);
         UserDao userDao=new UserDaoImpl();
         ResultMessage message=userDao.modifyUser(userPOTest);
     }
@@ -55,12 +55,41 @@ public class test_Alex {
         UserDao userDao=new UserDaoImpl();
         UserPO userPO=userDao.getUserData(id);
         System.out.println(userPO.getAccountName());
+        System.out.println(userPO.getUserType());
+        System.out.println(userPO.getRank());
     }
 
     static void getUser(String accountName)throws Exception{
         UserDao userDao=new UserDaoImpl();
         UserPO userPO=userDao.getUserData(accountName);
-        System.out.println(userPO.getUserID());
+        System.out.println("the user id is :"+userPO.getUserID());
+        //System.out.println(userPO.getRank());
+        System.out.println(userPO.getMemberInfo());
+    }
+
+    static void signup()throws Exception{
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-mm-dd");
+        String time;
+        Date date=simpleDateFormat.parse("1996-8-24");
+        time=simpleDateFormat.format(date);
+        File image=new File("/home/alex/Pictures/test.jpg");
+        UserPO userPOTest1=new UserPO(0, UserType.Customer,"betaforalex","818818","Alex Yu-beta",null,image,8000, MemberType.Enterprise,time,0,null,5);
+        UserPO userPOTest2=new UserPO(0, UserType.Customer,"alex2097","818818","Alex Yu-beta",null,image,8000, MemberType.Enterprise,time,0,null,5);
+
+        UserDao userDao=new UserDaoImpl();
+        System.out.println("testing inserting a new user");
+        System.out.println(userDao.signup(userPOTest1));
+        System.out.println("testing inserting an already added user");
+        System.out.println(userDao.signup(userPOTest2));
+    }
+
+    static void login() throws Exception{
+        UserDao userDao=new UserDaoImpl();
+        System.out.println("testing login successfully");
+        System.out.println(userDao.login("alex2097","123"));
+        System.out.println("testing login failed case");
+        System.out.println(userDao.login("alex2097","asdf"));
+        System.out.println(userDao.login("alex2098","asdf"));
     }
 
     public static void main(String args[]) throws Exception{
@@ -69,8 +98,11 @@ public class test_Alex {
         statement.execute("ALTER TABLE hbmsdatabase.user AUTO_INCREMENT = 1");
         //deleteUser(2);
         //addUser();
-        getUser(1);
+        //getUser(1);
         //getUser("alex2097");
         //modifyUser();
+        //signup();
+        //deleteUser(3);
+        login();
     }
 }
