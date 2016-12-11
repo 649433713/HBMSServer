@@ -1,4 +1,6 @@
 package po;
+import model.PromotionType;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -7,7 +9,8 @@ import java.util.List;
  */
 public class PromotionPO implements Serializable{
     //shared
-    String id;
+    int promotionID;
+    PromotionType promotionType;
     String name;
     String type;
     String content;
@@ -54,35 +57,5 @@ public class PromotionPO implements Serializable{
         this.regionAvailable=regionAvailable;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public List<Integer> getRankAvailable() {
-        return rankAvailable;
-    }
-
-    public List<String> getRegionAvailable() {
-        return regionAvailable;
-    }
 }
