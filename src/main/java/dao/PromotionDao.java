@@ -1,21 +1,18 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 
 import message.ResultMessage;
+import model.PromotionFilter;
 import po.PromotionPO;
 
 public interface PromotionDao {
-	 public PromotionPO showPromotion();
-	 
-	 public List<PromotionPO> showPromotionList();
+	public Map<Integer, PromotionPO> getPromotionList(PromotionFilter promotionFilter)throws Exception;
 
-	 
-	 public ResultMessage addPromotion(PromotionPO po);
-	 
-	 public ResultMessage modifyPromotion(PromotionPO po);
-	 
-	 public ResultMessage deletePromotion(String id);
+	public ResultMessage addPromotion(PromotionPO po)throws Exception;
+
+	public ResultMessage updatePromotion(PromotionPO po)throws Exception;
 	 
 
 }

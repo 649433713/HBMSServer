@@ -33,5 +33,11 @@ public class DataFactoryImpl implements DataFactory{
 		return creditDataHelper;
 	}
 
+	@Override
+	public PromotionDataHelper getPromotionDataHelper() {
+		PromotionDataHelper promotionDataHelper=new PromotionDataMysqlHelper();
+		return promotionDataHelper;
+	}
+
 
 }

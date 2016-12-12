@@ -1,4 +1,5 @@
 package po;
+import model.DiscountType;
 import model.PromotionType;
 
 import java.io.Serializable;
@@ -8,7 +9,8 @@ import java.util.List;
  * Created by alex on 16-11-17.
  */
 public class PromotionPO implements Serializable{
-    private static final long serialVersionUID = -3063228490603502682L;
+
+    private static final long serialVersionUID = -9141885023401470037L;
     int promotionID;
     PromotionType promotionType;
     int region;
@@ -17,10 +19,13 @@ public class PromotionPO implements Serializable{
     Date startDate;
     Date endDate;
     int minRankAvailable;
-    int maxRankAvailalbe;
+    int maxRankAvailable;
+    DiscountType type;
+    int condition;
+    int discount;
 
-    //two types of promotions share the same member, so one constructor is ok
-    public PromotionPO(int promotionID, PromotionType promotionType, int region, String name, String content, Date startDate, Date endDate, int minRankAvailable, int maxRankAvailalbe) {
+
+    public PromotionPO(int promotionID, PromotionType promotionType, int region, String name, String content, Date startDate, Date endDate, int minRankAvailable, int maxRankAvailable, DiscountType type, int condition, int discount) {
         this.promotionID = promotionID;
         this.promotionType = promotionType;
         this.region = region;
@@ -29,7 +34,10 @@ public class PromotionPO implements Serializable{
         this.startDate = startDate;
         this.endDate = endDate;
         this.minRankAvailable = minRankAvailable;
-        this.maxRankAvailalbe = maxRankAvailalbe;
+        this.maxRankAvailable = maxRankAvailable;
+        this.type = type;
+        this.condition = condition;
+        this.discount = discount;
     }
 
     public int getPromotionID() {
@@ -64,7 +72,19 @@ public class PromotionPO implements Serializable{
         return minRankAvailable;
     }
 
-    public int getMaxRankAvailalbe() {
-        return maxRankAvailalbe;
+    public int getMaxRankAvailable() {
+        return maxRankAvailable;
+    }
+
+    public DiscountType getType() {
+        return type;
+    }
+
+    public int getCondition() {
+        return condition;
+    }
+
+    public int getDiscount() {
+        return discount;
     }
 }

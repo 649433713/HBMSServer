@@ -7,24 +7,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import dao.CreditDao;
-import dao.HotelDao;
-import dao.OrderDao;
-import dao.RoomDao;
-import dao.UserDao;
-import daoImpl.CreditDaoImpl;
-import daoImpl.HotelDaoImpl;
-import daoImpl.OrderDaoImpl;
-import daoImpl.RoomDaoImpl;
-import daoImpl.UserDaoImpl;
+import dao.*;
+import daoImpl.*;
 import message.OrderStateMessage;
 import message.ResultMessage;
 import message.RoomStateMessage;
 import model.HotelFilter;
+import model.PromotionFilter;
 import model.UserType;
 import po.*;
 
-public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao {
+public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao ,CreditDao, PromotionDao {
 	/**
 	 * 
 	 */
@@ -38,15 +31,16 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	private CreditDao creditDao;
 	private OrderDao orderDao;
 	private RoomDao roomDao;
+	private PromotionDao promotionDao;
 	
 	protected DataRemoteObject() throws RemoteException {
 		super();
 		hotelDao = new HotelDaoImpl();
-//		userDao=new UserDaoImpl();
-//		creditDao = new CreditDaoImpl();
+		userDao=new UserDaoImpl();
+		creditDao = new CreditDaoImpl();
 		orderDao = new OrderDaoImpl();
 		roomDao = new RoomDaoImpl();
-		 
+		promotionDao=new PromotionDaoImpl();
 		
 	}
 
@@ -285,4 +279,38 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 		return userDao.signup(po);
 	}
 
+	@Override
+	public long getCreditValue(int userID) throws RemoteException, Exception {
+		return creditDao.getCreditValue(userID);
+	}
+
+	@Override
+	public ResultMessage setCreditValue(int userID, long value) throws RemoteException, Exception {
+		return creditDao.setCreditValue(userID,value);
+	}
+
+	@Override
+	public Map<Integer, CreditRecordPO> getCreditRecordList(int userID) throws RemoteException {
+		return creditDao.getCreditRecordList(userID);
+	}
+
+	@Override
+	public ResultMessage addCreditRecord(CreditRecordPO po) throws RemoteException {
+		return creditDao.addCreditRecord(po);
+	}
+
+	@Override
+	public Map<Integer, PromotionPO> getPromotionList(PromotionFilter promotionFilter) throws Exception {
+		return promotionDao.getPromotionList(promotionFilter);
+	}
+
+	@Override
+	public ResultMessage addPromotion(PromotionPO po) throws Exception {
+		return promotionDao.addPromotion(po);
+	}
+
+	@Override
+	public ResultMessage updatePromotion(PromotionPO po) throws Exception {
+		return promotionDao.updatePromotion(po);
+	}
 }
