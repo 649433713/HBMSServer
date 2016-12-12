@@ -31,16 +31,13 @@ public class test {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // 日期格式
 		Date date = dateFormat.parse("2015-07-31"); // 指定日期
 	
-		Map<String, RoomInfoPO> roomList = null;
+	
 		try {
-			OrderPO orderPO;
-			orderDao.getOrderList(0, null,null);
-			orderPO = orderDao.getOrderInfo(10);
+			Map<String, RoomInfoPO> roomList = roomDao.getRoomList(119, dateFormat.parse("2016-12-15"));
 		
-			AppealPO appealPO = new AppealPO(0, orderPO.getOrderID(), orderPO.getUserID(), 0, null, "不服", null);
-			orderDao.addAppealOrder(appealPO);
-			System.out.println(orderDao.getAppealOrder(orderPO.getOrderID()));
-			
+			for (RoomInfoPO roomInfoPO : roomList.values()) {
+				System.out.println(roomInfoPO);
+			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

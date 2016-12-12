@@ -55,42 +55,37 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 		}else {
 			String dayOff = DateToDayOff.dateToDatOff(date);
 			
-			String sql = "select * from roominfo where hotelID =? group by roomType ";
-			String sql2 = "select count(*)num,roomType from roomdate inner join roominfo "
+			String sql = "select roomType,defaultPrice from roominfo where hotelID =? group by roomType ";
+			String sql2 = "select roominfo.roomInfoID roomInfoID,hotelID,roomID,roomType,min(defaultPrice)Price from roomdate inner join roominfo "
 					+ "on roomdate.roomInfoID = roominfo.roomInfoID where roominfo.hotelID = ? "
 					+ "and "+dayOff+"=1 group by roomType";
-			Map<String, RoomInfoPO> map = new LinkedHashMap<>();
-			Map<String, Integer> roomNum = new LinkedHashMap<>();
+			Map<String, RoomInfoPO> roominfo = new LinkedHashMap<>();
 			PreparedStatement preparedStatement;
 			try {
-				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement = connection.prepareStatement(sql2);
 				preparedStatement.setInt(1, hotel_ID);
 				ResultSet resultSet = preparedStatement.executeQuery();
 				
-				preparedStatement = connection.prepareStatement(sql2);
+				preparedStatement = connection.prepareStatement(sql);
 				preparedStatement.setInt(1, hotel_ID);
 		
 				ResultSet resultSet2 = preparedStatement.executeQuery();
-
-				while (resultSet2.next()) {
-					
-					roomNum.put(resultSet2.getString("roomType"), resultSet2.getInt("num"));					
-				}
 
 				RoomInfoPO roomInfoPO = null;
 				while (resultSet.next()) {
 
 					roomInfoPO = new RoomInfoPO(resultSet.getInt("roomInfoID"), resultSet.getInt("hotelID"),
-							resultSet.getString("roomID"), resultSet.getString("roomType"), resultSet.getInt("defaultPrice"),
-							RoomStateMessage.values()[resultSet.getInt("roomState")], resultSet.getDate("detailedInfo1"),
-							resultSet.getDate("detailedInfo2"));
-					int i = 0;
-					if (roomNum.get(roomInfoPO.getRoomType())!=null) {
-						i =roomNum.get(roomInfoPO.getRoomType());
-					}
+							resultSet.getString("roomID"), resultSet.getString("roomType"), resultSet.getInt("Price"),
+							null,null,null);
 				
-					roomInfoPO.setTempNum(i);
-					map.put(roomInfoPO.getRoomID(), roomInfoPO);
+					roominfo.put(roomInfoPO.getRoomType(), roomInfoPO);
+				}
+				
+				while(resultSet2.next()){
+					if (roominfo.get(resultSet2.getString("roomType")) == null) {
+						roominfo.put(resultSet2.getString("roomType"), new RoomInfoPO(0, 0, null,
+								resultSet2.getString("roomType"), resultSet2.getInt("defaultPrice"), null, null, null));
+					}
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -98,7 +93,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 				return null;
 			}
 
-			return map;
+			return roominfo;
 
 		}
 		
