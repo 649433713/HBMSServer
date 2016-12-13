@@ -4,6 +4,10 @@ import java.awt.Image;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author 凡
+ *
+ */
 public class CommentInfoPO implements Serializable{
 	/**
 	 * 

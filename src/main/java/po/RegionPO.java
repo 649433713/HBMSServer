@@ -2,6 +2,10 @@ package po;
 
 import java.io.Serializable;
 
+/**
+ * @author 凡
+ *
+ */
 public class RegionPO implements Serializable{
 
 	/**

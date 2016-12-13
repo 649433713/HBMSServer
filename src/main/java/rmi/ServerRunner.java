@@ -2,6 +2,10 @@ package rmi;
 
 import rmi.RemoteHelper;
 
+/**
+ * @author 凡
+ *
+ */
 public class ServerRunner {
 	
 	public ServerRunner() {

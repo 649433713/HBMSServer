@@ -6,6 +6,10 @@ import dataHelper.OrderDataHelper;
 import dataHelper.RoomDataHelper;
 import dataHelper.UserDataHelper;
 
+/**
+ * @author 凡
+ *
+ */
 public class DataFactoryImpl implements DataFactory{
 
 	public HotelDataHelper getHotelDataHelper() {

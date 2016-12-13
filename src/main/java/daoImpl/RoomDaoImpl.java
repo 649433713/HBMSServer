@@ -14,6 +14,10 @@ import message.RoomStateMessage;
 import model.UserType;
 import message.ResultMessage;
 
+/**
+ * @author 凡
+ *
+ */
 public class RoomDaoImpl implements RoomDao {
 
 	private Map<String, RoomInfoPO> map;
@@ -48,10 +52,10 @@ public class RoomDaoImpl implements RoomDao {
 	}
 
 	@Override
-	public RoomInfoPO getRoomInfo(String roomType) throws RemoteException {
+	public RoomInfoPO getRoomInfo(String roomID) throws RemoteException {
 		RoomInfoPO copy = null;
 		for (RoomInfoPO roomInfoPO : map.values()) {
-			if (roomType.equals(roomInfoPO.getRoomType())) {
+			if (roomID.equals(roomInfoPO.getRoomID())) {
 				copy = roomInfoPO;
 				break;
 			}

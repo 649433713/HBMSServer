@@ -20,6 +20,10 @@ import po.CommentInfoPO;
 import po.HotelPO;
 import po.RegionPO;
 
+/**
+ * @author 凡
+ *
+ */
 public class HotelDataMysqlHelper implements HotelDataHelper {
 	Connection connection;
 

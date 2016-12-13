@@ -30,6 +30,10 @@ import po.RegionPO;
 import po.RoomInfoPO;
 import po.UserPO;
 
+/**
+ * @author 凡
+ *
+ */
 public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao {
 	/**
 	 * 
@@ -99,8 +103,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public RoomInfoPO getRoomInfo(String roomType) throws RemoteException {
-		return roomDao.getRoomInfo(roomType);
+	public RoomInfoPO getRoomInfo(String roomID) throws RemoteException {
+		return roomDao.getRoomInfo(roomID);
 	}
 
 	@Override

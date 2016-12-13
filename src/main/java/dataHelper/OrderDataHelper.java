@@ -8,6 +8,10 @@ import model.UserType;
 import po.AppealPO;
 import po.OrderPO;
 
+/**
+ * @author 凡
+ *
+ */
 public interface OrderDataHelper {
 	public Map<Integer,OrderPO> getOrderList(int ID,UserType userType,OrderStateMessage orderState);
 

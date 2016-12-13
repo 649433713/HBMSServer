@@ -15,6 +15,10 @@ import model.UserType;
 import po.AppealPO;
 import po.OrderPO;
 
+/**
+ * @author 凡
+ *
+ */
 public class OrderDaoImpl implements OrderDao
 {
 	
