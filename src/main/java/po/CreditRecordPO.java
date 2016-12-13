@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class CreditRecordPO implements Serializable{
 
+
 	private static final long serialVersionUID = 5432468739548863445L;
 	int creditRecordID;
 	Date time;

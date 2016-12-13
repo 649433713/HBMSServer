@@ -10,6 +10,7 @@ import java.util.Map;
  * Created by alex on 12/12/16.
  */
 public class PromotionFilter implements Serializable{
+
     private static final long serialVersionUID = 5332058456060215535L;
     public List<Map<String, Object>> filter = new ArrayList<>();
 

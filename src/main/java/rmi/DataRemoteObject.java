@@ -18,10 +18,11 @@ import model.UserType;
 import po.*;
 
 public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao ,CreditDao, PromotionDao {
+	private static final long serialVersionUID = -894598509334934845L;
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8161659370903805031L;
+
 	/**
 	 * 
 	 */
