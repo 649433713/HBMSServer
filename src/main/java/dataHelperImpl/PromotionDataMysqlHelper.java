@@ -72,18 +72,59 @@ public class PromotionDataMysqlHelper implements PromotionDataHelper{
 
 	@Override
 	public ResultMessage addPromotion(PromotionPO po) throws Exception{
-        Statement statement=connection.createStatement();
 
 
-
+        String sql = ""+
+                " insert into promotion"+
+                " (promotionType,region,name,content,"+
+                " startDate,endDate,minRankAvailable,maxRankAvailable,type,condition,discount)"+
+                " values(?,?,?,?,?,?,?,?,?,?,?)";
+		try{
+			PreparedStatement preparedStatement=connection.prepareStatement(sql);
+			preparedStatement.setInt(1,po.getPromotionType().ordinal());
+			preparedStatement.setInt(2,po.getRegion());
+			preparedStatement.setString(3,po.getName());
+			preparedStatement.setString(4,po.getContent());
+			preparedStatement.setDate(5,new Date(po.getStartDate().getTime()));
+			preparedStatement.setDate(6,new Date(po.getEndDate().getTime()));
+			preparedStatement.setInt(7,po.getMinRankAvailable());
+			preparedStatement.setInt(8,po.getMaxRankAvailable());
+			preparedStatement.setInt(9,po.getType().ordinal());
+			preparedStatement.setInt(10,po.getCondition());
+			preparedStatement.setInt(11,po.getDiscount());
+		}catch(SQLException e){
+			e.printStackTrace();
+			return ResultMessage.failure;
+		}
 		return ResultMessage.success;
 	}
 
 	@Override
 	public ResultMessage updatePromotion(PromotionPO po) throws Exception{
-        Statement statement=connection.createStatement();
 
+		String sql1=" "+
+				"update promotion " +
+				"set promotionType=?,region=?,name=?,content=?,startDate=?,endDate=?,minRankAvailable=?,maxRankAvailable=?,type=?,condition=?,discount=? " +
+				"where promotionID=?";
 
+		try{
+			PreparedStatement preparedStatement=connection.prepareStatement(sql1);
+			preparedStatement.setInt(1,po.getPromotionType().ordinal());
+			preparedStatement.setInt(2,po.getRegion());
+			preparedStatement.setString(3,po.getName());
+			preparedStatement.setString(4,po.getContent());
+			preparedStatement.setDate(5,new Date(po.getStartDate().getTime()));
+			preparedStatement.setDate(6,new Date(po.getEndDate().getTime()));
+			preparedStatement.setInt(7,po.getMinRankAvailable());
+			preparedStatement.setInt(8,po.getMaxRankAvailable());
+			preparedStatement.setInt(9,po.getType().ordinal());
+			preparedStatement.setInt(10,po.getCondition());
+			preparedStatement.setInt(11,po.getDiscount());
+			preparedStatement.setInt(12,po.getPromotionID());
+		}catch(SQLException e){
+			e.printStackTrace();
+			return ResultMessage.failure;
+		}
 
 		return ResultMessage.success;
 	}
