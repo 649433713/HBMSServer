@@ -1,9 +1,7 @@
 package daoImpl;
 
 import java.sql.Connection;
-import java.util.List;
 import java.util.Map;
-
 import dao.PromotionDao;
 import dataHelper.DataFactory;
 import dataHelper.PromotionDataHelper;
@@ -11,6 +9,7 @@ import dataHelperImpl.DBUtil_Alex;
 import dataHelperImpl.DataFactoryImpl;
 import message.ResultMessage;
 import model.PromotionFilter;
+import model.PromotionType;
 import po.PromotionPO;
 
 public class PromotionDaoImpl implements PromotionDao{
@@ -37,9 +36,17 @@ public class PromotionDaoImpl implements PromotionDao{
 
 
 	@Override
-	public Map<Integer, PromotionPO> getPromotionList(PromotionFilter promotionFilter) throws Exception {
+	public Map<Integer, PromotionPO> getHotelPromotionList(PromotionFilter promotionFilter) throws Exception {
+		promotionFilter.add("promotionType","=", PromotionType.HotelPromotion.ordinal());
 		return promotionDataHelper.getPromotionList(promotionFilter);
 	}
+
+	@Override
+	public Map<Integer, PromotionPO> getWebPromotionList(PromotionFilter promotionFilter) throws Exception {
+		promotionFilter.add("promotionType","=",PromotionType.WebPromotion.ordinal());
+		return promotionDataHelper.getPromotionList(promotionFilter);
+	}
+
 
 	@Override
 	public ResultMessage addPromotion(PromotionPO po) throws Exception {

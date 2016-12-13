@@ -77,10 +77,9 @@ public class test_Alex_Promotion {
         }
         PromotionFilter filter=new PromotionFilter();
         date1=simpleDateFormat.parse("2016-12-1");
-        filter.add("promotionType","=",PromotionType.HotelPromotion.ordinal());
         filter.add("startDate",">",date1);
 
-        Map<Integer,PromotionPO> map=promotionDao.getPromotionList(filter);
+        Map<Integer,PromotionPO> map=promotionDao.getHotelPromotionList(filter);
         PromotionPO promotionPO;
         if(map.size()==0){
             System.out.println("the map is null");

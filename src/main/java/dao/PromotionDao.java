@@ -8,7 +8,9 @@ import model.PromotionFilter;
 import po.PromotionPO;
 
 public interface PromotionDao {
-	public Map<Integer, PromotionPO> getPromotionList(PromotionFilter promotionFilter)throws Exception;
+	public Map<Integer, PromotionPO> getHotelPromotionList(PromotionFilter promotionFilter)throws Exception;
+
+	public Map<Integer, PromotionPO> getWebPromotionList(PromotionFilter promotionFilter)throws Exception;
 
 	public ResultMessage addPromotion(PromotionPO po)throws Exception;
 

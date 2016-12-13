@@ -18,7 +18,8 @@ import model.UserType;
 import po.*;
 
 public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, UserDao,  OrderDao, RoomDao ,CreditDao, PromotionDao {
-	private static final long serialVersionUID = -894598509334934845L;
+	private static final long serialVersionUID = -4024589936788353523L;
+
 	/**
 	 * 
 	 */
@@ -304,8 +305,13 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public Map<Integer, PromotionPO> getPromotionList(PromotionFilter promotionFilter) throws Exception {
-		return promotionDao.getPromotionList(promotionFilter);
+	public Map<Integer, PromotionPO> getHotelPromotionList(PromotionFilter promotionFilter) throws Exception {
+		return promotionDao.getHotelPromotionList(promotionFilter);
+	}
+
+	@Override
+	public Map<Integer, PromotionPO> getWebPromotionList(PromotionFilter promotionFilter) throws Exception {
+		return promotionDao.getWebPromotionList(promotionFilter);
 	}
 
 	@Override
