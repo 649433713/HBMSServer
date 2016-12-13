@@ -10,6 +10,10 @@ import model.UserType;
 import po.AppealPO;
 import po.OrderPO;
 
+/**
+ * @author 凡
+ *
+ */
 public interface OrderDao extends Remote{
 	
 		//以下是用户    对订单模块数据层的需求操作

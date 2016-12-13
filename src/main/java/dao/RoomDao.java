@@ -9,6 +9,10 @@ import message.ResultMessage;
 import message.RoomStateMessage;
 import po.RoomInfoPO;
 
+/**
+ * @author 凡
+ *
+ */
 public interface RoomDao extends Remote {
 	
 	/**
@@ -17,7 +21,7 @@ public interface RoomDao extends Remote {
 	 */
 	public Map<String, RoomInfoPO> getRoomList(int hotel_ID,Date date)throws RemoteException;
 	
-	public RoomInfoPO getRoomInfo(String roomType)throws RemoteException;
+	public RoomInfoPO getRoomInfo(String roomID)throws RemoteException;
 		
 	public ResultMessage addRoom(RoomInfoPO po)throws RemoteException;
 	

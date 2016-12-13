@@ -60,7 +60,7 @@ public class PromotionDataMysqlHelper implements PromotionDataHelper{
                         ,resultSet.getDate("endDate"),resultSet.getInt("minRankAvailable")
                         ,resultSet.getInt("maxRankAvailable")
                         ,discountTypeHelper.getDiscountType(resultSet.getInt("type"))
-                        ,resultSet.getInt("condition")
+                        ,resultSet.getInt("requirement")
                         ,resultSet.getInt("discount"));
                 map.put(promotionPO.getPromotionID(),promotionPO);
             }
@@ -77,7 +77,7 @@ public class PromotionDataMysqlHelper implements PromotionDataHelper{
         String sql = ""+
                 " insert into promotion"+
                 " (promotionType,region,name,content,"+
-                " startDate,endDate,minRankAvailable,maxRankAvailable,type,condition,discount)"+
+                " startDate,endDate,minRankAvailable,maxRankAvailable,type,requirement,discount)"+
                 " values(?,?,?,?,?,?,?,?,?,?,?)";
 		try{
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
@@ -90,8 +90,31 @@ public class PromotionDataMysqlHelper implements PromotionDataHelper{
 			preparedStatement.setInt(7,po.getMinRankAvailable());
 			preparedStatement.setInt(8,po.getMaxRankAvailable());
 			preparedStatement.setInt(9,po.getType().ordinal());
-			preparedStatement.setInt(10,po.getCondition());
+			preparedStatement.setInt(10,po.getRequirement());
 			preparedStatement.setInt(11,po.getDiscount());
+			preparedStatement.execute();
+		}catch(SQLException e){
+			e.printStackTrace();
+			return ResultMessage.failure;
+		}
+		return ResultMessage.success;
+	}
+
+	@Override
+	public ResultMessage deletePromotion(int id) throws Exception {
+		String sql="" + " Select * from promotion" + " where promotionID =? ";
+		String sql2 = "" + "delete from promotion where promotionID = ?";
+		try{
+			PreparedStatement preparedStatement=connection.prepareStatement(sql);
+			preparedStatement.setInt(1,id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (!resultSet.next()) {
+				return ResultMessage.notexist;
+			}
+			preparedStatement = connection.prepareStatement(sql2);
+			preparedStatement.setInt(1, id);
+			preparedStatement.execute();
+
 		}catch(SQLException e){
 			e.printStackTrace();
 			return ResultMessage.failure;
@@ -118,9 +141,10 @@ public class PromotionDataMysqlHelper implements PromotionDataHelper{
 			preparedStatement.setInt(7,po.getMinRankAvailable());
 			preparedStatement.setInt(8,po.getMaxRankAvailable());
 			preparedStatement.setInt(9,po.getType().ordinal());
-			preparedStatement.setInt(10,po.getCondition());
+			preparedStatement.setInt(10,po.getRequirement());
 			preparedStatement.setInt(11,po.getDiscount());
 			preparedStatement.setInt(12,po.getPromotionID());
+			preparedStatement.execute();
 		}catch(SQLException e){
 			e.printStackTrace();
 			return ResultMessage.failure;

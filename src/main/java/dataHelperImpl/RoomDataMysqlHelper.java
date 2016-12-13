@@ -14,6 +14,10 @@ import message.RoomStateMessage;
 import model.DateToDayOff;
 import po.RoomInfoPO;
 
+/**
+ * @author 凡
+ *
+ */
 public class RoomDataMysqlHelper implements RoomDataHelper {
 	Connection connection;
 
@@ -25,7 +29,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 	public Map<String, RoomInfoPO> getRoomList(int hotel_ID,java.util.Date date) {
 
 		if (date==null) {
-			String sql = "select * from roominfo where hotelID =? ";
+			String sql = "select * from roominfo where hotelID =? order by roomType";
 			
 			Map<String, RoomInfoPO> map = new LinkedHashMap<>();
 			PreparedStatement preparedStatement;
@@ -58,7 +62,7 @@ public class RoomDataMysqlHelper implements RoomDataHelper {
 			String sql = "select roomType,defaultPrice from roominfo where hotelID =? group by roomType ";
 			String sql2 = "select roominfo.roomInfoID roomInfoID,hotelID,roomID,roomType,min(defaultPrice)Price from roomdate inner join roominfo "
 					+ "on roomdate.roomInfoID = roominfo.roomInfoID where roominfo.hotelID = ? "
-					+ "and "+dayOff+"=1 group by roomType";
+					+ "and "+dayOff+"=1 group by roomType order by Price";
 			Map<String, RoomInfoPO> roominfo = new LinkedHashMap<>();
 			PreparedStatement preparedStatement;
 			try {

@@ -1,7 +1,7 @@
 package message;
 /**
- * added by wf
- * 
+ * @author 凡
+ *
  */
 public enum RoomStateMessage {
 	Unavailable,Blank,Booked,Checkined

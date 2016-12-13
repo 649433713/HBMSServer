@@ -2,6 +2,10 @@ package dataHelperImpl;
 
 import dataHelper.*;
 
+/**
+ * @author 凡
+ *
+ */
 public class DataFactoryImpl implements DataFactory{
 
 	public HotelDataHelper getHotelDataHelper() {

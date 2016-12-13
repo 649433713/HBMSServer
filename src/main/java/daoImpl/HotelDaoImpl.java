@@ -15,6 +15,10 @@ import po.CommentInfoPO;
 import po.HotelPO;
 import po.RegionPO;
 
+/**
+ * @author 凡
+ *
+ */
 public class HotelDaoImpl implements HotelDao{
 	private Map<Integer, HotelPO> map;
 	

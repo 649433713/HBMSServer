@@ -10,7 +10,8 @@ import java.util.List;
  */
 public class PromotionPO implements Serializable{
 
-    private static final long serialVersionUID = -9141885023401470037L;
+
+    private static final long serialVersionUID = -5502676819446211197L;
     int promotionID;
     PromotionType promotionType;
     int region;
@@ -21,8 +22,9 @@ public class PromotionPO implements Serializable{
     int minRankAvailable;
     int maxRankAvailable;
     DiscountType type;
-    int condition;
+    int requirement;
     int discount;
+
 
 
     public PromotionPO(int promotionID, PromotionType promotionType, int region, String name, String content, Date startDate, Date endDate, int minRankAvailable, int maxRankAvailable, DiscountType type, int condition, int discount) {
@@ -36,7 +38,7 @@ public class PromotionPO implements Serializable{
         this.minRankAvailable = minRankAvailable;
         this.maxRankAvailable = maxRankAvailable;
         this.type = type;
-        this.condition = condition;
+        this.requirement = condition;
         this.discount = discount;
     }
 
@@ -80,8 +82,8 @@ public class PromotionPO implements Serializable{
         return type;
     }
 
-    public int getCondition() {
-        return condition;
+    public int getRequirement() {
+        return requirement;
     }
 
     public int getDiscount() {

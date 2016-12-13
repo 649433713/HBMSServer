@@ -6,6 +6,10 @@ import java.util.Date;
 
 import message.RoomStateMessage;
 
+/**
+ * @author 凡
+ *
+ */
 public class RoomInfoPO implements Serializable{
 	
 	

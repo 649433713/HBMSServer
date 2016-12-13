@@ -2,6 +2,10 @@ package dataHelperImpl;
 
 import java.sql.*;
 
+/**
+ * @author 凡
+ *
+ */
 public class DBUtil {
 	
 	private static final String URL = "jdbc:mysql://127.0.0.1:3306/hbmsdatabase?useUnicode=true&characterEncoding=utf-8&useSSL=false";

@@ -5,6 +5,10 @@ import java.util.Date;
 
 import message.AppealStateMessage;
 
+/**
+ * @author 凡
+ *
+ */
 public class AppealPO implements Serializable{
 	/**
 	 * 

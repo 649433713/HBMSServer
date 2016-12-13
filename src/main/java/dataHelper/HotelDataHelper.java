@@ -10,6 +10,10 @@ import po.CommentInfoPO;
 import po.HotelPO;
 import po.RegionPO;
 
+/**
+ * @author 凡
+ *
+ */
 public interface HotelDataHelper {
 	
 	public Map<Integer,HotelPO> getHotelList(HotelFilter filter, String order, Date date);

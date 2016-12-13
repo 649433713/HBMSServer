@@ -7,6 +7,10 @@ import message.ResultMessage;
 import message.RoomStateMessage;
 import po.RoomInfoPO;
 
+/**
+ * @author 凡
+ *
+ */
 public interface RoomDataHelper {
 	
 	public Map<String, RoomInfoPO> getRoomList(int hotel_ID, Date date);

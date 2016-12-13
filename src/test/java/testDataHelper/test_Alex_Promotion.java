@@ -32,6 +32,10 @@ public class test_Alex_Promotion {
         System.out.println(promotionDao.addPromotion(po));
     }
 
+    static void updatePromotion(){
+
+    }
+
     public static void main(String args[])throws Exception{
         reestablishment();
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
@@ -41,8 +45,8 @@ public class test_Alex_Promotion {
         PromotionPO po1=new PromotionPO(0,PromotionType.HotelPromotion,2,"double 11 promotion","all 50% off!!!",date1,date2,1,10,discountTypeHelper.getDiscountType(1),0,50);
         date1=simpleDateFormat.parse("2017-12-10");
         date2=simpleDateFormat.parse("2017-12-14");
-        PromotionPO po2=new PromotionPO(0,PromotionType.HotelPromotion,3,"双十二慢减特惠","满500减１５０",date1,date2,3,10,discountTypeHelper.getDiscountType(0),500,150);
+        PromotionPO po2=new PromotionPO(0,PromotionType.HotelPromotion,3,"双十二满减特惠","满500减１５０",date1,date2,3,10,discountTypeHelper.getDiscountType(0),500,150);
         addPromotion(po1);
-        //addPromotion(po2);
+        addPromotion(po2);
     }
 }

@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author 凡
+ *
+ */
 public class HotelPO implements Serializable{
 	/**
 	 * 

@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author 凡
+ *
+ */
 public class HotelFilter implements Serializable{
 
 

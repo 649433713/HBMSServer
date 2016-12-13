@@ -1,5 +1,9 @@
 package dataHelper;
 
+/**
+ * @author 凡
+ *
+ */
 public interface DataFactory {
 	
 	public HotelDataHelper getHotelDataHelper();

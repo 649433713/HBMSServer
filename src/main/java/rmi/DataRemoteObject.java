@@ -32,7 +32,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	private OrderDao orderDao;
 	private RoomDao roomDao;
 	private PromotionDao promotionDao;
-	
+
 	protected DataRemoteObject() throws RemoteException {
 		super();
 		hotelDao = new HotelDaoImpl();
@@ -87,8 +87,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	}
 
 	@Override
-	public RoomInfoPO getRoomInfo(String roomType) throws RemoteException {
-		return roomDao.getRoomInfo(roomType);
+	public RoomInfoPO getRoomInfo(String roomID) throws RemoteException {
+		return roomDao.getRoomInfo(roomID);
 	}
 
 	@Override
