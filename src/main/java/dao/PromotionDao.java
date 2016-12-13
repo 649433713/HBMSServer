@@ -12,6 +12,8 @@ public interface PromotionDao {
 
 	public ResultMessage addPromotion(PromotionPO po)throws Exception;
 
+	public ResultMessage deletePromotion(int id)throws Exception;
+
 	public ResultMessage updatePromotion(PromotionPO po)throws Exception;
 	 
 

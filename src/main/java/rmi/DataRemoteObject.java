@@ -217,17 +217,20 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 
 	@Override
 	public ResultMessage addAppealOrder(AppealPO appealPO) throws RemoteException {
-		return null;
+
+		return orderDao.addAppealOrder(appealPO);
 	}
 
 	@Override
 	public AppealPO getAppealOrder(int orderID) throws RemoteException {
-		return null;
+
+		return orderDao.getAppealOrder(orderID);
 	}
 
 	@Override
 	public ResultMessage modifyAppealOrder(AppealPO appealPO) throws RemoteException {
-		return null;
+
+		return orderDao.modifyAppealOrder(appealPO);
 	}
 
 	@Override
@@ -307,6 +310,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements HotelDao, U
 	@Override
 	public ResultMessage addPromotion(PromotionPO po) throws Exception {
 		return promotionDao.addPromotion(po);
+	}
+
+	@Override
+	public ResultMessage deletePromotion(int id) throws Exception {
+		return promotionDao.deletePromotion(id);
 	}
 
 	@Override

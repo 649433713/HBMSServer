@@ -47,6 +47,11 @@ public class PromotionDaoImpl implements PromotionDao{
 	}
 
 	@Override
+	public ResultMessage deletePromotion(int id) throws Exception {
+		return promotionDataHelper.deletePromotion(id);
+	}
+
+	@Override
 	public ResultMessage updatePromotion(PromotionPO po) throws Exception {
 		return promotionDataHelper.updatePromotion(po);
 	}
